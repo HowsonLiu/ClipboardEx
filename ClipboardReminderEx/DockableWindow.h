@@ -19,12 +19,12 @@ enum DockDirection {
 class QClipboard;
 class QMouseEvent;
 class QPropertyAnimation;
-class ReminderWindow : public QWidget
+class DockableWindow : public QWidget
 {
 	Q_OBJECT
 
 public:
-	ReminderWindow(QWidget *parent = Q_NULLPTR);
+	DockableWindow(QWidget *parent = Q_NULLPTR);
 
 protected:
 	// handle drag and dock
@@ -46,8 +46,6 @@ private:
 	void dockAnimationHide(int x, int y);
 
 private:
-	QClipboard* m_clipBoard = nullptr;
-
 	// drag and dock variable
 	bool m_bIsDraging = false;
 	bool m_bDockShow = false;

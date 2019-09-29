@@ -1,4 +1,4 @@
-#include "ReminderWindow.h"
+#include "DockableWindow.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QMouseEvent>
@@ -7,16 +7,15 @@
 #include <QPropertyAnimation>
 #include <QDebug>
 
-ReminderWindow::ReminderWindow(QWidget *parent)
+DockableWindow::DockableWindow(QWidget *parent)
 	: QWidget(parent)
 {
 	initWindow();
-	// setMouseTracking(true);	// or else mouseMoveEvent will call when click
 	connect(m_dockShowAnimation, &QPropertyAnimation::finished, [this]() {m_bDockShow = true; });
 	connect(m_dockHideAnimation, &QPropertyAnimation::finished, [this]() {m_bDockShow = false; });
 }
 
-void ReminderWindow::mousePressEvent(QMouseEvent* event)
+void DockableWindow::mousePressEvent(QMouseEvent* event)
 {
 	if (Qt::LeftButton == event->button()) {
 		m_bIsDraging = true;
@@ -25,13 +24,13 @@ void ReminderWindow::mousePressEvent(QMouseEvent* event)
 	__super::mousePressEvent(event);
 }
 
-void ReminderWindow::mouseMoveEvent(QMouseEvent* event)
+void DockableWindow::mouseMoveEvent(QMouseEvent* event)
 {
 	if (m_bIsDraging) move(event->pos() - m_mousePressPoint + pos());
 	__super::mouseMoveEvent(event);
 }
 
-void ReminderWindow::mouseReleaseEvent(QMouseEvent* event)
+void DockableWindow::mouseReleaseEvent(QMouseEvent* event)
 {
 	m_bIsDraging = false;
 	setDock(canDock());
@@ -40,7 +39,7 @@ void ReminderWindow::mouseReleaseEvent(QMouseEvent* event)
 	__super::mouseReleaseEvent(event);
 }
 
-void ReminderWindow::enterEvent(QEvent* event)
+void DockableWindow::enterEvent(QEvent* event)
 {
 	if (!m_bDockShow && QAbstractAnimation::Running != m_dockShowAnimation->state()
 		&& QAbstractAnimation::Running != m_dockHideAnimation->state()) {
@@ -48,25 +47,22 @@ void ReminderWindow::enterEvent(QEvent* event)
 	}
 }
 
-void ReminderWindow::leaveEvent(QEvent* event)
+void DockableWindow::leaveEvent(QEvent* event)
 {
 	if (DockDirection::None != m_curDockDirection)
 		dockHide();
 }
 
-void ReminderWindow::initWindow()
+void DockableWindow::initWindow()
 {
-	m_clipBoard = QApplication::clipboard();
-
 	m_dockShowAnimation = new QPropertyAnimation(this, "geometry");
 	m_dockShowAnimation->setDuration(DOCK_ANIMATION_DURATION);
 	m_dockHideAnimation = new QPropertyAnimation(this, "geometry");
 	m_dockHideAnimation->setDuration(DOCK_ANIMATION_DURATION);
-
-	setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::ToolTip);
+	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 }
 
-DockDirection ReminderWindow::canDock() const
+DockDirection DockableWindow::canDock() const
 {
 	int screen_x = GetSystemMetrics(SM_XVIRTUALSCREEN);
 	int screen_y = GetSystemMetrics(SM_YVIRTUALSCREEN);
@@ -82,12 +78,12 @@ DockDirection ReminderWindow::canDock() const
 	return DockDirection::None;
 }
 
-void ReminderWindow::setDock(const DockDirection dockDirection)
+void DockableWindow::setDock(const DockDirection dockDirection)
 {
 	m_curDockDirection = dockDirection;
 }
 
-void ReminderWindow::prepareDock()
+void DockableWindow::prepareDock()
 {
 	// In some case, the windows exceeds more than one direction, so we need to make sure the window fully shows
 	int screen_x = GetSystemMetrics(SM_XVIRTUALSCREEN);
@@ -101,7 +97,7 @@ void ReminderWindow::prepareDock()
 	move(target_x, target_y);
 }
 
-void ReminderWindow::dockShow()
+void DockableWindow::dockShow()
 {
 	if (DockDirection::None == m_curDockDirection) return;
 	if (DockDirection::UP == m_curDockDirection) {
@@ -118,7 +114,7 @@ void ReminderWindow::dockShow()
 	}
 }
 
-void ReminderWindow::dockHide()
+void DockableWindow::dockHide()
 {
 	if (DockDirection::None == m_curDockDirection) return;
 	if (DockDirection::UP == m_curDockDirection) {
@@ -137,7 +133,7 @@ void ReminderWindow::dockHide()
 	}
 }
 
-void ReminderWindow::dockAnimationShow(int x, int y)
+void DockableWindow::dockAnimationShow(int x, int y)
 {
 	auto end_val = this->geometry();
 	end_val.moveTo(x, y);
@@ -146,7 +142,7 @@ void ReminderWindow::dockAnimationShow(int x, int y)
 	m_dockShowAnimation->start();
 }
 
-void ReminderWindow::dockAnimationHide(int x, int y)
+void DockableWindow::dockAnimationHide(int x, int y)
 {
 	auto end_val = this->geometry();
 	end_val.moveTo(x, y);
