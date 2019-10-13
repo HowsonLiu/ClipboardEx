@@ -120,10 +120,10 @@
     <ClCompile Include="DockableWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="DockableWindow.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtRcc Include="ReminderWindow.qrc" />
+    <QtMoc Include="DockableWindow.h">
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\tmp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\tmp\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

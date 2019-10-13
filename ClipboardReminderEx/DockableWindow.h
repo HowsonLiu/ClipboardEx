@@ -19,6 +19,15 @@ enum DockDirection {
 class QClipboard;
 class QMouseEvent;
 class QPropertyAnimation;
+
+/*!
+ * \class DockableWindow
+ *
+ * \brief A base class for dockable windows
+ *
+ * \author HowsonLiu
+ * \date October 2019
+ */
 class DockableWindow : public QWidget
 {
 	Q_OBJECT

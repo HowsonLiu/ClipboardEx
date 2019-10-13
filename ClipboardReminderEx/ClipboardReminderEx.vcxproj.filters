@@ -34,11 +34,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="ReminderWindow.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-  </ItemGroup>
-  <ItemGroup>
     <QtMoc Include="DockableWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
