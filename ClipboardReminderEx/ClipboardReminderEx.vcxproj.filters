@@ -32,9 +32,15 @@
     <ClCompile Include="DockableWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MenuActionWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="DockableWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="MenuActionWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
