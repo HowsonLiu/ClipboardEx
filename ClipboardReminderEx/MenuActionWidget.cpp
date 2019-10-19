@@ -3,9 +3,10 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QSlider>
 
-NumMenuActionWidget::NumMenuActionWidget(const QString& describeText, int defaultVal, 
-	int minVal, int maxVal, QWidget* parent /*= nullptr*/)
+NumMenuActionWidget::NumMenuActionWidget(const QString& describeText, int minVal, 
+	int defaultVal, int maxVal, QWidget* parent /*= nullptr*/)
 	: QWidget(parent)
 	, m_minVal(minVal)
 	, m_maxVal(maxVal)
@@ -34,6 +35,7 @@ void NumMenuActionWidget::initWindow()
 	downLayout->addWidget(m_numLabel);
 	downLayout->addWidget(m_plusButton);
 	layout->addLayout(downLayout);
+	setLayout(layout);
 }
 
 void NumMenuActionWidget::onPlusButtonClick()
@@ -52,4 +54,33 @@ void NumMenuActionWidget::onMinusButtonClick()
 	if (m_curVal < m_maxVal) m_plusButton->setEnabled(true);
 	m_numLabel->setText(QString::number(m_curVal));
 	sigNumChange(m_curVal);
+}
+
+SliderMenuActionWidget::SliderMenuActionWidget(const QString& describeText, int minVal, 
+	int defaultVal, int maxVal, QWidget* parent /*= nullptr*/)
+	: QWidget(parent)
+	, m_minVal(minVal)
+	, m_curVal(defaultVal)
+	, m_maxVal(maxVal)
+	, m_describeText(describeText)
+{
+	initWindow();
+	connect(m_slider, &QSlider::valueChanged, this, &SliderMenuActionWidget::sigNumChange);
+}
+
+void SliderMenuActionWidget::initWindow()
+{
+	m_describeTextLabel = new QLabel(this);
+	m_slider = new QSlider(this);
+
+	QVBoxLayout* layout = new QVBoxLayout(this);
+	layout->addWidget(m_describeTextLabel);
+	layout->addWidget(m_slider);
+	setLayout(layout);
+
+	m_slider->setMinimum(m_minVal);
+	m_slider->setMaximum(m_maxVal);
+	m_slider->setValue(m_curVal);
+	m_slider->setOrientation(Qt::Horizontal);
+	m_describeTextLabel->setText(m_describeText);
 }

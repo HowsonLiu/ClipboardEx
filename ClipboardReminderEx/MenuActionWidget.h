@@ -3,6 +3,7 @@
 
 class QLabel;
 class QPushButton;
+class QSlider;
 
 /*!
  * \class NumMenuActionWidget
@@ -17,7 +18,7 @@ class NumMenuActionWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	NumMenuActionWidget(const QString& describeText, int defaultVal, int minVal, int maxVal, QWidget* parent = nullptr);
+	NumMenuActionWidget(const QString& describeText, int minVal, int defaultVal, int maxVal, QWidget* parent = nullptr);
 
 private:
 	void initWindow();
@@ -41,3 +42,25 @@ private:
 	QPushButton* m_minusButton;
 };
 
+
+class SliderMenuActionWidget : public QWidget 
+{
+	Q_OBJECT
+public:
+	SliderMenuActionWidget(const QString& describeText, int minVal, int defaultVal, int maxVal, QWidget* parent = nullptr);
+
+private:
+	void initWindow();
+
+signals:
+	void sigNumChange(int);
+
+private:
+	int m_minVal;
+	int m_maxVal;
+	int m_curVal;
+	QString m_describeText;
+
+	QSlider* m_slider;
+	QLabel* m_describeTextLabel;
+};
