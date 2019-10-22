@@ -35,12 +35,18 @@
     <ClCompile Include="MenuActionWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ClipboardTipsWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="DockableWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MenuActionWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ClipboardTipsWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
