@@ -2,6 +2,10 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QList>
+#include <QListWidget>
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QMimeData>
 
 HistoryDataList* HistoryDataList::getInstance() 
 {
@@ -9,7 +13,7 @@ HistoryDataList* HistoryDataList::getInstance()
 	return &instance;
 }
 
-HistoryDataList::HistoryDataList(QObject* parent = nullptr) : QObject(parent)
+HistoryDataList::HistoryDataList(QObject* parent) : QObject(parent)
 {
 	connect(QApplication::clipboard(), &QClipboard::dataChanged, getInstance(), &HistoryDataList::onClipboardDataUpdate);
 }
@@ -37,13 +41,41 @@ void HistoryDataList::onClipboardDataUpdate()
 	emit sigDataListUpdate();
 }
 
-ClipboardTipsWindow::ClipboardTipsWindow(QWidget* parent /*= nullptr*/)
-	: DockableWindow(parent)
+MimeDataLabel::MimeDataLabel(QWidget* parent /*= nullptr*/)
 {
 
 }
 
+
+void MimeDataLabel::showMimeData(const QMimeData* data)
+{
+	if (data->hasImage()) {
+		QImage img = qvariant_cast<QImage>(data->imageData());
+		setPixmap(QPixmap::fromImage(img));
+	}
+	else if (data->hasText() || data->hasUrls() || data->hasHtml())
+		setText(data->text());
+	else
+		setText("Unknow");
+}
+
+ClipboardTipsWindow::ClipboardTipsWindow(QWidget* parent /*= nullptr*/)
+	: DockableWindow(parent)
+{
+	initWindow();
+	m_curMimeDataLabel->showMimeData(QApplication::clipboard()->mimeData());
+}
+
 void ClipboardTipsWindow::initWindow()
 {
+	m_curMimeDataLabel = new MimeDataLabel(this);
+	m_historyMimeDataListWidget = new QListWidget(this);
+	m_expandButton = new QPushButton(this);
 
+	QVBoxLayout* layout = new QVBoxLayout(this);
+	layout->addWidget(m_curMimeDataLabel);
+	layout->addWidget(m_historyMimeDataListWidget);
+	layout->addWidget(m_expandButton);
+
+	setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint | Qt::ToolTip);
 }

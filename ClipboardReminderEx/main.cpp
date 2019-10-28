@@ -1,12 +1,13 @@
 #include "DockableWindow.h"
 #include <QtWidgets/QApplication>
 #include "MenuActionWidget.h"
+#include "ClipboardTipsWindow.h"
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	DockableWindow w;
+	ClipboardTipsWindow w;
 	w.show();
 
 	NumMenuActionWidget n("Show", 1, 3, 5);

@@ -1,13 +1,17 @@
 #pragma once
 #include "DockableWindow.h"
+#include <QLabel>
 
 class QMimeData;
+class QPushButton;
+class QListWidget;
 
 class HistoryDataList : public QObject 
 {
 	Q_OBJECT
 public:
 	static HistoryDataList* getInstance();
+	inline auto dataList() const { return &m_historyClipboardDataList; }
 
 private:
 	HistoryDataList(QObject* parent = nullptr);
@@ -30,10 +34,22 @@ private:
 };
 
 /*!
+ * \class MimeDataLabel
+ * \brief A label show mime data
+ * \author liuhaosheng
+ * \date October 2019
+ */
+class MimeDataLabel : public QLabel 
+{
+	Q_OBJECT
+public:
+	MimeDataLabel(QWidget* parent = nullptr);
+	void showMimeData(const QMimeData*);
+};
+
+/*!
  * \class ClipboardTipsWindow
- *
  * \brief Show clipboard current and prevent content.
- *
  * \author HowsonLiu
  * \date October 2019
  */
@@ -45,5 +61,10 @@ public:
 
 private:
 	void initWindow();
+
+private:
+	MimeDataLabel* m_curMimeDataLabel;
+	QListWidget* m_historyMimeDataListWidget;
+	QPushButton* m_expandButton;
 };
 
