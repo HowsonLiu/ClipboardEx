@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	NumMenuActionWidget n("Show", 1, 3, 5);
 	n.show();
 
-	SliderMenuActionWidget s("Show", 1, 50, 100);
+	DoubleSliderMenuActionWidget s("Size", "width", 50, 80, 100, "height", 1, 50, 100);
 	s.show();
 
 	return a.exec();

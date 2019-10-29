@@ -64,3 +64,35 @@ private:
 	QSlider* m_slider;
 	QLabel* m_describeTextLabel;
 };
+
+class DoubleSliderMenuActionWidget : public QWidget
+{
+	Q_OBJECT
+public:
+	DoubleSliderMenuActionWidget(const QString& title, const QString& describeText1, int minVal1, int defaultVal1, int maxVal1,
+		const QString& describeText2, int minVal2, int defaultVal2, int maxVal2, QWidget* parent = nullptr);
+
+private:
+	void initWindow();
+
+signals:
+	void sigNumChange1(int);
+	void sigNumChange2(int);
+
+private:
+	int m_minVal1;
+	int m_maxVal1;
+	int m_curVal1;
+	QString m_describeText1;
+	int m_minVal2;
+	int m_maxVal2;
+	int m_curVal2;
+	QString m_describeText2;
+	QString m_titleText;
+
+	QSlider* m_slider1;
+	QSlider* m_slider2;
+	QLabel* m_titleLabel;
+	QLabel* m_describeLabel1;
+	QLabel* m_describeLabel2;
+};

@@ -84,3 +84,48 @@ void SliderMenuActionWidget::initWindow()
 	m_slider->setOrientation(Qt::Horizontal);
 	m_describeTextLabel->setText(m_describeText);
 }
+
+DoubleSliderMenuActionWidget::DoubleSliderMenuActionWidget(const QString& title, 
+	const QString& describeText1, int minVal1, int defaultVal1, int maxVal1, 
+	const QString& describeText2, int minVal2, int defaultVal2, int maxVal2, 
+	QWidget* parent /*= nullptr*/) : QWidget(parent), m_titleText(title),
+	m_describeText1(describeText1), m_minVal1(minVal1), m_curVal1(defaultVal1), m_maxVal1(maxVal1),
+	m_describeText2(describeText2), m_minVal2(minVal2), m_curVal2(defaultVal2), m_maxVal2(maxVal2)
+{
+	initWindow();
+	connect(m_slider1, &QSlider::valueChanged, this, &DoubleSliderMenuActionWidget::sigNumChange1);
+	connect(m_slider2, &QSlider::valueChanged, this, &DoubleSliderMenuActionWidget::sigNumChange2);
+}
+
+void DoubleSliderMenuActionWidget::initWindow()
+{
+	m_titleLabel = new QLabel(this);
+	m_describeLabel1 = new QLabel(this);
+	m_describeLabel2 = new QLabel(this);
+	m_slider1 = new QSlider(this);
+	m_slider2 = new QSlider(this);
+	
+	QVBoxLayout* layout = new QVBoxLayout(this);
+	layout->addWidget(m_titleLabel);
+	QHBoxLayout* hlayout1 = new QHBoxLayout(this);
+	hlayout1->addWidget(m_describeLabel1);
+	hlayout1->addWidget(m_slider1);
+	QHBoxLayout* hlayout2 = new QHBoxLayout(this);
+	hlayout2->addWidget(m_describeLabel2);
+	hlayout2->addWidget(m_slider2);
+	layout->addLayout(hlayout1);
+	layout->addLayout(hlayout2);
+	setLayout(layout);
+
+	m_slider1->setMinimum(m_minVal1);
+	m_slider1->setMaximum(m_maxVal1);
+	m_slider1->setValue(m_curVal1);
+	m_slider1->setOrientation(Qt::Horizontal);
+	m_describeLabel1->setText(m_describeText2);
+	m_slider2->setMinimum(m_minVal2);
+	m_slider2->setMaximum(m_maxVal2);
+	m_slider2->setValue(m_curVal2);
+	m_slider2->setOrientation(Qt::Horizontal);
+	m_describeLabel2->setText(m_describeText2);
+	m_titleLabel->setText(m_titleText);
+}
