@@ -15,6 +15,44 @@ DockableWindow::DockableWindow(QWidget *parent)
 	connect(m_dockHideAnimation, &QPropertyAnimation::finished, [this]() {m_bDockShow = false; });
 }
 
+DockableWindowPosition DockableWindow::getDockablePostion() const
+{
+	DockableWindowPosition res;
+	res.dockDirection = m_curDockDirection;
+	if (DockDirection::LEFT == m_curDockDirection || DockDirection::RIGHT == m_curDockDirection)
+		res.dockPosition.dockOffset = this->y();
+	else if (DockDirection::UP == m_curDockDirection)
+		res.dockPosition.dockOffset = this->x();
+	else 
+		res.dockPosition.undockPosion = this->pos();
+	return res;
+}
+
+void DockableWindow::moveDockablePosition(const DockableWindowPosition& dockpos)
+{
+	m_curDockDirection = (DockDirection)dockpos.dockDirection;
+	int target_x, target_y;
+	if (DockDirection::LEFT == m_curDockDirection) {
+		target_x = GetSystemMetrics(SM_XVIRTUALSCREEN) - this->width() + DOCK_SHOW_DISTANCE;
+		target_y = dockpos.dockPosition.dockOffset;
+	}
+	else if (DockDirection::RIGHT == m_curDockDirection) {
+		int screen_x = GetSystemMetrics(SM_XVIRTUALSCREEN);
+		int screen_width = GetSystemMetrics(SM_CXVIRTUALSCREEN);
+		target_x = screen_x + screen_width - DOCK_SHOW_DISTANCE;
+		target_y = dockpos.dockPosition.dockOffset;
+	}
+	else if (DockDirection::UP == m_curDockDirection) {
+		target_y = GetSystemMetrics(SM_YVIRTUALSCREEN) - this->height() + DOCK_SHOW_DISTANCE;
+		target_x = dockpos.dockPosition.dockOffset;
+	}
+	else {
+		target_x = dockpos.dockPosition.undockPosion.x();
+		target_y = dockpos.dockPosition.undockPosion.y();
+	}
+	move(target_x, target_y);
+}
+
 void DockableWindow::mousePressEvent(QMouseEvent* event)
 {
 	if (Qt::LeftButton == event->button()) {

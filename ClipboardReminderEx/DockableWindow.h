@@ -21,6 +21,21 @@ class QMouseEvent;
 class QPropertyAnimation;
 
 /*!
+ * \class DockableWindowPosition
+ * \brief The serialization and deserialization of dockable window postion
+ * \author liuhaosheng
+ * \date November 2019
+ */
+struct DockableWindowPosition 
+{
+	short dockDirection;
+	union {
+		QPoint  undockPosion;
+		int dockOffset;
+	} dockPosition{};
+};
+
+/*!
  * \class DockableWindow
  *
  * \brief A base class for dockable windows
@@ -34,6 +49,8 @@ class DockableWindow : public QWidget
 
 public:
 	DockableWindow(QWidget *parent = Q_NULLPTR);
+	DockableWindowPosition getDockablePostion() const;
+	void moveDockablePosition(const DockableWindowPosition&);
 
 protected:
 	// handle drag and dock
