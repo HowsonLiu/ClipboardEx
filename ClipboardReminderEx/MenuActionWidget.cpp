@@ -121,7 +121,7 @@ void DoubleSliderMenuActionWidget::initWindow()
 	m_slider1->setMaximum(m_maxVal1);
 	m_slider1->setValue(m_curVal1);
 	m_slider1->setOrientation(Qt::Horizontal);
-	m_describeLabel1->setText(m_describeText2);
+	m_describeLabel1->setText(m_describeText1);
 	m_slider2->setMinimum(m_minVal2);
 	m_slider2->setMaximum(m_maxVal2);
 	m_slider2->setValue(m_curVal2);
