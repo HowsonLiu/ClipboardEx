@@ -108,11 +108,20 @@ void MainControl::setUpTrayIcon()
 	trayIcon->setIcon(QIcon("c:\\Users\\liuhaosheng\\Pictures\\1.png"));	// neccessary
 	trayIcon->show();
 
-	connect(tipsNumWidget, &NumMenuActionWidget::sigNumChange, this, &MainControl::onTipsNumChange);
-	connect(historySizeWidget, &NumMenuActionWidget::sigNumChange, [this](int n) {m_historySize = n; });
+	connect(tipsNumWidget, &NumMenuActionWidget::sigNumChange, this, &MainControl::onTipsWindowNumChange);
+	connect(historySizeWidget, &NumMenuActionWidget::sigNumChange, [this](int n) {
+		m_historySize = n; 
+		HistoryDataList::getInstance()->onSetListSize(m_historySize); 
+	});
 	connect(tipsListHeightWidget, &SliderMenuActionWidget::sigNumChange, [this](int n) {m_tipsListHeight = n; });
-	connect(tipsRectWidget, &DoubleSliderMenuActionWidget::sigNumChange1, [this](int n) {m_tipsRectSize.setWidth(n); });
-	connect(tipsRectWidget, &DoubleSliderMenuActionWidget::sigNumChange2, [this](int n) {m_tipsRectSize.setHeight(n); });
+	connect(tipsRectWidget, &DoubleSliderMenuActionWidget::sigNumChange1, [this](int n) {
+		m_tipsRectSize.setWidth(n);
+		for(auto tip : m_tipsWindows) tip->resizeLabel(m_tipsRectSize);
+	});
+	connect(tipsRectWidget, &DoubleSliderMenuActionWidget::sigNumChange2, [this](int n) {
+		m_tipsRectSize.setHeight(n);
+		for (auto tip : m_tipsWindows) tip->resizeLabel(m_tipsRectSize);
+	});
 }
 
 void MainControl::setAutoSave()
@@ -123,7 +132,7 @@ void MainControl::setAutoSave()
 	connect(timer, &QTimer::timeout, this, &MainControl::onSaveConfigure);
 }
 
-void MainControl::onTipsNumChange(int i)
+void MainControl::onTipsWindowNumChange(int i)
 {
 	while (m_tipsWindows.size() > i) {
 		auto window = m_tipsWindows.front();

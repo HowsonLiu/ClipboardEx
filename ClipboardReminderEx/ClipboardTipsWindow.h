@@ -82,6 +82,7 @@ public:
 	ClipboardTipsWindowState getTipsWindowState() const;
 	void loadTipsWindowState(const ClipboardTipsWindowState&);
 	void updateHistoryList();
+	void resizeLabel(const QSize&);
 
 private:
 	void initWindow();

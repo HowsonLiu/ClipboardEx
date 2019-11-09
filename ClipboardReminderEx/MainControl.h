@@ -21,7 +21,7 @@ public:
 	void setAutoSave();
 
 private slots:
-	void onTipsNumChange(int);
+	void onTipsWindowNumChange(int);
 	void onSaveConfigure();
 
 private:

@@ -162,6 +162,11 @@ void ClipboardTipsWindow::updateHistoryList()
 	}
 }
 
+void ClipboardTipsWindow::resizeLabel(const QSize& size)
+{
+	m_curMimeDataLabel->setFixedSize(size);
+}
+
 void ClipboardTipsWindow::initWindow()
 {
 	m_curMimeDataLabel = new MimeDataLabel(this);

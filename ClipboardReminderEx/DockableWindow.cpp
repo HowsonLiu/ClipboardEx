@@ -118,7 +118,13 @@ void DockableWindow::enterEvent(QEvent* event)
 void DockableWindow::leaveEvent(QEvent* event)
 {
 	if (DockDirection::None != m_curDockDirection)
-		dockHide();
+		dockHide(true);
+}
+
+void DockableWindow::resizeEvent(QResizeEvent* event)
+{
+	__super::resizeEvent(event);
+	dockHide(false);
 }
 
 void DockableWindow::initWindow()
@@ -182,22 +188,25 @@ void DockableWindow::dockShow()
 	}
 }
 
-void DockableWindow::dockHide()
+void DockableWindow::dockHide(bool animation)
 {
 	if (DockDirection::None == m_curDockDirection) return;
 	if (DockDirection::UP == m_curDockDirection) {
 		int target_y = GetSystemMetrics(SM_YVIRTUALSCREEN) - this->height() + DOCK_SHOW_DISTANCE;
-		dockAnimationHide(this->x(), target_y);
+		if (animation) dockAnimationHide(this->x(), target_y);
+		else move(this->x(), target_y);
 	}
 	else if (DockDirection::LEFT == m_curDockDirection) {
 		int target_x = GetSystemMetrics(SM_XVIRTUALSCREEN) - this->width() + DOCK_SHOW_DISTANCE;
-		dockAnimationHide(target_x, this->y());
+		if (animation) dockAnimationHide(target_x, this->y());
+		else move(target_x, this->y());
 	}
 	else if (DockDirection::RIGHT == m_curDockDirection) {
 		int screen_x = GetSystemMetrics(SM_XVIRTUALSCREEN);
 		int screen_width = GetSystemMetrics(SM_CXVIRTUALSCREEN);
 		int target_x = screen_x + screen_width - DOCK_SHOW_DISTANCE;
-		dockAnimationHide(target_x, this->y());
+		if (animation) dockAnimationHide(target_x, this->y());
+		else move(target_x, this->y());
 	}
 }
 
