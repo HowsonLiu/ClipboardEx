@@ -26,20 +26,23 @@ class QPropertyAnimation;
  * \author liuhaosheng
  * \date November 2019
  */
-struct DockableWindowPosition 
+struct DockableWindowState 
 {
 	short dockDirection;
 	union {
 		QPoint  undockPosion;
 		int dockOffset;
 	} dockPosition{};
+
+public:
+	DockableWindowState();
+	DockableWindowState(const QString&);
+	operator QString();
 };
 
 /*!
  * \class DockableWindow
- *
  * \brief A base class for dockable windows
- *
  * \author HowsonLiu
  * \date October 2019
  */
@@ -49,8 +52,8 @@ class DockableWindow : public QWidget
 
 public:
 	DockableWindow(QWidget *parent = Q_NULLPTR);
-	DockableWindowPosition getDockablePostion() const;
-	void moveDockablePosition(const DockableWindowPosition&);
+	DockableWindowState getDockableState() const;
+	void loadDockableState(const DockableWindowState&);
 
 protected:
 	// handle drag and dock

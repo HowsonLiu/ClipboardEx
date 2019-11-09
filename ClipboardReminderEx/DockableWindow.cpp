@@ -7,6 +7,36 @@
 #include <QPropertyAnimation>
 #include <QDebug>
 
+DockableWindowState::DockableWindowState() : dockDirection(DockDirection::None), dockPosition({ {0,0} })
+{
+}
+
+
+DockableWindowState::DockableWindowState(const QString& str)
+{
+	if (str.isEmpty()) return;
+	QStringList list = str.split(",");
+	if (list.isEmpty()) return;
+	if (DockDirection::None == list[0].toInt() && list.size() == 3) {
+		dockDirection = list[0].toInt();
+		dockPosition.undockPosion.setX(list[1].toInt());
+		dockPosition.undockPosion.setY(list[2].toInt());
+	}
+	else if (DockDirection::None != list[0].toInt() && list.size() == 2) {
+		dockDirection = list[0].toInt();
+		dockPosition.dockOffset = list[1].toInt();
+	}
+}
+
+DockableWindowState::operator QString()
+{
+	QString res = QString::number(dockDirection) + ",";
+	if (DockDirection::None == dockDirection)
+		return res + QString::number(dockPosition.undockPosion.x()) + "," + QString::number(dockPosition.undockPosion.y());
+	else
+		return res + QString::number(dockPosition.dockOffset);
+}
+
 DockableWindow::DockableWindow(QWidget *parent)
 	: QWidget(parent)
 {
@@ -15,9 +45,9 @@ DockableWindow::DockableWindow(QWidget *parent)
 	connect(m_dockHideAnimation, &QPropertyAnimation::finished, [this]() {m_bDockShow = false; });
 }
 
-DockableWindowPosition DockableWindow::getDockablePostion() const
+DockableWindowState DockableWindow::getDockableState() const
 {
-	DockableWindowPosition res;
+	DockableWindowState res;
 	res.dockDirection = m_curDockDirection;
 	if (DockDirection::LEFT == m_curDockDirection || DockDirection::RIGHT == m_curDockDirection)
 		res.dockPosition.dockOffset = this->y();
@@ -28,7 +58,7 @@ DockableWindowPosition DockableWindow::getDockablePostion() const
 	return res;
 }
 
-void DockableWindow::moveDockablePosition(const DockableWindowPosition& dockpos)
+void DockableWindow::loadDockableState(const DockableWindowState& dockpos)
 {
 	m_curDockDirection = (DockDirection)dockpos.dockDirection;
 	int target_x, target_y;

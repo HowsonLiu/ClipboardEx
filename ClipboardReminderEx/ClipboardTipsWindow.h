@@ -3,8 +3,9 @@
 #include <QLabel>
 
 class QMimeData;
-class QPushButton;
+class QCheckBox;
 class QListWidget;
+class QPropertyAnimation;
 
 class HistoryDataList : public QObject 
 {
@@ -45,6 +46,19 @@ class MimeDataLabel : public QLabel
 public:
 	MimeDataLabel(QWidget* parent = nullptr);
 	void showMimeData(const QMimeData*);
+
+protected:
+	virtual void resizeEvent(QResizeEvent* event) override;
+};
+
+struct ClipboardTipsWindowState {
+	bool bExpand;
+	bool bAutoShow;
+	DockableWindowState dockState;
+public:
+	ClipboardTipsWindowState();
+	ClipboardTipsWindowState(const QString&);
+	operator QString();
 };
 
 /*!
@@ -58,13 +72,22 @@ class ClipboardTipsWindow : public DockableWindow
 	Q_OBJECT
 public:
 	ClipboardTipsWindow(QWidget* parent = nullptr);
+	ClipboardTipsWindowState getTipsWindowState() const;
+	void loadTipsWindowState(const ClipboardTipsWindowState&);
 
 private:
 	void initWindow();
 
+private slots:
+	void onHistoryListUpdate();
+	void onCheckBoxStateChanged(int state);
+
 private:
 	MimeDataLabel* m_curMimeDataLabel;
 	QListWidget* m_historyMimeDataListWidget;
-	QPushButton* m_expandButton;
+	QCheckBox* m_expandCheckBox;
+	QCheckBox* m_autoShowCheckBox;
+	QPropertyAnimation* m_expandAnimation;
+	QPropertyAnimation* m_shrinkAnimation;
 };
 
