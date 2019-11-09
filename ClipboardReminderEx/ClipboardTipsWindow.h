@@ -33,6 +33,7 @@ private:
 	QList<const QMimeData*> m_historyClipboardDataList;
 	int m_listSize;
 };
+QMimeData* deepCopyMimeData(const QMimeData*);
 
 /*!
  * \class MimeDataLabel
@@ -51,6 +52,12 @@ protected:
 	virtual void resizeEvent(QResizeEvent* event) override;
 };
 
+/*!
+ * \class ClipboardTipsWindowState
+ * \brief ClipboardTipsWindow's state serializatior
+ * \author liuhaosheng
+ * \date November 2019
+ */
 struct ClipboardTipsWindowState {
 	bool bExpand;
 	bool bAutoShow;
@@ -74,9 +81,11 @@ public:
 	ClipboardTipsWindow(QWidget* parent = nullptr);
 	ClipboardTipsWindowState getTipsWindowState() const;
 	void loadTipsWindowState(const ClipboardTipsWindowState&);
+	void updateHistoryList();
 
 private:
 	void initWindow();
+	void beautyWindow();
 
 private slots:
 	void onHistoryListUpdate();

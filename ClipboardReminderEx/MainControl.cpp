@@ -57,15 +57,18 @@ void MainControl::readConfig()
 void MainControl::setUpUI()
 {
 	setUpTrayIcon();
+	HistoryDataList::getInstance()->onSetListSize(m_historySize);
 	if (m_tipsWindowState.isEmpty()) {
 		ClipboardTipsWindow* window = new ClipboardTipsWindow;
-		window->move(QApplication::desktop()->screen()->rect().center() - window->rect().center());
+		window->updateHistoryList();
 		window->show();
+		window->move(QApplication::desktop()->screen()->rect().center() - window->rect().center());
 		m_tipsWindows.push_back(window);
 	}
 	else {
 		for (auto state : m_tipsWindowState) {
 			ClipboardTipsWindow* window = new ClipboardTipsWindow;
+			window->updateHistoryList();
 			window->show();
 			window->loadTipsWindowState(state);
 			m_tipsWindows.push_back(window);
