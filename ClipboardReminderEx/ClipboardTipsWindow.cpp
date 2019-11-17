@@ -17,8 +17,7 @@ MimeDataLabel::MimeDataLabel(QWidget* parent /*= nullptr*/) : QLabel(parent)
 	, m_bDisplay(true), m_bindMimeData(nullptr)
 {
 	setWordWrap(true);
-	// setMaximumSize(300, 300);
-	// setScaledContents(true);
+	setStyleSheet("background-color:yellow");
 }
 
 void MimeDataLabel::showMimeData()
@@ -104,7 +103,9 @@ void ClipboardTipsWindow::updateHistoryList()
 		QListWidgetItem* item = new QListWidgetItem(m_historyMimeDataListWidget);
 		MimeDataLabel* label = new MimeDataLabel(this);
 		connect(this, &ClipboardTipsWindow::sigUpdateLabelSize, label, &MimeDataLabel::onUpdateSize);
-		connect(this, &ClipboardTipsWindow::sigUpdateLabelSize, [item](const QSize& size) {item->setSizeHint(size); });
+		connect(this, &ClipboardTipsWindow::sigUpdateLabelSize, [item](const QSize& size) {
+			item->setSizeHint(QSize(item->sizeHint().width(), size.height()));
+		});
 		m_historyMimeDataListWidget->addItem(item);
 		m_historyMimeDataListWidget->setItemWidget(item, label);
 	}
@@ -160,7 +161,6 @@ void ClipboardTipsWindow::initWindow()
 
 void ClipboardTipsWindow::beautyWindow()
 {
-	m_curMimeDataLabel->setStyleSheet("background-color:yellow");
 	setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint | Qt::ToolTip);
 	setAttribute(Qt::WA_DeleteOnClose, true);
 }
