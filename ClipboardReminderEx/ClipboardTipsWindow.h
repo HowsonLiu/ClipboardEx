@@ -22,8 +22,8 @@ public:
 	inline void setMimeData(const QMimeData* data) { m_bindMimeData = data; showMimeData(); }
 	inline void setDisplay(bool b) { m_bDisplay = b; }
 
-protected:
-	virtual void resizeEvent(QResizeEvent* event) override;
+public slots:
+	void onUpdateSize(const QSize&);
 
 private:
 	void showMimeData();
@@ -71,6 +71,9 @@ private:
 	void initWindow();
 	void beautyWindow();
 
+signals:
+	void sigUpdateLabelSize(const QSize&);
+
 private slots:
 	void onHistoryListUpdate();
 	void onExpandStateChanged(int state);
@@ -83,6 +86,6 @@ private:
 	QPropertyAnimation* m_expandAnimation;
 	QPropertyAnimation* m_shrinkAnimation;
 
-	int m_oldListHeight;
+	int m_listHeight;
 };
 

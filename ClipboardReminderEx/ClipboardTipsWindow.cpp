@@ -7,6 +7,7 @@
 #include <QPropertyAnimation>
 #include <QMimeData>
 #include <QUrl>
+#include <QDebug>
 
 namespace {
 	static float g_expandSpeed = 1;
@@ -25,6 +26,7 @@ void MimeDataLabel::showMimeData()
 	if (!m_bindMimeData) return;
 	if (m_bindMimeData->hasImage()) {
 		setPixmap(QPixmap::fromImage(qvariant_cast<QImage>(m_bindMimeData->imageData()).scaled(width(), height(), Qt::KeepAspectRatio)));
+		setAlignment(Qt::AlignCenter);
 		return;
 	}
 	QString content;
@@ -42,9 +44,10 @@ void MimeDataLabel::showMimeData()
 	setText(content);
 }
 
-void MimeDataLabel::resizeEvent(QResizeEvent* event)
+void MimeDataLabel::onUpdateSize(const QSize& size)
 {
-	if (m_bDisplay) showMimeData();
+	setFixedSize(size);
+	showMimeData();		// update image size
 }
 
 ClipboardTipsWindowState::ClipboardTipsWindowState() : bExpand(false), 
@@ -100,6 +103,8 @@ void ClipboardTipsWindow::updateHistoryList()
 	while (m_historyMimeDataListWidget->count() < dataList->size() - 1) {
 		QListWidgetItem* item = new QListWidgetItem(m_historyMimeDataListWidget);
 		MimeDataLabel* label = new MimeDataLabel(this);
+		connect(this, &ClipboardTipsWindow::sigUpdateLabelSize, label, &MimeDataLabel::onUpdateSize);
+		connect(this, &ClipboardTipsWindow::sigUpdateLabelSize, [item](const QSize& size) {item->setSizeHint(size); });
 		m_historyMimeDataListWidget->addItem(item);
 		m_historyMimeDataListWidget->setItemWidget(item, label);
 	}
@@ -116,15 +121,19 @@ void ClipboardTipsWindow::updateHistoryList()
 
 void ClipboardTipsWindow::setLabelSize(const QSize& size)
 {
-	m_curMimeDataLabel->setFixedSize(size);
+	emit sigUpdateLabelSize(size);
+	m_curMimeDataLabel->onUpdateSize(size);
 	m_historyMimeDataListWidget->setFixedWidth(size.width());
 	adjustSize();
 }
 
 void ClipboardTipsWindow::setListHeight(int h)
 {
-	m_historyMimeDataListWidget->setFixedHeight(h);
-	adjustSize();
+	m_listHeight = h;
+	if (m_expandCheckBox->isChecked()) {
+		m_historyMimeDataListWidget->setFixedHeight(m_listHeight);
+		adjustSize();
+	}
 }
 
 void ClipboardTipsWindow::initWindow()
@@ -133,8 +142,8 @@ void ClipboardTipsWindow::initWindow()
 	m_historyMimeDataListWidget = new QListWidget(this);
 	m_expandCheckBox = new QCheckBox(this);
 	m_autoShowCheckBox = new QCheckBox(this);
-	m_expandAnimation = new QPropertyAnimation(m_historyMimeDataListWidget, "size");
-	m_shrinkAnimation = new QPropertyAnimation(m_historyMimeDataListWidget, "size");
+	m_expandAnimation = new QPropertyAnimation(m_historyMimeDataListWidget);
+	m_shrinkAnimation = new QPropertyAnimation(m_historyMimeDataListWidget);
 
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	layout->addWidget(m_curMimeDataLabel);
@@ -151,6 +160,7 @@ void ClipboardTipsWindow::initWindow()
 
 void ClipboardTipsWindow::beautyWindow()
 {
+	m_curMimeDataLabel->setStyleSheet("background-color:yellow");
 	setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint | Qt::ToolTip);
 	setAttribute(Qt::WA_DeleteOnClose, true);
 }
@@ -165,16 +175,17 @@ void ClipboardTipsWindow::onExpandStateChanged(int state)
 	m_expandAnimation->stop();
 	m_shrinkAnimation->stop();
 	if (Qt::CheckState::Unchecked == state) {
-		m_oldListHeight = m_historyMimeDataListWidget->height();
+		m_historyMimeDataListWidget->setMinimumSize(0, 0);
 		m_shrinkAnimation->setStartValue(m_historyMimeDataListWidget->size());
 		m_shrinkAnimation->setEndValue(QSize(m_historyMimeDataListWidget->width(), 0));
-		m_shrinkAnimation->setDuration(/*m_oldListHeight * g_expandSpeed*/1);
+		m_shrinkAnimation->setDuration(m_listHeight * g_expandSpeed);
 		m_shrinkAnimation->start();
 	}
 	else {
+		m_historyMimeDataListWidget->setMinimumSize(0, 0);
 		m_expandAnimation->setStartValue(m_historyMimeDataListWidget->size());
-		m_expandAnimation->setEndValue(QSize(m_historyMimeDataListWidget->width(), m_oldListHeight));
-		m_expandAnimation->setDuration(/*m_oldListHeight * g_expandSpeed*/1);
+		m_expandAnimation->setEndValue(QSize(m_historyMimeDataListWidget->width(), m_listHeight));
+		m_expandAnimation->setDuration(m_listHeight * g_expandSpeed);
 		m_expandAnimation->start();
 	}
 }

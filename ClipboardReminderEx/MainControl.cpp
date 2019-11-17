@@ -2,6 +2,7 @@
 #include "MenuActionWidget.h"
 #include "ClipboardTipsWindow.h"
 #include "ConfigManager.h"
+#include "HistoryDataList.h"
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QWidgetAction>
@@ -61,6 +62,8 @@ void MainControl::setUpUI()
 	if (m_tipsWindowState.isEmpty()) {
 		ClipboardTipsWindow* window = new ClipboardTipsWindow;
 		window->updateHistoryList();
+		window->setLabelSize(m_tipsRectSize);
+		window->setListHeight(m_tipsListHeight);
 		window->show();
 		window->move(QApplication::desktop()->screen()->rect().center() - window->rect().center());
 		m_tipsWindows.push_back(window);
@@ -69,6 +72,8 @@ void MainControl::setUpUI()
 		for (auto state : m_tipsWindowState) {
 			ClipboardTipsWindow* window = new ClipboardTipsWindow;
 			window->updateHistoryList();
+			window->setLabelSize(m_tipsRectSize);
+			window->setListHeight(m_tipsListHeight);
 			window->show();
 			window->loadTipsWindowState(state);
 			m_tipsWindows.push_back(window);
@@ -113,14 +118,17 @@ void MainControl::setUpTrayIcon()
 		m_historySize = n; 
 		HistoryDataList::getInstance()->onSetListSize(m_historySize); 
 	});
-	connect(tipsListHeightWidget, &SliderMenuActionWidget::sigNumChange, [this](int n) {m_tipsListHeight = n; });
+	connect(tipsListHeightWidget, &SliderMenuActionWidget::sigNumChange, [this](int n) {
+		m_tipsListHeight = n; 
+		for (auto tip : m_tipsWindows) tip->setListHeight(m_tipsListHeight);
+	});
 	connect(tipsRectWidget, &DoubleSliderMenuActionWidget::sigNumChange1, [this](int n) {
 		m_tipsRectSize.setWidth(n);
-		for(auto tip : m_tipsWindows) tip->resizeLabel(m_tipsRectSize);
+		for(auto tip : m_tipsWindows) tip->setLabelSize(m_tipsRectSize);
 	});
 	connect(tipsRectWidget, &DoubleSliderMenuActionWidget::sigNumChange2, [this](int n) {
 		m_tipsRectSize.setHeight(n);
-		for (auto tip : m_tipsWindows) tip->resizeLabel(m_tipsRectSize);
+		for (auto tip : m_tipsWindows) tip->setLabelSize(m_tipsRectSize);
 	});
 }
 
