@@ -1,39 +1,12 @@
 #pragma once
 #include "DockableWindow.h"
 #include <QLabel>
+#include <QImage>
 
 class QMimeData;
 class QCheckBox;
 class QListWidget;
 class QPropertyAnimation;
-
-class HistoryDataList : public QObject 
-{
-	Q_OBJECT
-public:
-	static HistoryDataList* getInstance();
-	inline auto dataList() const { return &m_historyClipboardDataList; }
-
-private:
-	HistoryDataList(QObject* parent = nullptr);
-	~HistoryDataList();
-
-signals:
-	// called when resize the list or clipboard update
-	void sigDataListUpdate();
-
-public slots:
-	void onSetListSize(int);
-
-private slots:
-	void onClipboardDataUpdate();
-
-private:
-	// older data are in the front of the list
-	QList<const QMimeData*> m_historyClipboardDataList;
-	int m_listSize;
-};
-QMimeData* deepCopyMimeData(const QMimeData*);
 
 /*!
  * \class MimeDataLabel
@@ -46,10 +19,18 @@ class MimeDataLabel : public QLabel
 	Q_OBJECT
 public:
 	MimeDataLabel(QWidget* parent = nullptr);
-	void showMimeData(const QMimeData*);
+	inline void setMimeData(const QMimeData* data) { m_bindMimeData = data; showMimeData(); }
+	inline void setDisplay(bool b) { m_bDisplay = b; }
 
 protected:
 	virtual void resizeEvent(QResizeEvent* event) override;
+
+private:
+	void showMimeData();
+
+private:
+	const QMimeData* m_bindMimeData;
+	bool m_bDisplay;
 };
 
 /*!
@@ -80,9 +61,11 @@ class ClipboardTipsWindow : public DockableWindow
 public:
 	ClipboardTipsWindow(QWidget* parent = nullptr);
 	ClipboardTipsWindowState getTipsWindowState() const;
+
 	void loadTipsWindowState(const ClipboardTipsWindowState&);
 	void updateHistoryList();
-	void resizeLabel(const QSize&);
+	void setLabelSize(const QSize&);
+	void setListHeight(int);
 
 private:
 	void initWindow();
@@ -90,7 +73,7 @@ private:
 
 private slots:
 	void onHistoryListUpdate();
-	void onCheckBoxStateChanged(int state);
+	void onExpandStateChanged(int state);
 
 private:
 	MimeDataLabel* m_curMimeDataLabel;
@@ -99,5 +82,7 @@ private:
 	QCheckBox* m_autoShowCheckBox;
 	QPropertyAnimation* m_expandAnimation;
 	QPropertyAnimation* m_shrinkAnimation;
+
+	int m_oldListHeight;
 };
 

@@ -1,88 +1,40 @@
 #include "ClipboardTipsWindow.h"
-#include <QApplication>
-#include <QClipboard>
+#include "HistoryDataList.h"
 #include <QList>
 #include <QListWidget>
 #include <QVBoxLayout>
 #include <QCheckBox>
-#include <QMimeData>
 #include <QPropertyAnimation>
+#include <QMimeData>
 #include <QUrl>
 
-HistoryDataList* HistoryDataList::getInstance() 
-{
-	static HistoryDataList instance;
-	return &instance;
+namespace {
+	static float g_expandSpeed = 1;
 }
 
-HistoryDataList::HistoryDataList(QObject* parent) : QObject(parent)
-{
-	m_historyClipboardDataList.push_back(deepCopyMimeData(QApplication::clipboard()->mimeData()));
-	connect(QApplication::clipboard(), &QClipboard::dataChanged, getInstance(), &HistoryDataList::onClipboardDataUpdate);
-}
-
-HistoryDataList::~HistoryDataList()
-{
-}
-
-void HistoryDataList::onSetListSize(int s)
-{
-	if (s < m_historyClipboardDataList.size()) {
-		while (m_historyClipboardDataList.size() > s) m_historyClipboardDataList.pop_front();
-		emit sigDataListUpdate();
-	}
-	m_listSize = s;
-}
-
-void HistoryDataList::onClipboardDataUpdate()
-{
-	while (m_historyClipboardDataList.size() >= m_listSize) {
-		m_historyClipboardDataList.pop_front();
-	}
-	m_historyClipboardDataList.push_back(deepCopyMimeData(QApplication::clipboard()->mimeData()));
-	emit sigDataListUpdate();
-}
-
-QMimeData* deepCopyMimeData(const QMimeData* src)
-{
-	QMimeData* dst = new QMimeData;
-	foreach(QString format, src->formats()) {
-		QByteArray data = src->data(format);
-		// Checking for custom MIME types
-		if (format.startsWith("application/x-qt"))
-		{
-			// Retrieving true format name
-			int indexBegin = format.indexOf('"') + 1;
-			int indexEnd = format.indexOf('"', indexBegin);
-			format = format.mid(indexBegin, indexEnd - indexBegin);
-		}
-		dst->setData(format, data);
-	}
-	return dst;
-}
-
-MimeDataLabel::MimeDataLabel(QWidget* parent /*= nullptr*/)
+MimeDataLabel::MimeDataLabel(QWidget* parent /*= nullptr*/) : QLabel(parent)
+	, m_bDisplay(true), m_bindMimeData(nullptr)
 {
 	setWordWrap(true);
-	setMaximumSize(300, 300);
-	setScaledContents(true);
+	// setMaximumSize(300, 300);
+	// setScaledContents(true);
 }
 
-void MimeDataLabel::showMimeData(const QMimeData* data)
+void MimeDataLabel::showMimeData()
 {
-	if (data->hasImage()) {
-		QImage img = qvariant_cast<QImage>(data->imageData());
-		setPixmap(QPixmap::fromImage(img));
+	if (!m_bindMimeData) return;
+	if (m_bindMimeData->hasImage()) {
+		setPixmap(QPixmap::fromImage(qvariant_cast<QImage>(m_bindMimeData->imageData()).scaled(width(), height(), Qt::KeepAspectRatio)));
 		return;
 	}
 	QString content;
-	if (data->hasText())
-		content = data->text();
-	else if (data->hasHtml()) {
-		content = data->html();
+	if (m_bindMimeData->hasText())
+		content = m_bindMimeData->text();
+	else if (m_bindMimeData->hasHtml()) {
+		content = m_bindMimeData->html();
 	}
-	else if (data->hasUrls()) {
-		foreach(QUrl url, data->urls()) {
+	else if (m_bindMimeData->hasUrls()) {
+		foreach(QUrl url, m_bindMimeData->urls()) {
 			content += url.toString() + "\n";
 		}
 	}
@@ -92,8 +44,7 @@ void MimeDataLabel::showMimeData(const QMimeData* data)
 
 void MimeDataLabel::resizeEvent(QResizeEvent* event)
 {
-	QPixmap* p = const_cast<QPixmap*>(pixmap());
-	if (p) setPixmap(p->scaled(width(), height(), Qt::KeepAspectRatio));
+	if (m_bDisplay) showMimeData();
 }
 
 ClipboardTipsWindowState::ClipboardTipsWindowState() : bExpand(false), 
@@ -123,6 +74,7 @@ ClipboardTipsWindow::ClipboardTipsWindow(QWidget* parent /*= nullptr*/)
 	initWindow();
 	beautyWindow();
 	connect(HistoryDataList::getInstance(), &HistoryDataList::sigDataListUpdate, this, &ClipboardTipsWindow::onHistoryListUpdate);
+	connect(m_expandCheckBox, &QCheckBox::stateChanged, this, &ClipboardTipsWindow::onExpandStateChanged);
 }
 
 ClipboardTipsWindowState ClipboardTipsWindow::getTipsWindowState() const
@@ -144,7 +96,7 @@ void ClipboardTipsWindow::loadTipsWindowState(const ClipboardTipsWindowState& st
 void ClipboardTipsWindow::updateHistoryList()
 {
 	auto dataList = HistoryDataList::getInstance()->dataList();
-	m_curMimeDataLabel->showMimeData(dataList->back());
+	m_curMimeDataLabel->setMimeData(dataList->back());
 	while (m_historyMimeDataListWidget->count() < dataList->size() - 1) {
 		QListWidgetItem* item = new QListWidgetItem(m_historyMimeDataListWidget);
 		MimeDataLabel* label = new MimeDataLabel(this);
@@ -158,13 +110,21 @@ void ClipboardTipsWindow::updateHistoryList()
 	for (int i = 0; i < dataList->size() - 1; i++) {
 		auto item = m_historyMimeDataListWidget->item(i);
 		MimeDataLabel* label = dynamic_cast<MimeDataLabel*>(m_historyMimeDataListWidget->itemWidget(item));
-		label->showMimeData(dataList->at(dataList->size() - 2 - i));
+		label->setMimeData(dataList->at(dataList->size() - 2 - i));
 	}
 }
 
-void ClipboardTipsWindow::resizeLabel(const QSize& size)
+void ClipboardTipsWindow::setLabelSize(const QSize& size)
 {
 	m_curMimeDataLabel->setFixedSize(size);
+	m_historyMimeDataListWidget->setFixedWidth(size.width());
+	adjustSize();
+}
+
+void ClipboardTipsWindow::setListHeight(int h)
+{
+	m_historyMimeDataListWidget->setFixedHeight(h);
+	adjustSize();
 }
 
 void ClipboardTipsWindow::initWindow()
@@ -173,8 +133,8 @@ void ClipboardTipsWindow::initWindow()
 	m_historyMimeDataListWidget = new QListWidget(this);
 	m_expandCheckBox = new QCheckBox(this);
 	m_autoShowCheckBox = new QCheckBox(this);
-	m_expandAnimation = new QPropertyAnimation(this);
-	m_shrinkAnimation = new QPropertyAnimation(this);
+	m_expandAnimation = new QPropertyAnimation(m_historyMimeDataListWidget, "size");
+	m_shrinkAnimation = new QPropertyAnimation(m_historyMimeDataListWidget, "size");
 
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	layout->addWidget(m_curMimeDataLabel);
@@ -185,11 +145,14 @@ void ClipboardTipsWindow::initWindow()
 	bottomLayout->addWidget(m_autoShowCheckBox);
 	layout->addLayout(bottomLayout);
 	setLayout(layout);
+
+	setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 }
 
 void ClipboardTipsWindow::beautyWindow()
 {
 	setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint | Qt::ToolTip);
+	setAttribute(Qt::WA_DeleteOnClose, true);
 }
 
 void ClipboardTipsWindow::onHistoryListUpdate()
@@ -197,12 +160,21 @@ void ClipboardTipsWindow::onHistoryListUpdate()
 	updateHistoryList();
 }
 
-void ClipboardTipsWindow::onCheckBoxStateChanged(int state)
+void ClipboardTipsWindow::onExpandStateChanged(int state)
 {
+	m_expandAnimation->stop();
+	m_shrinkAnimation->stop();
 	if (Qt::CheckState::Unchecked == state) {
-
+		m_oldListHeight = m_historyMimeDataListWidget->height();
+		m_shrinkAnimation->setStartValue(m_historyMimeDataListWidget->size());
+		m_shrinkAnimation->setEndValue(QSize(m_historyMimeDataListWidget->width(), 0));
+		m_shrinkAnimation->setDuration(/*m_oldListHeight * g_expandSpeed*/1);
+		m_shrinkAnimation->start();
 	}
 	else {
-
+		m_expandAnimation->setStartValue(m_historyMimeDataListWidget->size());
+		m_expandAnimation->setEndValue(QSize(m_historyMimeDataListWidget->width(), m_oldListHeight));
+		m_expandAnimation->setDuration(/*m_oldListHeight * g_expandSpeed*/1);
+		m_expandAnimation->start();
 	}
 }

@@ -44,6 +44,9 @@
     <ClCompile Include="MainControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HistoryDataList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="DockableWindow.h">
@@ -59,6 +62,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MainControl.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="HistoryDataList.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
