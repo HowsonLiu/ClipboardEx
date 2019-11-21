@@ -1,7 +1,28 @@
 #pragma once
 #include <QObject>
+#include <QImage>
+#include <QString>
 
 class QMimeData;
+
+/*!
+ * \class ClipboardData
+ * \brief Actually it's the QMimeData class copy version, but it only saves
+the data which i need
+ * \author liuhaosheng
+ * \date November 2019
+ */
+struct ClipboardData {
+	QImage image;
+	QString text;
+	QList<QUrl> urls;
+	ClipboardData() {};
+	ClipboardData(const QMimeData*);
+	inline bool hasUrls() const { return urls.isEmpty(); }
+	inline bool hasImage() const { return image.isNull(); }
+	inline bool hasText() const { return text.isEmpty(); }
+};
+
 class HistoryDataList : public QObject
 {
 	Q_OBJECT
@@ -25,7 +46,6 @@ private slots:
 
 private:
 	// older data are in the front of the list
-	QList<QMimeData*> m_historyClipboardDataList;
+	QList<ClipboardData> m_historyClipboardDataList;
 	int m_listSize;
 };
-QMimeData* deepCopyMimeData(const QMimeData*);
