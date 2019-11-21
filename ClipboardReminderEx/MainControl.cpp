@@ -21,13 +21,13 @@ namespace {
 	static const int g_tipsNumMax = 20;
 	static const QString g_tipsRectDescribeText = "Label";
 	static const QString g_tipsRectHeightText = "Height";
-	static const QString g_tipsRectWidthText = "Width";
-	static const int g_tipsRectHeightMin = 300;
-	static const int g_tipsRectHeightDefault = 400;
-	static const int g_tipsRectHeightMax = 500;
-	static const int g_tipsRectWidthMin = 300;
-	static const int g_tipsRectWidthDefault = 400;
-	static const int g_tipsRectWidthMax = 500;
+	static const QString g_tipsRectWidthText = "Width ";
+	static const int g_tipsRectHeightMin = 108;
+	static const int g_tipsRectHeightDefault = 216;
+	static const int g_tipsRectHeightMax = 432;
+	static const int g_tipsRectWidthMin = 192;
+	static const int g_tipsRectWidthDefault = 384;
+	static const int g_tipsRectWidthMax = 768;
 	static const QString g_tipsListHeightText = "Height of list";
 	static const int g_tipsListHeightMin = 300;
 	static const int g_tipsListHeightDefault = 500;
@@ -72,10 +72,10 @@ void MainControl::setUpUI()
 		for (auto state : m_tipsWindowState) {
 			ClipboardTipsWindow* window = new ClipboardTipsWindow;
 			window->updateHistoryList();
+			window->loadTipsWindowState(state);
 			window->setLabelSize(m_tipsRectSize);
 			window->setListHeight(m_tipsListHeight);
 			window->show();
-			window->loadTipsWindowState(state);
 			m_tipsWindows.push_back(window);
 		}
 	}
