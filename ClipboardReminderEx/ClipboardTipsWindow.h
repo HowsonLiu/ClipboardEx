@@ -83,8 +83,6 @@ private:
 	QListWidget* m_historyMimeDataListWidget;
 	QCheckBox* m_expandCheckBox;
 	QCheckBox* m_autoShowCheckBox;
-	QPropertyAnimation* m_expandAnimation;
-	QPropertyAnimation* m_shrinkAnimation;
 
 	int m_listHeight;
 };

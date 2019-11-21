@@ -75,6 +75,7 @@ ClipboardTipsWindow::ClipboardTipsWindow(QWidget* parent /*= nullptr*/)
 {
 	initWindow();
 	beautyWindow();
+	connect(this, &ClipboardTipsWindow::sigUpdateLabelSize, m_curMimeDataLabel, &MimeDataLabel::onUpdateSize);
 	connect(HistoryDataList::getInstance(), &HistoryDataList::sigDataListUpdate, this, &ClipboardTipsWindow::onHistoryListUpdate);
 	connect(m_expandCheckBox, &QCheckBox::stateChanged, this, &ClipboardTipsWindow::onExpandStateChanged);
 }
@@ -123,7 +124,6 @@ void ClipboardTipsWindow::updateHistoryList()
 void ClipboardTipsWindow::setLabelSize(const QSize& size)
 {
 	emit sigUpdateLabelSize(size);
-	m_curMimeDataLabel->onUpdateSize(size);
 	m_historyMimeDataListWidget->setFixedWidth(size.width());
 	adjustSize();
 }
@@ -143,8 +143,6 @@ void ClipboardTipsWindow::initWindow()
 	m_historyMimeDataListWidget = new QListWidget(this);
 	m_expandCheckBox = new QCheckBox(this);
 	m_autoShowCheckBox = new QCheckBox(this);
-	m_expandAnimation = new QPropertyAnimation(m_historyMimeDataListWidget);
-	m_shrinkAnimation = new QPropertyAnimation(m_historyMimeDataListWidget);
 
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	layout->addWidget(m_curMimeDataLabel);
@@ -172,20 +170,11 @@ void ClipboardTipsWindow::onHistoryListUpdate()
 
 void ClipboardTipsWindow::onExpandStateChanged(int state)
 {
-	m_expandAnimation->stop();
-	m_shrinkAnimation->stop();
 	if (Qt::CheckState::Unchecked == state) {
-		m_historyMimeDataListWidget->setMinimumSize(0, 0);
-		m_shrinkAnimation->setStartValue(m_historyMimeDataListWidget->size());
-		m_shrinkAnimation->setEndValue(QSize(m_historyMimeDataListWidget->width(), 0));
-		m_shrinkAnimation->setDuration(m_listHeight * g_expandSpeed);
-		m_shrinkAnimation->start();
+		m_historyMimeDataListWidget->hide();
 	}
 	else {
-		m_historyMimeDataListWidget->setMinimumSize(0, 0);
-		m_expandAnimation->setStartValue(m_historyMimeDataListWidget->size());
-		m_expandAnimation->setEndValue(QSize(m_historyMimeDataListWidget->width(), m_listHeight));
-		m_expandAnimation->setDuration(m_listHeight * g_expandSpeed);
-		m_expandAnimation->start();
+		m_historyMimeDataListWidget->show();
 	}
+	adjustSize();
 }
