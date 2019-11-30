@@ -20,7 +20,7 @@ HistoryDataList* HistoryDataList::getInstance()
 
 HistoryDataList::HistoryDataList(QObject* parent) : QObject(parent)
 {
-	m_historyClipboardDataList.push_back(deepCopyMimeData(QApplication::clipboard()->mimeData()));
+	m_historyClipboardDataList.push_front(std::make_shared<ClipboardData>(QApplication::clipboard()->mimeData()));
 	connect(QApplication::clipboard(), &QClipboard::dataChanged, getInstance(), &HistoryDataList::onClipboardDataUpdate);
 }
 
@@ -32,7 +32,7 @@ void HistoryDataList::onSetListSize(int s)
 {
 	if (s < m_historyClipboardDataList.size()) {
 		while (m_historyClipboardDataList.size() > s)
-			m_historyClipboardDataList.pop_front();
+			m_historyClipboardDataList.pop_back();
 		emit sigDataListUpdate();
 	}
 	m_listSize = s;
@@ -41,7 +41,7 @@ void HistoryDataList::onSetListSize(int s)
 void HistoryDataList::onClipboardDataUpdate()
 {
 	while (m_historyClipboardDataList.size() >= m_listSize)
-		m_historyClipboardDataList.pop_front();
-	m_historyClipboardDataList.push_back(QApplication::clipboard()->mimeData());
+		m_historyClipboardDataList.pop_back();
+	m_historyClipboardDataList.push_front(std::make_shared<ClipboardData>(QApplication::clipboard()->mimeData()));
 	emit sigDataListUpdate();
 }

@@ -2,6 +2,8 @@
 #include <QObject>
 #include <QImage>
 #include <QString>
+#include <deque>
+#include <QUrl>
 
 class QMimeData;
 
@@ -18,9 +20,9 @@ struct ClipboardData {
 	QList<QUrl> urls;
 	ClipboardData() {};
 	ClipboardData(const QMimeData*);
-	inline bool hasUrls() const { return urls.isEmpty(); }
-	inline bool hasImage() const { return image.isNull(); }
-	inline bool hasText() const { return text.isEmpty(); }
+	inline bool hasUrls() const { return !urls.isEmpty(); }
+	inline bool hasImage() const { return !image.isNull(); }
+	inline bool hasText() const { return !text.isEmpty(); }
 };
 
 class HistoryDataList : public QObject
@@ -45,7 +47,7 @@ private slots:
 	void onClipboardDataUpdate();
 
 private:
-	// older data are in the front of the list
-	QList<ClipboardData> m_historyClipboardDataList;
+	// older data are in the end of the list
+	std::deque<std::shared_ptr<ClipboardData>> m_historyClipboardDataList;
 	int m_listSize;
 };
