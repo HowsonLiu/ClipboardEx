@@ -8,6 +8,8 @@
 #include <QMimeData>
 #include <QUrl>
 #include <QDebug>
+#include <QApplication>
+#include <QClipboard>
 
 namespace {
 	static float g_expandSpeed = 1;
@@ -24,23 +26,18 @@ void MimeDataLabel::showMimeData()
 {
 	if (!m_bindMimeData) return;
 	if (m_bindMimeData->hasImage()) {
-		setPixmap(QPixmap::fromImage(qvariant_cast<QImage>(m_bindMimeData->imageData()).scaled(width(), height(), Qt::KeepAspectRatio)));
-		setAlignment(Qt::AlignCenter);
+		setPixmap(QPixmap::fromImage(m_bindMimeData->image).scaled(size(), Qt::KeepAspectRatio));
 		return;
 	}
-	QString content;
-	if (m_bindMimeData->hasText())
-		content = m_bindMimeData->text();
-	else if (m_bindMimeData->hasHtml()) {
-		content = m_bindMimeData->html();
-	}
+	QString text = "UnKnown";
+	if (m_bindMimeData->hasText()) text = m_bindMimeData->text;
 	else if (m_bindMimeData->hasUrls()) {
-		foreach(QUrl url, m_bindMimeData->urls()) {
-			content += url.toString() + "\n";
-		}
+		text.clear();
+		for(auto url : m_bindMimeData->urls)
+			text += url.toString() + "\n";
 	}
-	if (content.isEmpty()) content = "Unknow";
-	setText(content);
+	setText(text);
+	// setPixmap(QPixmap::fromImage(qvariant_cast<QImage>(QApplication::clipboard()->mimeData()->imageData())));
 }
 
 void MimeDataLabel::onUpdateSize(const QSize& size)
@@ -99,7 +96,7 @@ void ClipboardTipsWindow::loadTipsWindowState(const ClipboardTipsWindowState& st
 void ClipboardTipsWindow::updateHistoryList()
 {
 	auto dataList = HistoryDataList::getInstance()->dataList();
-	m_curMimeDataLabel->setMimeData(dataList->back());
+	m_curMimeDataLabel->setMimeData(dataList->at(0));
 	while (m_historyMimeDataListWidget->count() < dataList->size() - 1) {
 		QListWidgetItem* item = new QListWidgetItem(m_historyMimeDataListWidget);
 		MimeDataLabel* label = new MimeDataLabel(this);
@@ -109,6 +106,7 @@ void ClipboardTipsWindow::updateHistoryList()
 		});
 		m_historyMimeDataListWidget->addItem(item);
 		m_historyMimeDataListWidget->setItemWidget(item, label);
+		emit sigUpdateLabelSize(m_curMimeDataLabel->size());
 	}
 	while (m_historyMimeDataListWidget->count() > dataList->size() - 1) {
 		auto item = m_historyMimeDataListWidget->takeItem(0);
@@ -117,7 +115,7 @@ void ClipboardTipsWindow::updateHistoryList()
 	for (int i = 0; i < dataList->size() - 1; i++) {
 		auto item = m_historyMimeDataListWidget->item(i);
 		MimeDataLabel* label = dynamic_cast<MimeDataLabel*>(m_historyMimeDataListWidget->itemWidget(item));
-		label->setMimeData(dataList->at(dataList->size() - 2 - i));
+		label->setMimeData(dataList->at(i + 1));
 	}
 }
 
@@ -125,7 +123,6 @@ void ClipboardTipsWindow::setLabelSize(const QSize& size)
 {
 	emit sigUpdateLabelSize(size);
 	m_historyMimeDataListWidget->setFixedWidth(size.width());
-	adjustSize();
 }
 
 void ClipboardTipsWindow::setListHeight(int h)
@@ -133,7 +130,6 @@ void ClipboardTipsWindow::setListHeight(int h)
 	m_listHeight = h;
 	if (m_expandCheckBox->isChecked()) {
 		m_historyMimeDataListWidget->setFixedHeight(m_listHeight);
-		adjustSize();
 	}
 }
 
@@ -177,4 +173,10 @@ void ClipboardTipsWindow::onExpandStateChanged(int state)
 		m_historyMimeDataListWidget->show();
 	}
 	adjustSize();
+}
+
+void ClipboardTipsWindow::onItemDoubleClicked(QListWidgetItem* item)
+{
+	MimeDataLabel* label = dynamic_cast<MimeDataLabel*>(m_historyMimeDataListWidget->itemWidget(item));
+	if (!label) return;
 }

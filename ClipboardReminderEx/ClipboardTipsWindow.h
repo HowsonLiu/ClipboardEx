@@ -1,5 +1,6 @@
 #pragma once
 #include "DockableWindow.h"
+#include "HistoryDataList.h"
 #include <QLabel>
 #include <QImage>
 
@@ -19,7 +20,7 @@ class MimeDataLabel : public QLabel
 	Q_OBJECT
 public:
 	MimeDataLabel(QWidget* parent = nullptr);
-	inline void setMimeData(const QMimeData* data) { m_bindMimeData = data; showMimeData(); }
+	inline void setMimeData(const std::shared_ptr<ClipboardData> data) { m_bindMimeData = data; showMimeData(); }
 	inline void setDisplay(bool b) { m_bDisplay = b; }
 
 public slots:
@@ -29,7 +30,7 @@ private:
 	void showMimeData();
 
 private:
-	const QMimeData* m_bindMimeData;
+	std::shared_ptr<ClipboardData> m_bindMimeData;
 	bool m_bDisplay;
 };
 
@@ -77,6 +78,7 @@ signals:
 private slots:
 	void onHistoryListUpdate();
 	void onExpandStateChanged(int state);
+	void onItemDoubleClicked(QListWidgetItem*);
 
 private:
 	MimeDataLabel* m_curMimeDataLabel;
