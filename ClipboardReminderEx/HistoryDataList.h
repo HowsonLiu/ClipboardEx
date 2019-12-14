@@ -20,13 +20,13 @@ struct ClipboardData {
 	QImage image;
 	QString text;
 	QList<QUrl> urls;
-	ClipboardData() {};
-	ClipboardData(const QMimeData*);
 	inline bool hasUrls() const { return !urls.isEmpty(); }
 	inline bool hasImage() const { return !image.isNull(); }
 	inline bool hasText() const { return !text.isEmpty(); }
 	inline bool isValid() const { return hasUrls() || hasImage() || hasText(); }
 	void clear();
+	void copyFromClipboard();
+	void copyToClipboard();
 };
 
 class ReadClipboardThread : public QThread 
@@ -51,7 +51,6 @@ public:
 	inline auto dataList() const { return &m_historyClipboardDataList; }
 private:
 	HistoryDataList(QObject* parent = nullptr);
-	~HistoryDataList();
 signals:
 	// called when resize the list or clipboard update
 	void sigDataListUpdate();

@@ -11,14 +11,6 @@ namespace {
 	static const int g_readMaxTime = 5 * 1000;
 }
 
-ClipboardData::ClipboardData(const QMimeData* mimedata)
-{
-	if (mimedata->hasImage()) image = qvariant_cast<QImage>(mimedata->imageData()).copy();
-	else if (mimedata->hasText()) text = mimedata->text();
-	else if (mimedata->hasHtml()) text = mimedata->html();
-	else if (mimedata->hasUrls()) urls = mimedata->urls();
-}
-
 void ClipboardData::clear()
 {
 	image = QImage();
@@ -26,12 +18,30 @@ void ClipboardData::clear()
 	urls.clear();
 }
 
+void ClipboardData::copyFromClipboard()
+{
+	const QMimeData* mimeData = QApplication::clipboard()->mimeData();
+	if (mimeData->hasImage()) image = qvariant_cast<QImage>(mimeData->imageData()).copy();
+	else if (mimeData->hasText()) text = mimeData->text();
+	else if (mimeData->hasHtml()) text = mimeData->html();
+	else if (mimeData->hasUrls()) urls = mimeData->urls();
+}
+
+void ClipboardData::copyToClipboard()
+{
+	if (!isValid()) return;
+	auto clipboard = QApplication::clipboard();
+	if (!image.isNull()) clipboard->setImage(image, QClipboard::Clipboard);
+	else if (!text.isEmpty()) clipboard->setText(text, QClipboard::Clipboard);
+	else if (!urls.isEmpty()) clipboard->setText(urls[0].toString(), QClipboard::Clipboard);
+}
+
 void ReadClipboardThread::run()
 {
 	QTime startTime = QTime::currentTime();
 	m_data.clear();
 	while (startTime.msecsTo(QTime::currentTime()) < g_readMaxTime  && !m_data.isValid()) {
-		// m_data = ClipboardData(QApplication::clipboard()->mimeData());
+		m_data.copyFromClipboard();
 		this->sleep(0);
 	}
 	if (m_data.isValid()) {
@@ -53,13 +63,9 @@ HistoryDataList* HistoryDataList::getInstance()
 HistoryDataList::HistoryDataList(QObject* parent) : QObject(parent)
 {
 	m_thread = new ReadClipboardThread(this);
-	m_historyClipboardDataList.push_front(std::make_shared<ClipboardData>(QApplication::clipboard()->mimeData()));
+	// m_historyClipboardDataList.push_front(std::make_shared<ClipboardData>(QApplication::clipboard()->mimeData()));
 	connect(m_thread, &ReadClipboardThread::sigSuccessed, this, &HistoryDataList::onClipboardDataUpdate);
-	connect(QApplication::clipboard(), &QClipboard::dataChanged, [this]() { m_thread->start(); });
-}
-
-HistoryDataList::~HistoryDataList()
-{
+	connect(QApplication::clipboard(), &QClipboard::dataChanged, [this]() {m_thread->start(); });
 }
 
 void HistoryDataList::onSetListSize(int s)
@@ -76,6 +82,6 @@ void HistoryDataList::onClipboardDataUpdate(const ClipboardData& data)
 {
 	while (m_historyClipboardDataList.size() >= m_listSize)
 		m_historyClipboardDataList.pop_back();
-	m_historyClipboardDataList.push_front(std::make_shared<ClipboardData>(QApplication::clipboard()->mimeData()));
+	// m_historyClipboardDataList.push_front(std::make_shared<ClipboardData>(QApplication::clipboard()->mimeData()));
 	emit sigDataListUpdate();
 }

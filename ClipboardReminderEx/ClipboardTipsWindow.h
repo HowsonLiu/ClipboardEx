@@ -8,6 +8,7 @@ class QMimeData;
 class QCheckBox;
 class QListWidget;
 class QPropertyAnimation;
+class QListWidgetItem;
 
 /*!
  * \class MimeDataLabel
