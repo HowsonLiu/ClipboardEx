@@ -21,18 +21,14 @@ class MimeDataLabel : public QLabel
 	Q_OBJECT
 public:
 	MimeDataLabel(QWidget* parent = nullptr);
-	inline void setMimeData(const std::shared_ptr<ClipboardData> data) { m_bindMimeData = data; showMimeData(); }
-	inline void setDisplay(bool b) { m_bDisplay = b; }
-
+	inline void setMimeData(const ClipboardDataPtr& data) { m_bindMimeData = data; showMimeData(); }
+	inline bool isValid() const { return m_bindMimeData ? m_bindMimeData->isValid() : false; }
 public slots:
 	void onUpdateSize(const QSize&);
-
 private:
 	void showMimeData();
-
 private:
-	std::shared_ptr<ClipboardData> m_bindMimeData;
-	bool m_bDisplay;
+	ClipboardDataPtr m_bindMimeData;
 };
 
 /*!

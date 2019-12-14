@@ -71,7 +71,7 @@ void MainControl::setUpUI()
 	else {
 		for (auto state : m_tipsWindowState) {
 			ClipboardTipsWindow* window = new ClipboardTipsWindow;
-			window->updateHistoryList();
+			// window->updateHistoryList();
 			window->loadTipsWindowState(state);
 			window->setLabelSize(m_tipsRectSize);
 			window->setListHeight(m_tipsListHeight);

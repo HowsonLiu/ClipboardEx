@@ -16,7 +16,7 @@ namespace {
 }
 
 MimeDataLabel::MimeDataLabel(QWidget* parent /*= nullptr*/) : QLabel(parent)
-	, m_bDisplay(true), m_bindMimeData(nullptr)
+	, m_bindMimeData(nullptr)
 {
 	setWordWrap(true);
 	setStyleSheet("background-color:yellow");

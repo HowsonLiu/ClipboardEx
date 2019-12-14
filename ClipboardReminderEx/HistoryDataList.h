@@ -28,19 +28,26 @@ struct ClipboardData {
 	void copyFromClipboard();
 	void copyToClipboard();
 };
+typedef std::shared_ptr<ClipboardData> ClipboardDataPtr;
+Q_DECLARE_METATYPE(ClipboardDataPtr);
 
+/*!
+ * \class ReadClipboardThread
+ * \brief In some case, we can not read the clipboard data at once. So I took this operation
+ on another thread
+ * \author liuhaosheng
+ * \date December 2019
+ */
 class ReadClipboardThread : public QThread 
 {
 	Q_OBJECT
 public:
-	explicit ReadClipboardThread(QObject* parent = nullptr) {};
+	explicit ReadClipboardThread(QObject* parent = nullptr) { qRegisterMetaType<ClipboardDataPtr>(); };
 protected:
 	virtual void run() override;
 signals:
-	void sigSuccessed(const ClipboardData& data);
+	void sigSuccessed(const ClipboardDataPtr& data);
 	void sigFailed();
-private:
-	ClipboardData m_data;
 };
 
 class HistoryDataList : public QObject
@@ -57,10 +64,11 @@ signals:
 public slots:
 	void onSetListSize(int);
 private slots:
-	void onClipboardDataUpdate(const ClipboardData& data);
+	void onReadSuccessed(const ClipboardDataPtr& data);
+	void onReadFailed();
 private:
-	// older data are in the end of the list
-	std::deque<std::shared_ptr<ClipboardData>> m_historyClipboardDataList;
-	int m_listSize;
 	ReadClipboardThread* m_thread;
+	// older data are in the end of the list
+	std::deque<ClipboardDataPtr> m_historyClipboardDataList;
+	int m_listSize;
 };
