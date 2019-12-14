@@ -25,6 +25,7 @@ public:
 	inline bool isValid() const { return m_bindMimeData ? m_bindMimeData->isValid() : false; }
 public slots:
 	void onUpdateSize(const QSize&);
+	void onDoubleClicked();
 private:
 	void showMimeData();
 private:

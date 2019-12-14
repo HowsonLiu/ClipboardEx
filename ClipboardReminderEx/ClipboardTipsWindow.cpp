@@ -46,6 +46,12 @@ void MimeDataLabel::onUpdateSize(const QSize& size)
 	showMimeData();		// update image size
 }
 
+void MimeDataLabel::onDoubleClicked()
+{
+	if (!m_bindMimeData || !m_bindMimeData->isValid()) return;
+	m_bindMimeData->copyToClipboard();
+}
+
 ClipboardTipsWindowState::ClipboardTipsWindowState() : bExpand(false), 
 	bAutoShow(true), dockState()
 {
@@ -72,6 +78,7 @@ ClipboardTipsWindow::ClipboardTipsWindow(QWidget* parent /*= nullptr*/)
 {
 	initWindow();
 	beautyWindow();
+	connect(m_historyMimeDataListWidget, &QListWidget::itemDoubleClicked, this, &ClipboardTipsWindow::onItemDoubleClicked);
 	connect(this, &ClipboardTipsWindow::sigUpdateLabelSize, m_curMimeDataLabel, &MimeDataLabel::onUpdateSize);
 	connect(HistoryDataList::getInstance(), &HistoryDataList::sigDataListUpdate, this, &ClipboardTipsWindow::onHistoryListUpdate);
 	connect(m_expandCheckBox, &QCheckBox::stateChanged, this, &ClipboardTipsWindow::onExpandStateChanged);
@@ -179,4 +186,5 @@ void ClipboardTipsWindow::onItemDoubleClicked(QListWidgetItem* item)
 {
 	MimeDataLabel* label = dynamic_cast<MimeDataLabel*>(m_historyMimeDataListWidget->itemWidget(item));
 	if (!label) return;
+	label->onDoubleClicked();
 }
