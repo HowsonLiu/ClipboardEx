@@ -96,6 +96,7 @@ ClipboardTipsWindowState ClipboardTipsWindow::getTipsWindowState() const
 void ClipboardTipsWindow::loadTipsWindowState(const ClipboardTipsWindowState& state)
 {
 	m_expandCheckBox->setChecked(state.bExpand);
+	m_historyMimeDataListWidget->setVisible(state.bExpand);
 	m_autoShowCheckBox->setChecked(state.bAutoShow);
 	loadDockableState(state.dockState);
 }
@@ -130,6 +131,7 @@ void ClipboardTipsWindow::setLabelSize(const QSize& size)
 {
 	emit sigUpdateLabelSize(size);
 	m_historyMimeDataListWidget->setFixedWidth(size.width());
+	adjustSize();
 }
 
 void ClipboardTipsWindow::setListHeight(int h)
@@ -137,6 +139,7 @@ void ClipboardTipsWindow::setListHeight(int h)
 	m_listHeight = h;
 	if (m_expandCheckBox->isChecked()) {
 		m_historyMimeDataListWidget->setFixedHeight(m_listHeight);
+		adjustSize();
 	}
 }
 
@@ -173,12 +176,8 @@ void ClipboardTipsWindow::onHistoryListUpdate()
 
 void ClipboardTipsWindow::onExpandStateChanged(int state)
 {
-	if (Qt::CheckState::Unchecked == state) {
-		m_historyMimeDataListWidget->hide();
-	}
-	else {
-		m_historyMimeDataListWidget->show();
-	}
+	m_historyMimeDataListWidget->setFixedHeight(m_listHeight);
+	m_historyMimeDataListWidget->setVisible(Qt::CheckState::Unchecked != state);
 	adjustSize();
 }
 
