@@ -15,6 +15,7 @@
 *_pch.h.cpp
 *_resource.rc
 *.qm
+*.tlog
 .#*
 *.*#
 core
@@ -71,3 +72,8 @@ Thumbs.db
 *.dll
 *.exe
 
+# build folder
+debug/
+release/
+Win32/
+build*/
