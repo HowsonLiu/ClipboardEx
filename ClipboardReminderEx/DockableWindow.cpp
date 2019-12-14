@@ -2,9 +2,9 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QMouseEvent>
-#include <Windows.h>
-#include <WinUser.h>
 #include <QPropertyAnimation>
+#include <QDesktopWidget>
+#include <QScreen>
 #include <QDebug>
 
 DockableWindowState::DockableWindowState() : dockDirection(DockDirection::None), dockPosition({ {0,0} })
@@ -136,19 +136,23 @@ void DockableWindow::initWindow()
 	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 }
 
+QRect DockableWindow::curScreenRect() const
+{
+	int screenIndex = QApplication::desktop()->screenNumber(this);
+	QScreen* curScreen = QGuiApplication::screens()[screenIndex];
+	if (curScreen) return curScreen->availableGeometry();
+	return QRect();
+}
+
 DockDirection DockableWindow::canDock() const
 {
-	int screen_x = GetSystemMetrics(SM_XVIRTUALSCREEN);
-	int screen_y = GetSystemMetrics(SM_YVIRTUALSCREEN);
-	int screen_width = GetSystemMetrics(SM_CXVIRTUALSCREEN);
-	int screen_height = GetSystemMetrics(SM_CYVIRTUALSCREEN);
-	// monitor with different resolutions combination will cause calculation not accurate
-	// like 1980x1080 + 2550x1440
-	// 1980x1080 dock upside will miss
-	// NOT TODO
-	if (this->y() < screen_y - DOCK_ENABLE_DISTANCE) return DockDirection::UP;	// up direction has high priority
-	if (this->x() < screen_x - DOCK_ENABLE_DISTANCE) return DockDirection::LEFT;
-	if (this->x() + this->width() > screen_x + screen_width) return DockDirection::RIGHT;
+	QScreen* topLeftScreen = QGuiApplication::screenAt(this->geometry().topLeft());
+	QScreen* topRightScreen = QGuiApplication::screenAt(this->geometry().topRight());
+	QScreen* bottomLeftScreen = QGuiApplication::screenAt(this->geometry().bottomLeft());
+	QScreen* bottomRightScreen = QGuiApplication::screenAt(this->geometry().bottomRight());
+	if (!topLeftScreen && topLeftScreen == topRightScreen) return DockDirection::UP;
+	else if (!topLeftScreen && topLeftScreen == bottomLeftScreen) return DockDirection::LEFT;
+	else if (!topRightScreen && topRightScreen == bottomRightScreen) return DockDirection::RIGHT;
 	return DockDirection::None;
 }
 
@@ -159,52 +163,52 @@ void DockableWindow::setDock(const DockDirection dockDirection)
 
 void DockableWindow::prepareDock()
 {
-	// In some case, the windows exceeds more than one direction, so we need to make sure the window fully shows
-	int screen_x = GetSystemMetrics(SM_XVIRTUALSCREEN);
-	int screen_y = GetSystemMetrics(SM_YVIRTUALSCREEN);
-	int screen_width = GetSystemMetrics(SM_CXVIRTUALSCREEN);
-	int target_y = this->y() < screen_y ? screen_y : this->y();
-	int target_x = this->x();
-	if (this->x() < screen_x) target_x = screen_x;
-	else if (this->x() > screen_x + screen_width - this->width())
-		target_x = screen_x + screen_width - this->width();
+	if (Q_UNLIKELY(!curScreenRect().isValid())) return;
+	// Make window show on the belong screen fully
+	QRect belongScreenRect = curScreenRect();
+	QRect rect = this->geometry();
+	int target_y = rect.y() > belongScreenRect.y() ? rect.y() : belongScreenRect.y();
+	int target_x = rect.x();
+	if (belongScreenRect.left() > rect.left())
+		target_x = belongScreenRect.left();
+	else if (belongScreenRect.right() < rect.right())
+		target_x = belongScreenRect.right() - rect.width();
 	move(target_x, target_y);
+	qDebug() << belongScreenRect << rect << belongScreenRect.right() << belongScreenRect.left();
 }
 
 void DockableWindow::dockShow()
 {
+	if (Q_UNLIKELY(!curScreenRect().isValid())) return;
 	if (DockDirection::None == m_curDockDirection) return;
 	if (DockDirection::UP == m_curDockDirection) {
-		dockAnimationShow(this->x(), GetSystemMetrics(SM_YVIRTUALSCREEN));
+		dockAnimationShow(this->x(), curScreenRect().top());
 	}
 	else if (DockDirection::LEFT == m_curDockDirection) {
-		dockAnimationShow(GetSystemMetrics(SM_XVIRTUALSCREEN), this->y());
+		dockAnimationShow(curScreenRect().left(), this->y());
 	}
 	else if (DockDirection::RIGHT == m_curDockDirection) {
-		int screen_x = GetSystemMetrics(SM_XVIRTUALSCREEN);
-		int screen_width = GetSystemMetrics(SM_CXVIRTUALSCREEN);
-		int target_x = screen_x + screen_width - this->width();
+		int target_x = curScreenRect().right() - this->width();
 		dockAnimationShow(target_x, this->y());
 	}
 }
 
 void DockableWindow::dockHide(bool animation)
 {
+	if (Q_UNLIKELY(!curScreenRect().isValid())) return;
 	if (DockDirection::None == m_curDockDirection) return;
 	if (DockDirection::UP == m_curDockDirection) {
-		int target_y = GetSystemMetrics(SM_YVIRTUALSCREEN) - this->height() + DOCK_SHOW_DISTANCE;
+		int target_y = curScreenRect().top() - this->height() + DOCK_SHOW_DISTANCE;
 		if (animation) dockAnimationHide(this->x(), target_y);
 		else move(this->x(), target_y);
 	}
 	else if (DockDirection::LEFT == m_curDockDirection) {
-		int target_x = GetSystemMetrics(SM_XVIRTUALSCREEN) - this->width() + DOCK_SHOW_DISTANCE;
+		int target_x = curScreenRect().left() - this->width() + DOCK_SHOW_DISTANCE;
 		if (animation) dockAnimationHide(target_x, this->y());
 		else move(target_x, this->y());
 	}
 	else if (DockDirection::RIGHT == m_curDockDirection) {
-		int screen_x = GetSystemMetrics(SM_XVIRTUALSCREEN);
-		int screen_width = GetSystemMetrics(SM_CXVIRTUALSCREEN);
-		int target_x = screen_x + screen_width - DOCK_SHOW_DISTANCE;
+		int target_x = curScreenRect().right() - DOCK_SHOW_DISTANCE;
 		if (animation) dockAnimationHide(target_x, this->y());
 		else move(target_x, this->y());
 	}

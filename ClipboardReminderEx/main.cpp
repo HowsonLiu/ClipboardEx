@@ -9,10 +9,12 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	MainControl m;
-	m.readConfig();
-	m.setUpUI();
-	m.setAutoSave();
+	//MainControl m;
+	//m.readConfig();
+	//m.setUpUI();
+	//m.setAutoSave();
+	DockableWindow w;
+	w.show();
 
 	return a.exec();
 }

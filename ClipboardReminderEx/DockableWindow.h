@@ -66,6 +66,7 @@ protected:
 
 private:
 	void initWindow();
+	QRect curScreenRect() const;
 	// dock
 	DockDirection canDock() const;
 	void setDock(const DockDirection);
