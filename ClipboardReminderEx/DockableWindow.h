@@ -28,14 +28,15 @@ class QPropertyAnimation;
  */
 struct DockableWindowState 
 {
-	short dockDirection;
+	short screenIndex = 0;
+	short dockDirection = DockDirection::None;
 	union {
-		QPoint  undockPosion;
-		int dockOffset;
-	} dockPosition{};
+		QPointF  undockPosion;
+		float dockOffset;
+	} dockPosition = { {0.0f,0.0f} };
 
 public:
-	DockableWindowState();
+	DockableWindowState() {};
 	DockableWindowState(const QString&);
 	operator QString();
 };

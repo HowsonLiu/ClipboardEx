@@ -72,9 +72,9 @@ void MainControl::setUpUI()
 		for (auto state : m_tipsWindowState) {
 			ClipboardTipsWindow* window = new ClipboardTipsWindow;
 			// window->updateHistoryList();
-			window->loadTipsWindowState(state);
 			window->setLabelSize(m_tipsRectSize);
 			window->setListHeight(m_tipsListHeight);
+			window->loadTipsWindowState(state);
 			window->show();
 			m_tipsWindows.push_back(window);
 		}

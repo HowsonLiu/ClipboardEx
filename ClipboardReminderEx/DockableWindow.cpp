@@ -7,30 +7,25 @@
 #include <QScreen>
 #include <QDebug>
 
-DockableWindowState::DockableWindowState() : dockDirection(DockDirection::None), dockPosition({ {0,0} })
-{
-}
-
-
 DockableWindowState::DockableWindowState(const QString& str)
 {
 	if (str.isEmpty()) return;
-	QStringList list = str.split(",");
-	if (list.isEmpty()) return;
-	if (DockDirection::None == list[0].toInt() && list.size() == 3) {
-		dockDirection = list[0].toInt();
-		dockPosition.undockPosion.setX(list[1].toInt());
-		dockPosition.undockPosion.setY(list[2].toInt());
+	QStringList list = str.split(',');
+	if (list.size() < 3) return;
+	screenIndex = list[0].toInt();
+	dockDirection = list[1].toInt();
+	if (DockDirection::None == dockDirection && list.size() == 4) {
+		dockPosition.undockPosion.setX(list[2].toFloat());
+		dockPosition.undockPosion.setY(list[3].toFloat());
 	}
-	else if (DockDirection::None != list[0].toInt() && list.size() == 2) {
-		dockDirection = list[0].toInt();
-		dockPosition.dockOffset = list[1].toInt();
+	else if (DockDirection::None != dockDirection && list.size() == 3) {
+		dockPosition.dockOffset = list[2].toFloat();
 	}
 }
 
 DockableWindowState::operator QString()
 {
-	QString res = QString::number(dockDirection) + ",";
+	QString res = QString::number(screenIndex) + ',' + QString::number(dockDirection) + ',';
 	if (DockDirection::None == dockDirection)
 		return res + QString::number(dockPosition.undockPosion.x()) + "," + QString::number(dockPosition.undockPosion.y());
 	else
@@ -48,37 +43,48 @@ DockableWindow::DockableWindow(QWidget *parent)
 DockableWindowState DockableWindow::getDockableState() const
 {
 	DockableWindowState res;
+	res.screenIndex = QApplication::desktop()->screenNumber(this);
 	res.dockDirection = m_curDockDirection;
-	if (DockDirection::LEFT == m_curDockDirection || DockDirection::RIGHT == m_curDockDirection)
-		res.dockPosition.dockOffset = this->y();
-	else if (DockDirection::UP == m_curDockDirection)
-		res.dockPosition.dockOffset = this->x();
-	else 
-		res.dockPosition.undockPosion = this->pos();
+	QRect screenRect = curScreenRect();
+	if (Q_UNLIKELY(!screenRect.isValid())) return res;
+	float xOffset = (float)(this->x() - screenRect.left()) / screenRect.width();
+	float yOffset = (float)(this->y() - screenRect.top()) / screenRect.height();
+	if (DockDirection::LEFT == m_curDockDirection || DockDirection::RIGHT == m_curDockDirection) {
+		res.dockPosition.dockOffset = yOffset;
+	}
+	else if (DockDirection::UP == m_curDockDirection) {
+		res.dockPosition.dockOffset = xOffset;
+	}
+	else {
+		res.dockPosition.undockPosion.setX(xOffset);
+		res.dockPosition.undockPosion.setY(yOffset);
+	}
 	return res;
 }
 
 void DockableWindow::loadDockableState(const DockableWindowState& dockpos)
 {
+	QScreen* screen = QGuiApplication::screens()[0];
+	if (dockpos.screenIndex < QGuiApplication::screens().size())
+		screen = QGuiApplication::screens()[dockpos.screenIndex];
 	m_curDockDirection = (DockDirection)dockpos.dockDirection;
 	int target_x, target_y;
+	QRect screenRect = screen->availableGeometry();
 	if (DockDirection::LEFT == m_curDockDirection) {
-		target_x = GetSystemMetrics(SM_XVIRTUALSCREEN) - this->width() + DOCK_SHOW_DISTANCE;
-		target_y = dockpos.dockPosition.dockOffset;
+		target_x = screenRect.left() - this->width() + DOCK_SHOW_DISTANCE;
+		target_y = dockpos.dockPosition.dockOffset * screenRect.height() + screenRect.top();
 	}
 	else if (DockDirection::RIGHT == m_curDockDirection) {
-		int screen_x = GetSystemMetrics(SM_XVIRTUALSCREEN);
-		int screen_width = GetSystemMetrics(SM_CXVIRTUALSCREEN);
-		target_x = screen_x + screen_width - DOCK_SHOW_DISTANCE;
-		target_y = dockpos.dockPosition.dockOffset;
+		target_x = screenRect.right() - DOCK_SHOW_DISTANCE;
+		target_y = dockpos.dockPosition.dockOffset * screenRect.height() + screenRect.top();
 	}
 	else if (DockDirection::UP == m_curDockDirection) {
-		target_y = GetSystemMetrics(SM_YVIRTUALSCREEN) - this->height() + DOCK_SHOW_DISTANCE;
-		target_x = dockpos.dockPosition.dockOffset;
+		target_y = screenRect.top() - this->height() + DOCK_SHOW_DISTANCE;
+		target_x = dockpos.dockPosition.dockOffset * screenRect.width() + screenRect.left();
 	}
 	else {
-		target_x = dockpos.dockPosition.undockPosion.x();
-		target_y = dockpos.dockPosition.undockPosion.y();
+		target_x = dockpos.dockPosition.undockPosion.x() * screenRect.width() + screenRect.left();
+		target_y = dockpos.dockPosition.undockPosion.y() * screenRect.height() + screenRect.top();
 	}
 	move(target_x, target_y);
 }
@@ -139,6 +145,7 @@ void DockableWindow::initWindow()
 QRect DockableWindow::curScreenRect() const
 {
 	int screenIndex = QApplication::desktop()->screenNumber(this);
+	if (screenIndex < 0) return QRect();
 	QScreen* curScreen = QGuiApplication::screens()[screenIndex];
 	if (curScreen) return curScreen->availableGeometry();
 	return QRect();
