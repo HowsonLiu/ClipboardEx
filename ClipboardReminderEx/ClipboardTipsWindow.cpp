@@ -61,7 +61,7 @@ ClipboardTipsWindowState::ClipboardTipsWindowState(const QString& str) : bExpand
 	bAutoShow(true), dockState()
 {
 	if (str.isEmpty()) return;
-	QStringList list = str.split('-');
+	QStringList list = str.split('/');
 	if (list.size() < 3) return;
 	bExpand = list[0].toInt();
 	bAutoShow = list[1].toInt();
@@ -70,7 +70,7 @@ ClipboardTipsWindowState::ClipboardTipsWindowState(const QString& str) : bExpand
 
 ClipboardTipsWindowState::operator QString()
 {
-	return QString::number(bExpand) + '-' + QString::number(bAutoShow) + '-' + dockState;
+	return QString::number(bExpand) + '/' + QString::number(bAutoShow) + '/' + dockState;
 }
 
 ClipboardTipsWindow::ClipboardTipsWindow(QWidget* parent /*= nullptr*/)
