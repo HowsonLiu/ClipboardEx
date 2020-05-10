@@ -1,9 +1,11 @@
 #include "MenuActionWidget.h"
+#include "def.h"
 #include <QLabel>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSlider>
+#include <QDebug>
 
 NumMenuActionWidget::NumMenuActionWidget(const QString& describeText, int minVal, 
 	int defaultVal, int maxVal, QWidget* parent /*= nullptr*/)
@@ -25,16 +27,22 @@ void NumMenuActionWidget::initWindow()
 	m_minusButton = new QPushButton(this);
 	m_describeTextLabel = new QLabel(this);
 
+	m_numLabel->setObjectName(kMenuSubValue);
+	m_describeTextLabel->setObjectName(kMenuSubTitle);
+	m_plusButton->setObjectName(kMenuSubRBtn);
+	m_minusButton->setObjectName(kMenuSubLBtn);
+	this->setObjectName(kMenuSubWidget);
+
 	m_describeTextLabel->setText(m_describeText);
 	m_numLabel->setText(QString::number(m_curVal));
 
 	QVBoxLayout* layout = new QVBoxLayout(this);
-	layout->addWidget(m_describeTextLabel);
+	layout->addWidget(m_describeTextLabel, 0, Qt::AlignHCenter);
 	QHBoxLayout* downLayout = new QHBoxLayout(this);
-	downLayout->addWidget(m_minusButton);
-	downLayout->addWidget(m_numLabel);
-	downLayout->addWidget(m_plusButton);
-	layout->addLayout(downLayout);
+	downLayout->addWidget(m_minusButton, 0, Qt::AlignVCenter);
+	downLayout->addWidget(m_numLabel, 1, Qt::AlignVCenter);
+	downLayout->addWidget(m_plusButton, 0, Qt::AlignVCenter);
+	layout->addLayout(downLayout, 1);
 	setLayout(layout);
 }
 
@@ -54,6 +62,7 @@ void NumMenuActionWidget::onMinusButtonClick()
 	if (m_curVal < m_maxVal) m_plusButton->setEnabled(true);
 	m_numLabel->setText(QString::number(m_curVal));
 	sigNumChange(m_curVal);
+	qDebug() << styleSheet();
 }
 
 SliderMenuActionWidget::SliderMenuActionWidget(const QString& describeText, int minVal, 

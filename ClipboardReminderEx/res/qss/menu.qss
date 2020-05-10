@@ -1,0 +1,62 @@
+#TrayMenu {
+	background-color: #2D2D30;
+	border: 1px solid #007ACC;
+	
+	color: #F1F1F1;
+}
+#TrayMenu::item {
+	height: 22px;
+}
+#TrayMenu::item:hover {
+	background-color: #3E3E40;
+}
+#TrayMenu::item:pressed {
+    background-color: #1B1B1C;
+}
+
+QToolButton#StartUpAction{
+	background-color: red;
+}
+
+QWidget#MenuSubWidget:hover {
+	background-color: #3E3E40;
+}
+QLabel#MenuSubTitle {
+	color: #F1F1F1;
+}
+QLabel#MenuSubValue {
+	color: #F1F1F1;
+	font: bold 25px "SimHei";
+	padding-left: 5px;
+}
+
+QPushButton#MenuSubLBtn {
+	width: 16px;
+	height: 16px;
+	border-image: url(:/res/image/left-normal.png);
+}
+QPushButton#MenuSubLBtn:hover {
+	border-image: url(:/res/image/left-hover.png);
+}
+QPushButton#MenuSubLBtn:pressed {
+	border-image: url(:/res/image/left-clicked.png);
+}
+QPushButton#MenuSubLBtn:disabled {
+	border-image: url(:/res/image/left-disable.png);
+}
+
+QPushButton#MenuSubRBtn {
+	width: 16px;
+	height: 16px;
+	border-image: url(:/res/image/right-normal.png);
+}
+QPushButton#MenuSubRBtn:hover {
+	border-image: url(:/res/image/right-hover.png);
+}
+QPushButton#MenuSubRBtn:pressed {
+	border-image: url(:/res/image/right-clicked.png);
+}
+QPushButton#MenuSubRBtn:disabled {
+	border-image: url(:/res/image/right-disable.png);
+}
+

@@ -24,7 +24,7 @@ public:
 	inline void setMimeData(const ClipboardDataPtr& data) { m_bindMimeData = data; showMimeData(); }
 	inline bool isValid() const { return m_bindMimeData ? m_bindMimeData->isValid() : false; }
 public slots:
-	void onUpdateSize(const QSize&);
+	//void onUpdateSize(const QSize&);
 	void onDoubleClicked();
 private:
 	void showMimeData();
@@ -68,7 +68,6 @@ public:
 
 private:
 	void initWindow();
-	void beautyWindow();
 
 signals:
 	void sigUpdateLabelSize(const QSize&);

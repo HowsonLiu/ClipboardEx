@@ -3,6 +3,7 @@
 #include "ClipboardTipsWindow.h"
 #include "ConfigManager.h"
 #include "HistoryDataList.h"
+#include "def.h"
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QWidgetAction>
@@ -11,11 +12,11 @@
 #include <QTimer>
 
 namespace {
-	static const QString g_historySizeDescribeText = "History Size";
+	static const QString g_historySizeDescribeText = QObject::tr("History Size");
 	static const int g_historySizeMin = 1;
 	static const int g_historySizeDefault = 5;
 	static const int g_histroySizeMax = 20;
-	static const QString g_tipsNumDescribeText = "Num of tips";
+	static const QString g_tipsNumDescribeText = QObject::tr("Num of tips");
 	static const int g_tipsNumMin = 1;
 	static const int g_tipsNumDefault = 1;
 	static const int g_tipsNumMax = 20;
@@ -33,12 +34,14 @@ namespace {
 	static const int g_tipsListHeightDefault = 500;
 	static const int g_tipsListHeightMax = 800;
 	static const int g_autoSaveInterval = 5 * 1000;
+
+	const QString kThemeQss = "theme.qss";
 }
 
 MainControl::MainControl(QObject* parent /*= nullptr*/) : QObject(parent)
 	, m_tipsWindowState()
-	, m_historySize(g_historySizeDefault), m_tipsListHeight(g_tipsListHeightDefault)
-	, m_tipsRectSize({g_tipsRectWidthDefault, g_tipsRectHeightDefault})
+	, m_historySize(g_historySizeDefault)/*, m_tipsListHeight(g_tipsListHeightDefault)
+	, m_tipsRectSize({g_tipsRectWidthDefault, g_tipsRectHeightDefault})*/
 {
 }
 
@@ -46,24 +49,31 @@ void MainControl::readConfig()
 {
 	auto tipsWindowState = IniManager::getInstance()->getWindowPositions();
 	int historySize = IniManager::getInstance()->getHistorySize();
-	int tipsListHeight = IniManager::getInstance()->getTipsListHeight();
-	auto tipsRectSize = IniManager::getInstance()->getTipsRectSize();
+	//int tipsListHeight = IniManager::getInstance()->getTipsListHeight();
+	//auto tipsRectSize = IniManager::getInstance()->getTipsRectSize();
 
 	if (historySize) m_historySize = historySize;
-	if (tipsListHeight) m_tipsListHeight = tipsListHeight;
-	if (tipsRectSize.isValid()) m_tipsRectSize = tipsRectSize;
+	//if (tipsListHeight) m_tipsListHeight = tipsListHeight;
+	//if (tipsRectSize.isValid()) m_tipsRectSize = tipsRectSize;
 	if (!tipsWindowState.isEmpty()) m_tipsWindowState = tipsWindowState;
 }
 
 void MainControl::setUpUI()
 {
+	setUpQss();
 	setUpTrayIcon();
+	setUpWindow();
+}
+
+void MainControl::setUpWindow()
+{
 	HistoryDataList::getInstance()->onSetListSize(m_historySize);
 	if (m_tipsWindowState.isEmpty()) {
 		ClipboardTipsWindow* window = new ClipboardTipsWindow;
+		window->setStyleSheet(m_windowQss);
 		window->updateHistoryList();
-		window->setLabelSize(m_tipsRectSize);
-		window->setListHeight(m_tipsListHeight);
+		//window->setLabelSize(m_tipsRectSize);
+		//window->setListHeight(m_tipsListHeight);
 		window->show();
 		window->move(QApplication::desktop()->screen()->rect().center() - window->rect().center());
 		m_tipsWindows.push_back(window);
@@ -71,9 +81,10 @@ void MainControl::setUpUI()
 	else {
 		for (auto state : m_tipsWindowState) {
 			ClipboardTipsWindow* window = new ClipboardTipsWindow;
-			// window->updateHistoryList();
-			window->setLabelSize(m_tipsRectSize);
-			window->setListHeight(m_tipsListHeight);
+			window->setStyleSheet(m_windowQss);
+			//window->updateHistoryList();
+			//window->setLabelSize(m_tipsRectSize);
+			//window->setListHeight(m_tipsListHeight);
 			window->loadTipsWindowState(state);
 			window->show();
 			m_tipsWindows.push_back(window);
@@ -85,32 +96,52 @@ void MainControl::setUpTrayIcon()
 {
 	QSystemTrayIcon* trayIcon = new QSystemTrayIcon(this);
 	QMenu* trayIconMenu = new QMenu;
+	trayIconMenu->setObjectName(kTrayMenu);
+
+	// start up
+	QAction* startUpAction = new QAction(trayIconMenu);
+	startUpAction->setText(tr("Start up"));
+	startUpAction->setCheckable(true);
+
+	// history size
 	NumMenuActionWidget* historySizeWidget = new NumMenuActionWidget(g_historySizeDescribeText,
 		g_historySizeMin, m_historySize, g_histroySizeMax, trayIconMenu);
 	QWidgetAction* historySizeAction = new QWidgetAction(trayIconMenu);
+	historySizeAction->setDefaultWidget(historySizeWidget);
+
+	// number of tips windows
 	NumMenuActionWidget* tipsNumWidget = new NumMenuActionWidget(g_tipsNumDescribeText,
 		g_tipsNumMin, m_tipsWindowState.size(), g_tipsNumMax, trayIconMenu);
 	QWidgetAction* tipsNumAction = new QWidgetAction(trayIconMenu);
-	DoubleSliderMenuActionWidget* tipsRectWidget = new DoubleSliderMenuActionWidget(g_tipsRectDescribeText,
-		g_tipsRectWidthText, g_tipsRectWidthMin, m_tipsRectSize.width(), g_tipsRectWidthMax,
-		g_tipsRectHeightText, g_tipsRectHeightMin, m_tipsRectSize.height(), g_tipsRectHeightMax, trayIconMenu);
-	QWidgetAction* tipsRectAction = new QWidgetAction(trayIconMenu);
-	SliderMenuActionWidget* tipsListHeightWidget = new SliderMenuActionWidget(g_tipsListHeightText,
-		g_tipsListHeightMin, m_tipsListHeight, g_tipsListHeightMax, trayIconMenu);
-	QWidgetAction* tipsListAction = new QWidgetAction(trayIconMenu);
-
-	historySizeAction->setDefaultWidget(historySizeWidget);
-	trayIconMenu->addAction(historySizeAction);
 	tipsNumAction->setDefaultWidget(tipsNumWidget);
+
+	//// window size
+	//DoubleSliderMenuActionWidget* tipsRectWidget = new DoubleSliderMenuActionWidget(g_tipsRectDescribeText,
+	//	g_tipsRectWidthText, g_tipsRectWidthMin, m_tipsRectSize.width(), g_tipsRectWidthMax,
+	//	g_tipsRectHeightText, g_tipsRectHeightMin, m_tipsRectSize.height(), g_tipsRectHeightMax, trayIconMenu);
+	//QWidgetAction* tipsRectAction = new QWidgetAction(trayIconMenu);
+	//tipsRectAction->setDefaultWidget(tipsRectWidget);
+
+	//// list height
+	//SliderMenuActionWidget* tipsListHeightWidget = new SliderMenuActionWidget(g_tipsListHeightText,
+	//	g_tipsListHeightMin, m_tipsListHeight, g_tipsListHeightMax, trayIconMenu);
+	//QWidgetAction* tipsListAction = new QWidgetAction(trayIconMenu);
+	//tipsListAction->setDefaultWidget(tipsListHeightWidget);
+
+	// exit
+	QAction* exitAction = new QAction(trayIconMenu);
+	exitAction->setText(tr("Exit"));
+
+	trayIconMenu->addAction(startUpAction);
+	trayIconMenu->addAction(historySizeAction);
 	trayIconMenu->addAction(tipsNumAction);
-	tipsRectAction->setDefaultWidget(tipsRectWidget);
-	trayIconMenu->addAction(tipsRectAction);
-	tipsListAction->setDefaultWidget(tipsListHeightWidget);
-	trayIconMenu->addAction(tipsListAction);
-	trayIconMenu->addAction("Exit");
+	//trayIconMenu->addAction(tipsRectAction);
+	//trayIconMenu->addAction(tipsListAction);
+	trayIconMenu->addAction(exitAction);
+	trayIconMenu->setStyleSheet(m_menuQss);
 
 	trayIcon->setContextMenu(trayIconMenu);
-	trayIcon->setIcon(QIcon("c:\\Users\\liuhaosheng\\Pictures\\1.png"));	// neccessary
+	trayIcon->setIcon(QIcon("d:\\PaPa Liu\\Pictures\\KonachanSpider\\269277.jpg"));	// neccessary
 	trayIcon->show();
 
 	connect(tipsNumWidget, &NumMenuActionWidget::sigNumChange, this, &MainControl::onTipsWindowNumChange);
@@ -118,18 +149,34 @@ void MainControl::setUpTrayIcon()
 		m_historySize = n; 
 		HistoryDataList::getInstance()->onSetListSize(m_historySize); 
 	});
-	connect(tipsListHeightWidget, &SliderMenuActionWidget::sigNumChange, [this](int n) {
-		m_tipsListHeight = n; 
-		for (auto tip : m_tipsWindows) tip->setListHeight(m_tipsListHeight);
-	});
-	connect(tipsRectWidget, &DoubleSliderMenuActionWidget::sigNumChange1, [this](int n) {
-		m_tipsRectSize.setWidth(n);
-		for(auto tip : m_tipsWindows) tip->setLabelSize(m_tipsRectSize);
-	});
-	connect(tipsRectWidget, &DoubleSliderMenuActionWidget::sigNumChange2, [this](int n) {
-		m_tipsRectSize.setHeight(n);
-		for (auto tip : m_tipsWindows) tip->setLabelSize(m_tipsRectSize);
-	});
+	//connect(tipsListHeightWidget, &SliderMenuActionWidget::sigNumChange, [this](int n) {
+	//	m_tipsListHeight = n; 
+	//	for (auto tip : m_tipsWindows) tip->setListHeight(m_tipsListHeight);
+	//});
+	//connect(tipsRectWidget, &DoubleSliderMenuActionWidget::sigNumChange1, [this](int n) {
+	//	m_tipsRectSize.setWidth(n);
+	//	for(auto tip : m_tipsWindows) tip->setLabelSize(m_tipsRectSize);
+	//});
+	//connect(tipsRectWidget, &DoubleSliderMenuActionWidget::sigNumChange2, [this](int n) {
+	//	m_tipsRectSize.setHeight(n);
+	//	for (auto tip : m_tipsWindows) tip->setLabelSize(m_tipsRectSize);
+	//});
+}
+
+void MainControl::setUpQss()
+{
+	do {
+		QFile qssFile;
+		qssFile.setFileName(":/res/qss/menu.qss");
+		if (!qssFile.open(QIODevice::ReadOnly | QIODevice::Text)) break;
+		m_menuQss = qssFile.readAll();
+		qssFile.close();
+
+		qssFile.setFileName(":/res/qss/window.qss");
+		if (!qssFile.open(QIODevice::ReadOnly | QIODevice::Text)) break;
+		m_windowQss = qssFile.readAll();
+		qssFile.close();
+	} while (false);
 }
 
 void MainControl::setAutoSave()
@@ -162,6 +209,6 @@ void MainControl::onSaveConfigure()
 		states.push_back(tip->getTipsWindowState());
 	IniManager::getInstance()->setWindowPositions(states);
 	IniManager::getInstance()->setHistorySize(m_historySize);
-	IniManager::getInstance()->setTipsListHeight(m_tipsListHeight);
-	IniManager::getInstance()->setTipsRectSize(m_tipsRectSize);
+	//IniManager::getInstance()->setTipsListHeight(m_tipsListHeight);
+	//IniManager::getInstance()->setTipsRectSize(m_tipsRectSize);
 }

@@ -30,9 +30,13 @@ HEADERS += \
     DockableWindow.h \
     HistoryDataList.h \
     MainControl.h \
-    MenuActionWidget.h
+    MenuActionWidget.h \
+    def.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    res.qrc

@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/image/startup.png</file>
+        <file>res/image/left-clicked.png</file>
+        <file>res/image/left-disable.png</file>
+        <file>res/image/left-hover.png</file>
+        <file>res/image/left-normal.png</file>
+        <file>res/image/right-clicked.png</file>
+        <file>res/image/right-disable.png</file>
+        <file>res/image/right-hover.png</file>
+        <file>res/image/right-normal.png</file>
+        <file>res/qss/menu.qss</file>
+        <file>res/qss/window.qss</file>
+    </qresource>
+</RCC>

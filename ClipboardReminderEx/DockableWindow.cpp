@@ -7,6 +7,14 @@
 #include <QScreen>
 #include <QDebug>
 
+namespace {
+	// Window docks until window's edge exceed monitor's edge kDockEnableDistance
+	const int kDockEnableDistance = 5;
+	// it will show kUnDockTriggerDistance pixel edge when docks
+	const int kUnDockTriggerDistance = 3;
+	const int kDockAnimationDuration = 200;	// ms
+}
+
 DockableWindowState::DockableWindowState(const QString& str)
 {
 	if (str.isEmpty()) return;
@@ -36,8 +44,8 @@ DockableWindow::DockableWindow(QWidget *parent)
 	: QWidget(parent)
 {
 	initWindow();
-	connect(m_dockShowAnimation, &QPropertyAnimation::finished, [this]() {m_bDockShow = true; });
-	connect(m_dockHideAnimation, &QPropertyAnimation::finished, [this]() {m_bDockShow = false; });
+	connect(m_dockShowAnimation, &QPropertyAnimation::finished, this, [this]() {m_bDockShow = true; });
+	connect(m_dockHideAnimation, &QPropertyAnimation::finished, this, [this]() {m_bDockShow = false; });
 }
 
 DockableWindowState DockableWindow::getDockableState() const
@@ -71,15 +79,15 @@ void DockableWindow::loadDockableState(const DockableWindowState& dockpos)
 	int target_x, target_y;
 	QRect screenRect = screen->availableGeometry();
 	if (DockDirection::LEFT == m_curDockDirection) {
-		target_x = screenRect.left() - this->width() + DOCK_SHOW_DISTANCE;
+		target_x = screenRect.left() - this->width() + kUnDockTriggerDistance;
 		target_y = dockpos.dockPosition.dockOffset * screenRect.height() + screenRect.top();
 	}
 	else if (DockDirection::RIGHT == m_curDockDirection) {
-		target_x = screenRect.right() - DOCK_SHOW_DISTANCE;
+		target_x = screenRect.right() - kUnDockTriggerDistance;
 		target_y = dockpos.dockPosition.dockOffset * screenRect.height() + screenRect.top();
 	}
 	else if (DockDirection::UP == m_curDockDirection) {
-		target_y = screenRect.top() - this->height() + DOCK_SHOW_DISTANCE;
+		target_y = screenRect.top() - this->height() + kUnDockTriggerDistance;
 		target_x = dockpos.dockPosition.dockOffset * screenRect.width() + screenRect.left();
 	}
 	else {
@@ -130,15 +138,15 @@ void DockableWindow::leaveEvent(QEvent* event)
 void DockableWindow::resizeEvent(QResizeEvent* event)
 {
 	__super::resizeEvent(event);
-	dockHide(false);
+	// dockHide(false);
 }
 
 void DockableWindow::initWindow()
 {
 	m_dockShowAnimation = new QPropertyAnimation(this, "geometry");
-	m_dockShowAnimation->setDuration(DOCK_ANIMATION_DURATION);
+	m_dockShowAnimation->setDuration(kDockAnimationDuration);
 	m_dockHideAnimation = new QPropertyAnimation(this, "geometry");
-	m_dockHideAnimation->setDuration(DOCK_ANIMATION_DURATION);
+	m_dockHideAnimation->setDuration(kDockAnimationDuration);
 	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 }
 
@@ -205,17 +213,17 @@ void DockableWindow::dockHide(bool animation)
 	if (Q_UNLIKELY(!curScreenRect().isValid())) return;
 	if (DockDirection::None == m_curDockDirection) return;
 	if (DockDirection::UP == m_curDockDirection) {
-		int target_y = curScreenRect().top() - this->height() + DOCK_SHOW_DISTANCE;
+		int target_y = curScreenRect().top() - this->height() + kUnDockTriggerDistance;
 		if (animation) dockAnimationHide(this->x(), target_y);
 		else move(this->x(), target_y);
 	}
 	else if (DockDirection::LEFT == m_curDockDirection) {
-		int target_x = curScreenRect().left() - this->width() + DOCK_SHOW_DISTANCE;
+		int target_x = curScreenRect().left() - this->width() + kUnDockTriggerDistance;
 		if (animation) dockAnimationHide(target_x, this->y());
 		else move(target_x, this->y());
 	}
 	else if (DockDirection::RIGHT == m_curDockDirection) {
-		int target_x = curScreenRect().right() - DOCK_SHOW_DISTANCE;
+		int target_x = curScreenRect().right() - kUnDockTriggerDistance;
 		if (animation) dockAnimationHide(target_x, this->y());
 		else move(target_x, this->y());
 	}

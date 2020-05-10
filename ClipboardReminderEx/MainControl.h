@@ -17,8 +17,12 @@ public:
 	MainControl(QObject* parent = nullptr);
 	void readConfig();
 	void setUpUI();
-	void setUpTrayIcon();
 	void setAutoSave();
+
+private:
+	void setUpWindow();
+	void setUpTrayIcon();
+	void setUpQss();
 
 private slots:
 	void onTipsWindowNumChange(int);
@@ -30,7 +34,11 @@ private:
 	// config
 	QList<ClipboardTipsWindowState> m_tipsWindowState;
 	int m_historySize;
-	int m_tipsListHeight;
-	QSize m_tipsRectSize;
+	//int m_tipsListHeight;
+	//QSize m_tipsRectSize;
+
+	// qss
+	QString m_menuQss;
+	QString m_windowQss;
 };
 

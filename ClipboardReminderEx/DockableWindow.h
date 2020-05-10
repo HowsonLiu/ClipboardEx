@@ -3,12 +3,6 @@
 #include <QtWidgets/QWidget>
 #include <QPoint>
 
-// Window docks until window's edge exceed monitor's edge DOCK_ENABLE_DISTANCE
-#define DOCK_ENABLE_DISTANCE 5
-// it will show DOCK_SHOW_DISTANCE pixel edge when docks
-#define DOCK_SHOW_DISTANCE 3
-#define DOCK_ANIMATION_DURATION 200 // ms
-
 enum DockDirection {
 	None = 0,
 	UP,

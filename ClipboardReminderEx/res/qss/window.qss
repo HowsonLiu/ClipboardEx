@@ -1,0 +1,7 @@
+QLabel#MainLabel {
+	min-width: 320;
+	min-height: 240;
+	max-width: 640;
+	max-height: 480;
+	background-color: red;
+}
