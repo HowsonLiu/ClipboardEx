@@ -141,14 +141,18 @@ void MainControl::setUpTrayIcon()
 	trayIconMenu->setStyleSheet(m_menuQss);
 
 	trayIcon->setContextMenu(trayIconMenu);
-	trayIcon->setIcon(QIcon("d:\\PaPa Liu\\Pictures\\KonachanSpider\\269277.jpg"));	// neccessary
+	trayIcon->setIcon(QIcon("c:\\Users\\liuhaosheng\\Pictures\\1.png"));	// neccessary
 	trayIcon->show();
 
+	connect(startUpAction, &QAction::triggered, this, [](bool b) {
+		RegeditManager::getInstance()->enableRunStartUp(b);
+	});
 	connect(tipsNumWidget, &NumMenuActionWidget::sigNumChange, this, &MainControl::onTipsWindowNumChange);
-	connect(historySizeWidget, &NumMenuActionWidget::sigNumChange, [this](int n) {
+	connect(historySizeWidget, &NumMenuActionWidget::sigNumChange, this, [this](int n) {
 		m_historySize = n; 
 		HistoryDataList::getInstance()->onSetListSize(m_historySize); 
 	});
+	connect(exitAction, &QAction::triggered, this, &QApplication::quit);
 	//connect(tipsListHeightWidget, &SliderMenuActionWidget::sigNumChange, [this](int n) {
 	//	m_tipsListHeight = n; 
 	//	for (auto tip : m_tipsWindows) tip->setListHeight(m_tipsListHeight);

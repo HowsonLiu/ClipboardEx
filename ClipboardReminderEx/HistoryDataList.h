@@ -55,7 +55,9 @@ class HistoryDataList : public QObject
 	Q_OBJECT
 public:
 	static HistoryDataList* getInstance();
-	inline auto dataList() const { return &m_historyClipboardDataList; }
+	inline auto dataList() const { return &m_historyClipboardDataList; };
+	inline auto size() const { return m_historyClipboardDataList.size(); };
+	inline auto capacity() const { return m_listCapacity; }
 private:
 	HistoryDataList(QObject* parent = nullptr);
 signals:
@@ -70,5 +72,5 @@ private:
 	ReadClipboardThread* m_thread;
 	// older data are in the end of the list
 	std::deque<ClipboardDataPtr> m_historyClipboardDataList;
-	int m_listSize;
+	int m_listCapacity;
 };

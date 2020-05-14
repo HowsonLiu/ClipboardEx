@@ -76,12 +76,12 @@ void HistoryDataList::onSetListSize(int s)
 			m_historyClipboardDataList.pop_back();
 		emit sigDataListUpdate();
 	}
-	m_listSize = s;
+	m_listCapacity = s;
 }
 
 void HistoryDataList::onReadSuccessed(const ClipboardDataPtr& data)
 {
-	while (m_historyClipboardDataList.size() >= m_listSize)
+	while (m_historyClipboardDataList.size() >= m_listCapacity)
 		m_historyClipboardDataList.pop_back();
 	m_historyClipboardDataList.push_front(data);
 	emit sigDataListUpdate();

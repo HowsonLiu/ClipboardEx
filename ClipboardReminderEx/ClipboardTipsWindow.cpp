@@ -27,9 +27,6 @@ void MimeDataLabel::showMimeData()
 
 	if (m_bindMimeData->hasImage()) {
 		QSize originSize = m_bindMimeData->image.size();
-		QSize targetSize = originSize;
-		{ this->minimumWidth(), this->minimumHeight() };
-		if(originSize.width() > targetSize.width() || originSize.width())
 		setPixmap(QPixmap::fromImage(m_bindMimeData->image).scaled(size(), Qt::KeepAspectRatio));
 		return;
 	}
@@ -113,7 +110,7 @@ void ClipboardTipsWindow::loadTipsWindowState(const ClipboardTipsWindowState& st
 void ClipboardTipsWindow::updateHistoryList()
 {
 	auto dataList = HistoryDataList::getInstance()->dataList();
-	m_curMimeDataLabel->setMimeData(dataList->at(0));
+	// m_curMimeDataLabel->setMimeData(dataList->at(0));
 	while (m_historyMimeDataListWidget->count() < dataList->size() - 1) {
 		QListWidgetItem* item = new QListWidgetItem(m_historyMimeDataListWidget);
 		MimeDataLabel* label = new MimeDataLabel(this);
