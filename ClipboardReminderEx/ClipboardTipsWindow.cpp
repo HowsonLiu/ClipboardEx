@@ -11,9 +11,11 @@
 #include <QDebug>
 #include <QApplication>
 #include <QClipboard>
+#include <QTimer>
 
 namespace {
-	static float g_expandSpeed = 1;
+	const float kExpandSpeed = 1;
+	const float kShowTime = 1.0f;
 }
 
 MimeDataLabel::MimeDataLabel(QWidget* parent /*= nullptr*/) : QLabel(parent)
@@ -44,14 +46,7 @@ void MimeDataLabel::showMimeData()
 	}
 	setWordWrap(!text.contains('\n'));
 	setText(text);
-	// setPixmap(QPixmap::fromImage(qvariant_cast<QImage>(QApplication::clipboard()->mimeData()->imageData())));
 }
-
-//void MimeDataLabel::onUpdateSize(const QSize& size)
-//{
-//	setFixedSize(size);
-//	showMimeData();		// update image size
-//}
 
 void MimeDataLabel::onDoubleClicked()
 {
@@ -85,9 +80,10 @@ ClipboardTipsWindow::ClipboardTipsWindow(QWidget* parent /*= nullptr*/)
 {
 	initWindow();
 	connect(m_historyMimeDataListWidget, &QListWidget::itemDoubleClicked, this, &ClipboardTipsWindow::onItemDoubleClicked);
-	//connect(this, &ClipboardTipsWindow::sigUpdateLabelSize, m_curMimeDataLabel, &MimeDataLabel::onUpdateSize);
 	connect(HistoryDataList::getInstance(), &HistoryDataList::sigDataListUpdate, this, &ClipboardTipsWindow::onHistoryListUpdate);
 	connect(m_expandCheckBox, &QCheckBox::stateChanged, this, &ClipboardTipsWindow::onExpandStateChanged);
+	connect(m_autoShowCheckBox, &QCheckBox::stateChanged, this, &ClipboardTipsWindow::onAutoShowStateChanged);
+	connect(m_timer, &QTimer::timeout, this, &ClipboardTipsWindow::hide);
 }
 
 ClipboardTipsWindowState ClipboardTipsWindow::getTipsWindowState() const
@@ -110,17 +106,12 @@ void ClipboardTipsWindow::loadTipsWindowState(const ClipboardTipsWindowState& st
 void ClipboardTipsWindow::updateHistoryList()
 {
 	auto dataList = HistoryDataList::getInstance()->dataList();
-	// m_curMimeDataLabel->setMimeData(dataList->at(0));
+	m_curMimeDataLabel->setMimeData(dataList->at(0));
 	while (m_historyMimeDataListWidget->count() < dataList->size() - 1) {
 		QListWidgetItem* item = new QListWidgetItem(m_historyMimeDataListWidget);
 		MimeDataLabel* label = new MimeDataLabel(this);
-		//connect(this, &ClipboardTipsWindow::sigUpdateLabelSize, label, &MimeDataLabel::onUpdateSize);
-		//connect(this, &ClipboardTipsWindow::sigUpdateLabelSize, [item](const QSize& size) {
-		//	item->setSizeHint(QSize(item->sizeHint().width(), size.height()));
-		//});
 		m_historyMimeDataListWidget->addItem(item);
 		m_historyMimeDataListWidget->setItemWidget(item, label);
-		emit sigUpdateLabelSize(m_curMimeDataLabel->size());
 	}
 	while (m_historyMimeDataListWidget->count() > dataList->size() - 1) {
 		auto item = m_historyMimeDataListWidget->takeItem(0);
@@ -133,28 +124,13 @@ void ClipboardTipsWindow::updateHistoryList()
 	}
 }
 
-void ClipboardTipsWindow::setLabelSize(const QSize& size)
-{
-	emit sigUpdateLabelSize(size);
-	m_historyMimeDataListWidget->setFixedWidth(size.width());
-	adjustSize();
-}
-
-void ClipboardTipsWindow::setListHeight(int h)
-{
-	m_listHeight = h;
-	if (m_expandCheckBox->isChecked()) {
-		m_historyMimeDataListWidget->setFixedHeight(m_listHeight);
-		adjustSize();
-	}
-}
-
 void ClipboardTipsWindow::initWindow()
 {
 	m_curMimeDataLabel = new MimeDataLabel(this);
 	m_historyMimeDataListWidget = new QListWidget(this);
 	m_expandCheckBox = new QCheckBox(this);
 	m_autoShowCheckBox = new QCheckBox(this);
+	m_timer = new QTimer(this);
 
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	layout->addWidget(m_curMimeDataLabel);
@@ -175,14 +151,27 @@ void ClipboardTipsWindow::initWindow()
 
 void ClipboardTipsWindow::onHistoryListUpdate()
 {
+	show();
+	if (m_autoShowCheckBox->isChecked()) {
+		m_timer->start(kShowTime * 1000);
+	}
 	updateHistoryList();
 }
 
 void ClipboardTipsWindow::onExpandStateChanged(int state)
 {
-	// m_historyMimeDataListWidget->setFixedHeight(m_listHeight);
 	m_historyMimeDataListWidget->setVisible(Qt::CheckState::Unchecked != state);
 	adjustSize();
+}
+
+void ClipboardTipsWindow::onAutoShowStateChanged(int state)
+{
+	if (Qt::CheckState::Unchecked == state) {
+		m_timer->stop();
+	}
+	else {
+		m_timer->start(kShowTime * 1000);
+	}
 }
 
 void ClipboardTipsWindow::onItemDoubleClicked(QListWidgetItem* item)
@@ -190,4 +179,17 @@ void ClipboardTipsWindow::onItemDoubleClicked(QListWidgetItem* item)
 	MimeDataLabel* label = dynamic_cast<MimeDataLabel*>(m_historyMimeDataListWidget->itemWidget(item));
 	if (!label) return;
 	label->onDoubleClicked();
+}
+
+void ClipboardTipsWindow::mousePressEvent(QMouseEvent* event)
+{
+	if(m_timer->isActive()) m_timer->stop();
+	__super::mousePressEvent(event);
+}
+
+void ClipboardTipsWindow::mouseReleaseEvent(QMouseEvent* event)
+{
+	if (m_autoShowCheckBox->isChecked())
+		m_timer->start(kShowTime * 1000);
+	__super::mouseReleaseEvent(event);
 }

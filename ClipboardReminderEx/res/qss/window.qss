@@ -3,5 +3,4 @@ QLabel#MainLabel {
 	min-height: 240;
 	max-width: 640;
 	max-height: 480;
-	background-color: red;
 }

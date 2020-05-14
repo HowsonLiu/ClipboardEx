@@ -34,8 +34,6 @@ private:
 	// config
 	QList<ClipboardTipsWindowState> m_tipsWindowState;
 	int m_historySize;
-	//int m_tipsListHeight;
-	//QSize m_tipsRectSize;
 
 	// qss
 	QString m_menuQss;

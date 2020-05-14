@@ -58,6 +58,7 @@ public:
 	inline auto dataList() const { return &m_historyClipboardDataList; };
 	inline auto size() const { return m_historyClipboardDataList.size(); };
 	inline auto capacity() const { return m_listCapacity; }
+	void init() { m_thread->start(); };
 private:
 	HistoryDataList(QObject* parent = nullptr);
 signals:

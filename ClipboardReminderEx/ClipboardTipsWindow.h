@@ -9,6 +9,7 @@ class QCheckBox;
 class QListWidget;
 class QPropertyAnimation;
 class QListWidgetItem;
+class QTimer;
 
 /*!
  * \class MimeDataLabel
@@ -24,7 +25,6 @@ public:
 	inline void setMimeData(const ClipboardDataPtr& data) { m_bindMimeData = data; showMimeData(); }
 	inline bool isValid() const { return m_bindMimeData ? m_bindMimeData->isValid() : false; }
 public slots:
-	//void onUpdateSize(const QSize&);
 	void onDoubleClicked();
 private:
 	void showMimeData();
@@ -63,19 +63,19 @@ public:
 
 	void loadTipsWindowState(const ClipboardTipsWindowState&);
 	void updateHistoryList();
-	void setLabelSize(const QSize&);
-	void setListHeight(int);
 
 private:
 	void initWindow();
 
-signals:
-	void sigUpdateLabelSize(const QSize&);
-
 private slots:
 	void onHistoryListUpdate();
 	void onExpandStateChanged(int state);
+	void onAutoShowStateChanged(int state);
 	void onItemDoubleClicked(QListWidgetItem*);
+
+protected:
+	virtual void mousePressEvent(QMouseEvent* event) override;
+	virtual void mouseReleaseEvent(QMouseEvent* event) override;
 
 private:
 	MimeDataLabel* m_curMimeDataLabel;
@@ -83,6 +83,6 @@ private:
 	QCheckBox* m_expandCheckBox;
 	QCheckBox* m_autoShowCheckBox;
 
-	int m_listHeight;
+	QTimer* m_timer;
 };
 

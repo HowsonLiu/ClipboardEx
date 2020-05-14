@@ -66,7 +66,6 @@ HistoryDataList::HistoryDataList(QObject* parent) : QObject(parent)
 	connect(m_thread, &ReadClipboardThread::sigSuccessed, this, &HistoryDataList::onReadSuccessed);
 	connect(m_thread, &ReadClipboardThread::sigFailed, this, &HistoryDataList::onReadFailed);
 	connect(QApplication::clipboard(), &QClipboard::dataChanged, [this]() {m_thread->start(); });
-	m_thread->start();
 }
 
 void HistoryDataList::onSetListSize(int s)
