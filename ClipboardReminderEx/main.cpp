@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	MainControl m;
 	m.readConfig();
 	m.setUpUI();
-	m.setAutoSave();
+	//m.setAutoSave();
 	//DockableWindow w;
 	//w.show();
 

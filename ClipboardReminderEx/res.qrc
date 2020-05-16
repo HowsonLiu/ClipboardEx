@@ -11,5 +11,7 @@
         <file>res/image/right-normal.png</file>
         <file>res/qss/menu.qss</file>
         <file>res/qss/window.qss</file>
+        <file>res/image/tick_hover.png</file>
+        <file>res/image/tick_normal.png</file>
     </qresource>
 </RCC>

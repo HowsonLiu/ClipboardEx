@@ -73,7 +73,7 @@ DockableWindowState DockableWindow::getDockableState() const
 void DockableWindow::loadDockableState(const DockableWindowState& dockpos)
 {
 	QScreen* screen = QGuiApplication::screens()[0];
-	if (dockpos.screenIndex < QGuiApplication::screens().size())
+	if (dockpos.screenIndex < QGuiApplication::screens().size() && dockpos.screenIndex >= 0)
 		screen = QGuiApplication::screens()[dockpos.screenIndex];
 	m_curDockDirection = (DockDirection)dockpos.dockDirection;
 	int target_x, target_y;

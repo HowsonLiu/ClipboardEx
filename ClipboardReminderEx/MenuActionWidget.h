@@ -20,6 +20,10 @@ class NumMenuActionWidget : public QWidget
 public:
 	NumMenuActionWidget(const QString& describeText, int minVal, int defaultVal, int maxVal, QWidget* parent = nullptr);
 
+protected:
+	virtual void paintEvent(QPaintEvent *event) override;
+	virtual void mouseReleaseEvent(QMouseEvent *event) override;
+
 private:
 	void initWindow();
 

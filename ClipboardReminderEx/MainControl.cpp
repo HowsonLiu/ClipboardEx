@@ -88,11 +88,13 @@ void MainControl::setUpTrayIcon()
 	QSystemTrayIcon* trayIcon = new QSystemTrayIcon(this);
 	QMenu* trayIconMenu = new QMenu;
 	trayIconMenu->setObjectName(kTrayMenu);
+	trayIconMenu->setStyleSheet(m_menuQss);
 
 	// start up
 	QAction* startUpAction = new QAction(trayIconMenu);
 	startUpAction->setText(tr("Start up"));
 	startUpAction->setCheckable(true);
+	startUpAction->setObjectName(kStartUpAction);
 
 	// history size
 	NumMenuActionWidget* historySizeWidget = new NumMenuActionWidget(g_historySizeDescribeText,
@@ -114,7 +116,6 @@ void MainControl::setUpTrayIcon()
 	trayIconMenu->addAction(historySizeAction);
 	trayIconMenu->addAction(tipsNumAction);
 	trayIconMenu->addAction(exitAction);
-	trayIconMenu->setStyleSheet(m_menuQss);
 
 	trayIcon->setContextMenu(trayIconMenu);
 	trayIcon->setIcon(QIcon(":/res/image/startup.png"));	// neccessary
@@ -129,6 +130,7 @@ void MainControl::setUpTrayIcon()
 		HistoryDataList::getInstance()->onSetListSize(m_historySize); 
 	});
 	connect(exitAction, &QAction::triggered, this, &QApplication::quit);
+	connect(trayIcon, &QSystemTrayIcon::activated, this, [=]() {	trayIconMenu->adjustSize(); });
 }
 
 void MainControl::setUpQss()

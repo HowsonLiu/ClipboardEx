@@ -1,38 +1,53 @@
 #TrayMenu {
-	background-color: #2D2D30;
+	background-color: #1B1B1C;
 	border: 1px solid #007ACC;
+	width: 150px;
 	
+	font: 15px "Reboto";
 	color: #F1F1F1;
+	padding: 5 10 5 10;
 }
 #TrayMenu::item {
-	height: 22px;
+	width: 100px;
+	height: 20px;
+	padding: 5 0 5 30;
 }
-#TrayMenu::item:hover {
-	background-color: #3E3E40;
+#TrayMenu::item:selected {
+	background-color: #333334;
 }
 #TrayMenu::item:pressed {
-    background-color: #1B1B1C;
-}
 
-QToolButton#StartUpAction{
-	background-color: red;
+}
+#TrayMenu::indicator {
+	width: 20px;
+	height: 20px;
+}
+#TrayMenu::indicator:checked {
+	background-color: #2D2D30;
+	border-image: url(:/res/image/tick_normal.png);
+}
+#TrayMenu::indicator:checked:selected {
+	background-color: #3E3E40;
+	border-image: url(:/res/image/tick_hover.png);
 }
 
 QWidget#MenuSubWidget:hover {
-	background-color: #3E3E40;
+	background-color: #333334;
 }
 QLabel#MenuSubTitle {
+	font: 15px "Reboto";
 	color: #F1F1F1;
 }
 QLabel#MenuSubValue {
 	color: #F1F1F1;
 	font: bold 25px "SimHei";
-	padding-left: 5px;
 }
-
 QPushButton#MenuSubLBtn {
-	width: 16px;
-	height: 16px;
+	max-width: 16px;
+	max-height: 16px;
+	min-width: 16px;
+	min-height: 16px;
+	margin-left: 25px;
 	border-image: url(:/res/image/left-normal.png);
 }
 QPushButton#MenuSubLBtn:hover {
@@ -44,10 +59,12 @@ QPushButton#MenuSubLBtn:pressed {
 QPushButton#MenuSubLBtn:disabled {
 	border-image: url(:/res/image/left-disable.png);
 }
-
 QPushButton#MenuSubRBtn {
-	width: 16px;
-	height: 16px;
+	max-width: 16px;
+	max-height: 16px;
+	min-width: 16px;
+	min-height: 16px;
+	margin-right: 25px;
 	border-image: url(:/res/image/right-normal.png);
 }
 QPushButton#MenuSubRBtn:hover {

@@ -6,6 +6,8 @@
 #include <QVBoxLayout>
 #include <QSlider>
 #include <QDebug>
+#include <QStyleOption>
+#include <QPainter>
 
 NumMenuActionWidget::NumMenuActionWidget(const QString& describeText, int minVal, 
 	int defaultVal, int maxVal, QWidget* parent /*= nullptr*/)
@@ -18,6 +20,20 @@ NumMenuActionWidget::NumMenuActionWidget(const QString& describeText, int minVal
 	initWindow();
 	connect(m_plusButton, &QPushButton::clicked, this, &NumMenuActionWidget::onPlusButtonClick);
 	connect(m_minusButton, &QPushButton::clicked, this, &NumMenuActionWidget::onMinusButtonClick);
+}
+
+void NumMenuActionWidget::paintEvent(QPaintEvent *event)
+{
+	// custom qss
+	QStyleOption opt;
+	opt.init(this);
+	QPainter painter(this);
+	style()->drawPrimitive(QStyle::PE_Widget, &opt, &painter, this);
+}
+
+void NumMenuActionWidget::mouseReleaseEvent(QMouseEvent *event)
+{
+	// be empty to prevent closing when click this widget on menu
 }
 
 void NumMenuActionWidget::initWindow()
@@ -33,9 +49,6 @@ void NumMenuActionWidget::initWindow()
 	m_minusButton->setObjectName(kMenuSubLBtn);
 	this->setObjectName(kMenuSubWidget);
 
-	m_describeTextLabel->setText(m_describeText);
-	m_numLabel->setText(QString::number(m_curVal));
-
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	layout->addWidget(m_describeTextLabel, 0, Qt::AlignHCenter);
 	QHBoxLayout* downLayout = new QHBoxLayout(this);
@@ -44,6 +57,14 @@ void NumMenuActionWidget::initWindow()
 	downLayout->addWidget(m_plusButton, 0, Qt::AlignVCenter);
 	layout->addLayout(downLayout, 1);
 	setLayout(layout);
+
+	m_describeTextLabel->setText(m_describeText);
+	m_numLabel->setText(QString::number(m_curVal));
+	m_numLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+	m_minusButton->setEnabled(m_curVal > m_minVal);
+	m_plusButton->setEnabled(m_curVal < m_maxVal);
+
+	this->setMouseTracking(true);		// or else menu hover state will not be sync
 }
 
 void NumMenuActionWidget::onPlusButtonClick()
