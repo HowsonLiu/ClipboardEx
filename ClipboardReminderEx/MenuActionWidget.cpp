@@ -24,7 +24,7 @@ NumMenuActionWidget::NumMenuActionWidget(const QString& describeText, int minVal
 
 void NumMenuActionWidget::paintEvent(QPaintEvent *event)
 {
-	// custom qss
+	// support qss
 	QStyleOption opt;
 	opt.init(this);
 	QPainter painter(this);

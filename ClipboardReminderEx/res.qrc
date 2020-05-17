@@ -13,5 +13,13 @@
         <file>res/qss/window.qss</file>
         <file>res/image/tick_hover.png</file>
         <file>res/image/tick_normal.png</file>
+        <file>res/image/down-clicked.png</file>
+        <file>res/image/down-disable.png</file>
+        <file>res/image/down-hover.png</file>
+        <file>res/image/down-normal.png</file>
+        <file>res/image/up-clicked.png</file>
+        <file>res/image/up-disable.png</file>
+        <file>res/image/up-hover.png</file>
+        <file>res/image/up-normal.png</file>
     </qresource>
 </RCC>

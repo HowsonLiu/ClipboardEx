@@ -28,6 +28,7 @@ public slots:
 	void onDoubleClicked();
 private:
 	void showMimeData();
+	void showText(const QString& text);
 private:
 	ClipboardDataPtr m_bindMimeData;
 };
@@ -63,6 +64,7 @@ public:
 
 	void loadTipsWindowState(const ClipboardTipsWindowState&);
 	void updateHistoryList();
+	void show();
 
 private:
 	void initWindow();
@@ -76,6 +78,8 @@ private slots:
 protected:
 	virtual void mousePressEvent(QMouseEvent* event) override;
 	virtual void mouseReleaseEvent(QMouseEvent* event) override;
+	virtual void paintEvent(QPaintEvent *event) override;
+	virtual bool eventFilter(QObject *watched, QEvent *event);
 
 private:
 	MimeDataLabel* m_curMimeDataLabel;

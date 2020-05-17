@@ -4,7 +4,6 @@
 #include "ConfigManager.h"
 #include "HistoryDataList.h"
 #include "def.h"
-#include <QSystemTrayIcon>
 #include <QMenu>
 #include <QWidgetAction>
 #include <QApplication>
@@ -130,7 +129,7 @@ void MainControl::setUpTrayIcon()
 		HistoryDataList::getInstance()->onSetListSize(m_historySize); 
 	});
 	connect(exitAction, &QAction::triggered, this, &QApplication::quit);
-	connect(trayIcon, &QSystemTrayIcon::activated, this, [=]() {	trayIconMenu->adjustSize(); });
+	connect(trayIcon, &QSystemTrayIcon::activated, this, &MainControl::onTrayActivated);
 }
 
 void MainControl::setUpQss()
@@ -166,8 +165,10 @@ void MainControl::onTipsWindowNumChange(int i)
 	}
 	while (m_tipsWindows.size() < i) {
 		ClipboardTipsWindow* window = new ClipboardTipsWindow;
+		window->setStyleSheet(m_windowQss);
 		window->move(QApplication::desktop()->screen()->rect().center() - window->rect().center());
 		window->show();
+		window->updateHistoryList();
 		m_tipsWindows.push_back(window);
 	}
 }
@@ -179,4 +180,11 @@ void MainControl::onSaveConfigure()
 		states.push_back(tip->getTipsWindowState());
 	IniManager::getInstance()->setWindowPositions(states);
 	IniManager::getInstance()->setHistorySize(m_historySize);
+}
+
+void MainControl::onTrayActivated(QSystemTrayIcon::ActivationReason reson)
+{
+	if (reson != QSystemTrayIcon::DoubleClick) return;
+	for (auto& tips : m_tipsWindows)
+		tips->show();
 }

@@ -22,7 +22,8 @@ SOURCES += \
     HistoryDataList.cpp \
     MainControl.cpp \
     MenuActionWidget.cpp \
-    main.cpp
+    main.cpp \
+    util.cpp
 
 HEADERS += \
     ClipboardTipsWindow.h \
@@ -31,7 +32,8 @@ HEADERS += \
     HistoryDataList.h \
     MainControl.h \
     MenuActionWidget.h \
-    def.h
+    def.h \
+    util.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

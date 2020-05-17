@@ -4,6 +4,7 @@
 
 // define control name
 
+static const QString kTipsWindow = "TipsWindow";
 static const QString kMainLabel = "MainLabel";
 static const QString kSubLabel = "SubLabel";
 static const QString kLabelList = "LabelList";
@@ -18,5 +19,10 @@ static const QString kMenuSubTitle = "MenuSubTitle";
 static const QString kMenuSubValue = "MenuSubValue";
 static const QString kMenuSubLBtn = "MenuSubLBtn";
 static const QString kMenuSubRBtn = "MenuSubRBtn";
+
+// define style
+#define WHEEL_SCROLL_PER_PIXEL
+
+static const int kMinFontSize = 15;
 
 #endif // DEF_H

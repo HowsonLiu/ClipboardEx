@@ -1,6 +1,7 @@
 #pragma once
 #include "ClipboardTipsWindow.h"
 #include <QList>
+#include <QSystemTrayIcon>
 
 class ClipboardTipsWindow;
 
@@ -27,6 +28,7 @@ private:
 private slots:
 	void onTipsWindowNumChange(int);
 	void onSaveConfigure();
+	void onTrayActivated(QSystemTrayIcon::ActivationReason reson);
 
 private:
 	QList<ClipboardTipsWindow*> m_tipsWindows;

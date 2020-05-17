@@ -1,6 +1,152 @@
+QWidget#TipsWindow{
+	background-color: #2D2D30;
+	border: 1px solid #007ACC;
+}
+
 QLabel#MainLabel {
 	min-width: 320;
 	min-height: 240;
-	max-width: 640;
-	max-height: 480;
+	max-width: 320;
+	max-height: 240;
+
+	font: bold "Reboto";
+	color: #F1F1F1;
+}
+
+QLabel#SubLabel {
+	min-width: 280;
+	min-height: 210;
+	max-width: 280;
+	max-height: 210;
+
+	font: bold "Reboto";
+	color: #F1F1F1;
+}
+
+QListWidget#LabelList {
+	background-color: #1B1B1C;
+	min-height: 420;
+	max-height: 420;
+	border: 1px solid #3F3F46;
+}
+QListWidget#LabelList::item {
+	min-width: 280;
+	min-height: 210;
+	max-width: 280;
+	max-height: 210;
+}
+QListWidget#LabelList::item:hover {
+	border: 2px solid #007ACC;
+}
+QListWidget#LabelList::item:selected {
+	border: 0px solid #007ACC;
+	color:black;
+	background-color:rgb(248,168,0);
+}
+
+QScrollBar:vertical {
+	width: 12px;
+	background: #3E3E42;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	border: 0px;
+}
+QScrollBar::handle:vertical {
+	min-width: 12px;
+    background: #686868;
+}
+QScrollBar::handle:vertical:hover {
+    background: #9E9E9E;
+}
+QScrollBar::handle:vertical:pressed {
+    background: #EFEBEF;
+}
+QScrollBar::add-line:vertical {
+	width: 12px;
+	height: 12px;
+	border: 0px;
+	background: #3E3E42;
+}
+QScrollBar::sub-line:vertical {
+	width: 12px;
+	height: 12px;
+	border: 0px;
+	background: #3E3E42;
+}
+QScrollBar::add-page:vertical {
+	background:#3E3E42;
+}
+QScrollBar::sub-page:vertical {
+	background:#3E3E42;
+}
+QScrollBar::up-arrow:vertical {
+	width: 10px;
+	width: 10px;
+	border-image: url(:/res/image/up-normal.png);
+}
+QScrollBar::up-arrow:vertical:hover {
+	border-image: url(:/res/image/up-hover.png);
+}
+QScrollBar::up-arrow:vertical:pressed {
+	border-image: url(:/res/image/up-clicked.png);
+}
+QScrollBar::down-arrow:vertical {
+	width: 10px;
+	width: 10px;
+	border-image: url(:/res/image/down-normal.png);
+}
+QScrollBar::down-arrow:vertical:hover {
+	border-image: url(:/res/image/down-hover.png);
+}
+QScrollBar::down-arrow:vertical:pressed {
+	border-image: url(:/res/image/down-clicked.png);
+}
+
+
+QCheckBox#AutoShowBtn {
+	font: 17px "Reboto";
+	color: #F1F1F1;
+}
+QCheckBox#AutoShowBtn::indicator {
+	width: 20px;
+	height: 20px;
+	background-color: #3E3E40;
+}
+QCheckBox#AutoShowBtn::indicator:hover {
+	background-color: #686868;
+}
+QCheckBox#AutoShowBtn::indicator:checked {
+	width: 20px;
+	height: 20px;
+	background-color: #3E3E40;
+	border-image: url(:/res/image/tick_normal.png);
+}
+QCheckBox#AutoShowBtn::indicator:checked:hover {
+	background-color: #686868;
+	border-image: url(:/res/image/tick_hover.png);
+}
+
+
+
+QCheckBox#ExpandBtn::indicator {
+	width: 20px;
+	height: 20px;
+	border-image: url(:/res/image/down-normal.png);
+}
+QCheckBox#ExpandBtn::indicator:hover {
+	border-image: url(:/res/image/down-hover.png);
+}
+QCheckBox#ExpandBtn::indicator:pressed {
+	border-image: url(:/res/image/down-clicked.png);
+}
+QCheckBox#ExpandBtn::indicator:checked {
+	width: 20px;
+	height: 20px;
+	border-image: url(:/res/image/up-normal.png);
+}
+QCheckBox#ExpandBtn::indicator:checked:hover {
+	border-image: url(:/res/image/up-hover.png);
+}
+QCheckBox#ExpandBtn::indicator:checked:pressed {
+	border-image: url(:/res/image/up-clicked.png);
 }
