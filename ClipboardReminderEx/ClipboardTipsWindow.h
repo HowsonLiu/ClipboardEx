@@ -72,12 +72,11 @@ private:
 private slots:
 	void onHistoryListUpdate();
 	void onExpandStateChanged(int state);
-	void onAutoShowStateChanged(int state);
 	void onItemDoubleClicked(QListWidgetItem*);
 
 protected:
-	virtual void mousePressEvent(QMouseEvent* event) override;
-	virtual void mouseReleaseEvent(QMouseEvent* event) override;
+	virtual void enterEvent(QEvent* event) override;
+	virtual void leaveEvent(QEvent* event) override;
 	virtual void paintEvent(QPaintEvent *event) override;
 	virtual bool eventFilter(QObject *watched, QEvent *event);
 

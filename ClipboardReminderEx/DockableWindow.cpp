@@ -132,13 +132,7 @@ void DockableWindow::enterEvent(QEvent* event)
 void DockableWindow::leaveEvent(QEvent* event)
 {
 	if (DockDirection::None != m_curDockDirection)
-		dockHide(true);
-}
-
-void DockableWindow::resizeEvent(QResizeEvent* event)
-{
-	__super::resizeEvent(event);
-	// dockHide(false);
+		dockHide();
 }
 
 void DockableWindow::initWindow()
@@ -187,7 +181,7 @@ void DockableWindow::prepareDock()
 	if (belongScreenRect.left() > rect.left())
 		target_x = belongScreenRect.left();
 	else if (belongScreenRect.right() < rect.right())
-		target_x = belongScreenRect.right() - rect.width();
+		target_x = belongScreenRect.right() - rect.width() + 1;
 	move(target_x, target_y);
 	qDebug() << belongScreenRect << rect << belongScreenRect.right() << belongScreenRect.left();
 }
@@ -203,29 +197,26 @@ void DockableWindow::dockShow()
 		dockAnimationShow(curScreenRect().left(), this->y());
 	}
 	else if (DockDirection::RIGHT == m_curDockDirection) {
-		int target_x = curScreenRect().right() - this->width();
+		int target_x = curScreenRect().right() - this->width() + 1;
 		dockAnimationShow(target_x, this->y());
 	}
 }
 
-void DockableWindow::dockHide(bool animation)
+void DockableWindow::dockHide()
 {
 	if (Q_UNLIKELY(!curScreenRect().isValid())) return;
 	if (DockDirection::None == m_curDockDirection) return;
 	if (DockDirection::UP == m_curDockDirection) {
 		int target_y = curScreenRect().top() - this->height() + kUnDockTriggerDistance;
-		if (animation) dockAnimationHide(this->x(), target_y);
-		else move(this->x(), target_y);
+		dockAnimationHide(this->x(), target_y);
 	}
 	else if (DockDirection::LEFT == m_curDockDirection) {
 		int target_x = curScreenRect().left() - this->width() + kUnDockTriggerDistance;
-		if (animation) dockAnimationHide(target_x, this->y());
-		else move(target_x, this->y());
+		dockAnimationHide(target_x, this->y());
 	}
 	else if (DockDirection::RIGHT == m_curDockDirection) {
 		int target_x = curScreenRect().right() - kUnDockTriggerDistance;
-		if (animation) dockAnimationHide(target_x, this->y());
-		else move(target_x, this->y());
+		dockAnimationHide(target_x, this->y());
 	}
 }
 

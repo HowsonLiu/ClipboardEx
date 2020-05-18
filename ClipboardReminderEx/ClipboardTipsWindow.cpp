@@ -31,7 +31,7 @@ void MimeDataLabel::showMimeData()
 	if (!m_bindMimeData) return;
 
 	if (m_bindMimeData->hasImage()) {
-		QSize originSize = m_bindMimeData->image.size();
+		setAlignment(Qt::AlignCenter);
 		setPixmap(QPixmap::fromImage(m_bindMimeData->image).scaled(size(), Qt::KeepAspectRatio));
 		return;
 	}
@@ -53,6 +53,7 @@ void MimeDataLabel::showMimeData()
 void MimeDataLabel::showText(const QString& text)
 {
 	setWordWrap(!text.contains('\n'));
+	setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 	int fontSize = kMinFontSize;
 	QFont f = font();
 	f.setPixelSize(fontSize);
@@ -102,7 +103,6 @@ ClipboardTipsWindow::ClipboardTipsWindow(QWidget* parent /*= nullptr*/)
 	connect(m_historyMimeDataListWidget, &QListWidget::itemDoubleClicked, this, &ClipboardTipsWindow::onItemDoubleClicked);
 	connect(HistoryDataList::getInstance(), &HistoryDataList::sigDataListUpdate, this, &ClipboardTipsWindow::onHistoryListUpdate);
 	connect(m_expandCheckBox, &QCheckBox::stateChanged, this, &ClipboardTipsWindow::onExpandStateChanged);
-	connect(m_autoShowCheckBox, &QCheckBox::stateChanged, this, &ClipboardTipsWindow::onAutoShowStateChanged);
 	connect(m_timer, &QTimer::timeout, this, &ClipboardTipsWindow::hide);
 }
 
@@ -188,6 +188,7 @@ void ClipboardTipsWindow::initWindow()
 #endif
 
 	m_autoShowCheckBox->setText(tr("Auto show"));
+	m_historyMimeDataListWidget->setVisible(false);
 	setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint | Qt::ToolTip);
 	setAttribute(Qt::WA_DeleteOnClose, true);
 }
@@ -204,16 +205,6 @@ void ClipboardTipsWindow::onExpandStateChanged(int state)
 	adjustSize();
 }
 
-void ClipboardTipsWindow::onAutoShowStateChanged(int state)
-{
-	if (Qt::CheckState::Unchecked == state) {
-		m_timer->stop();
-	}
-	else {
-		m_timer->start(kShowTime * 1000);
-	}
-}
-
 void ClipboardTipsWindow::onItemDoubleClicked(QListWidgetItem* item)
 {
 	MimeDataLabel* label = dynamic_cast<MimeDataLabel*>(m_historyMimeDataListWidget->itemWidget(item));
@@ -221,17 +212,17 @@ void ClipboardTipsWindow::onItemDoubleClicked(QListWidgetItem* item)
 	label->onDoubleClicked();
 }
 
-void ClipboardTipsWindow::mousePressEvent(QMouseEvent* event)
+void ClipboardTipsWindow::enterEvent(QEvent* event)
 {
-	if(m_timer->isActive()) m_timer->stop();
-	__super::mousePressEvent(event);
+	if (m_timer->isActive()) m_timer->stop();
+	__super::enterEvent(event);
 }
 
-void ClipboardTipsWindow::mouseReleaseEvent(QMouseEvent* event)
+void ClipboardTipsWindow::leaveEvent(QEvent* event)
 {
 	if (m_autoShowCheckBox->isChecked())
 		m_timer->start(kShowTime * 1000);
-	__super::mouseReleaseEvent(event);
+	__super::leaveEvent(event);
 }
 
 void ClipboardTipsWindow::paintEvent(QPaintEvent *event)

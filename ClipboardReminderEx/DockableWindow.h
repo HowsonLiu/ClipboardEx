@@ -57,7 +57,6 @@ protected:
 	virtual void mouseReleaseEvent(QMouseEvent* event) override;
 	virtual void enterEvent(QEvent* event) override;
 	virtual void leaveEvent(QEvent* event) override;
-	virtual void resizeEvent(QResizeEvent* event) override;
 
 private:
 	void initWindow();
@@ -67,7 +66,7 @@ private:
 	void setDock(const DockDirection);
 	void prepareDock();
 	void dockShow();
-	void dockHide(bool);
+	void dockHide();
 	void dockAnimationShow(int x, int y);
 	void dockAnimationHide(int x, int y);
 

@@ -12,9 +12,6 @@ int main(int argc, char *argv[])
 	MainControl m;
 	m.readConfig();
 	m.setUpUI();
-	//m.setAutoSave();
-	//DockableWindow w;
-	//w.show();
 
 	return a.exec();
 }
