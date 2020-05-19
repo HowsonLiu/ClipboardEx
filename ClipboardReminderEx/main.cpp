@@ -8,10 +8,8 @@
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-
-	MainControl m;
-	m.readConfig();
-	m.setUpUI();
+	MainControl::getInstance()->readConfig();
+	MainControl::getInstance()->setUpUI();
 
 	return a.exec();
 }

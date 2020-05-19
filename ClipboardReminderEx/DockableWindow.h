@@ -58,19 +58,22 @@ protected:
 	virtual void enterEvent(QEvent* event) override;
 	virtual void leaveEvent(QEvent* event) override;
 
-private:
 	void initWindow();
 	QRect curScreenRect() const;
 	// dock
 	DockDirection canDock() const;
 	void setDock(const DockDirection);
-	void prepareDock();
-	void dockShow();
-	void dockHide();
 	void dockAnimationShow(int x, int y);
 	void dockAnimationHide(int x, int y);
 
-private:
+signals:
+	void sigDockStateChanged(DockDirection);
+
+public:
+	void prepareDock();
+	void dockShow();
+	void dockHide();
+
 	// drag and dock variable
 	bool m_bIsDraging = false;
 	bool m_bDockShow = false;

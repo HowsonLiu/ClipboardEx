@@ -64,7 +64,6 @@ public:
 
 	void loadTipsWindowState(const ClipboardTipsWindowState&);
 	void updateHistoryList();
-	void show();
 
 private:
 	void initWindow();
@@ -87,5 +86,6 @@ private:
 	QCheckBox* m_autoShowCheckBox;
 
 	QTimer* m_timer;
+	QTimer* m_dockTimer;
 };
 

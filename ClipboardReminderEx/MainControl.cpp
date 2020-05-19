@@ -43,6 +43,12 @@ MainControl::MainControl(QObject* parent /*= nullptr*/) : QObject(parent)
 {
 }
 
+MainControl* MainControl::getInstance()
+{
+	static MainControl mainControl;
+	return &mainControl;
+}
+
 void MainControl::readConfig()
 {
 	auto tipsWindowState = IniManager::getInstance()->getWindowPositions();
@@ -64,7 +70,6 @@ void MainControl::setUpWindow()
 	HistoryDataList::getInstance()->onSetListSize(m_historySize);
 	if (m_tipsWindowState.isEmpty()) {
 		ClipboardTipsWindow* window = new ClipboardTipsWindow;
-		window->setStyleSheet(m_windowQss);
 		window->updateHistoryList();
 		window->show();
 		window->move(QApplication::desktop()->screen()->rect().center() - window->rect().center());
@@ -73,7 +78,6 @@ void MainControl::setUpWindow()
 	else {
 		for (auto state : m_tipsWindowState) {
 			ClipboardTipsWindow* window = new ClipboardTipsWindow;
-			window->setStyleSheet(m_windowQss);
 			window->loadTipsWindowState(state);
 			window->show();
 			m_tipsWindows.push_back(window);

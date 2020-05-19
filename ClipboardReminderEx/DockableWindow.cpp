@@ -167,7 +167,9 @@ DockDirection DockableWindow::canDock() const
 
 void DockableWindow::setDock(const DockDirection dockDirection)
 {
+	if (m_curDockDirection == dockDirection) return;
 	m_curDockDirection = dockDirection;
+	emit sigDockStateChanged(m_curDockDirection);
 }
 
 void DockableWindow::prepareDock()

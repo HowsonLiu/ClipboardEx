@@ -2,6 +2,7 @@
 #include "HistoryDataList.h"
 #include "def.h"
 #include "util.h"
+#include "MainControl.h"
 #include <QList>
 #include <QListWidget>
 #include <QVBoxLayout>
@@ -104,6 +105,7 @@ ClipboardTipsWindow::ClipboardTipsWindow(QWidget* parent /*= nullptr*/)
 	connect(HistoryDataList::getInstance(), &HistoryDataList::sigDataListUpdate, this, &ClipboardTipsWindow::onHistoryListUpdate);
 	connect(m_expandCheckBox, &QCheckBox::stateChanged, this, &ClipboardTipsWindow::onExpandStateChanged);
 	connect(m_timer, &QTimer::timeout, this, &ClipboardTipsWindow::hide);
+	connect(m_dockTimer, &QTimer::timeout, this, &ClipboardTipsWindow::dockHide);
 }
 
 ClipboardTipsWindowState ClipboardTipsWindow::getTipsWindowState() const
@@ -140,22 +142,9 @@ void ClipboardTipsWindow::updateHistoryList()
 	}
 	for (int i = 0; i < dataList->size() - 1; i++) {
 		auto item = m_historyMimeDataListWidget->item(i);
-		MimeDataLabel* label = dynamic_cast<MimeDataLabel*>(m_historyMimeDataListWidget->itemWidget(item));
+		MimeDataLabel* label = qobject_cast<MimeDataLabel*>(m_historyMimeDataListWidget->itemWidget(item));
 		label->setMimeData(dataList->at(i + 1));
 	}
-}
-
-void ClipboardTipsWindow::show()
-{
-	static bool first = true;
-	if (first) {
-		m_historyMimeDataListWidget->verticalScrollBar()->setStyleSheet(this->styleSheet());
-		first = false;
-	}
-	if (m_autoShowCheckBox->isChecked()) {
-		m_timer->start(kShowTime * 1000);
-	}
-	__super::show();
 }
 
 void ClipboardTipsWindow::initWindow()
@@ -165,6 +154,7 @@ void ClipboardTipsWindow::initWindow()
 	m_expandCheckBox = new QCheckBox(this);
 	m_autoShowCheckBox = new QCheckBox(this);
 	m_timer = new QTimer(this);
+	m_dockTimer = new QTimer(this);
 
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	layout->addWidget(m_curMimeDataLabel);
@@ -187,8 +177,13 @@ void ClipboardTipsWindow::initWindow()
 	m_historyMimeDataListWidget->installEventFilter(this);
 #endif
 
-	m_autoShowCheckBox->setText(tr("Auto show"));
+	m_autoShowCheckBox->setText(tr("Auto hide"));
 	m_historyMimeDataListWidget->setVisible(false);
+	m_timer->setSingleShot(true);
+	m_dockTimer->setSingleShot(true);
+
+	setStyleSheet(MainControl::getInstance()->getWindowQss());
+	m_historyMimeDataListWidget->verticalScrollBar()->setStyleSheet(MainControl::getInstance()->getWindowQss());
 	setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint | Qt::ToolTip);
 	setAttribute(Qt::WA_DeleteOnClose, true);
 }
@@ -196,7 +191,20 @@ void ClipboardTipsWindow::initWindow()
 void ClipboardTipsWindow::onHistoryListUpdate()
 {
 	updateHistoryList();
+
+	// dock type show
+	if (m_curDockDirection != DockDirection::None) {
+		dockShow();
+		m_dockTimer->start(kShowTime * 1000);
+		return;
+	}
+
+	// floating type show
 	this->show();
+	if (m_autoShowCheckBox->isChecked() && 
+		!this->rect().contains(this->mapFromGlobal(QCursor::pos()))) {
+		m_timer->start(kShowTime * 1000);
+	}
 }
 
 void ClipboardTipsWindow::onExpandStateChanged(int state)
@@ -207,7 +215,7 @@ void ClipboardTipsWindow::onExpandStateChanged(int state)
 
 void ClipboardTipsWindow::onItemDoubleClicked(QListWidgetItem* item)
 {
-	MimeDataLabel* label = dynamic_cast<MimeDataLabel*>(m_historyMimeDataListWidget->itemWidget(item));
+	MimeDataLabel* label = qobject_cast<MimeDataLabel*>(m_historyMimeDataListWidget->itemWidget(item));
 	if (!label) return;
 	label->onDoubleClicked();
 }
@@ -215,12 +223,14 @@ void ClipboardTipsWindow::onItemDoubleClicked(QListWidgetItem* item)
 void ClipboardTipsWindow::enterEvent(QEvent* event)
 {
 	if (m_timer->isActive()) m_timer->stop();
+	if (m_dockTimer->isActive()) m_dockTimer->stop();
 	__super::enterEvent(event);
 }
 
 void ClipboardTipsWindow::leaveEvent(QEvent* event)
 {
-	if (m_autoShowCheckBox->isChecked())
+	if (m_autoShowCheckBox->isChecked() 
+		&& m_curDockDirection == DockDirection::None)
 		m_timer->start(kShowTime * 1000);
 	__super::leaveEvent(event);
 }
@@ -240,7 +250,7 @@ bool ClipboardTipsWindow::eventFilter(QObject *watched, QEvent *event)
 	// wheel scroll per pixel
 	if (event->type() == QEvent::Wheel) {
 		QWheelEvent *wEvent = static_cast<QWheelEvent*>(event);
-		auto scrollbar = dynamic_cast<QScrollBar*>(watched);
+		auto scrollbar = qobject_cast<QScrollBar*>(watched);
 		if (scrollbar) {
 			auto oriVal = scrollbar->value();
 			scrollbar->setValue(wEvent->delta() > 0 ? oriVal - 1 : oriVal + 1);
