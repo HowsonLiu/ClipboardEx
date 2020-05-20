@@ -14,10 +14,11 @@ QLabel#MainLabel {
 }
 
 QLabel#SubLabel {
-	min-width: 280;
-	min-height: 210;
-	max-width: 280;
-	max-height: 210;
+	min-width: 300;
+	min-height: 206;
+	max-width: 320;
+	max-height: 206;
+	margin: 2px;
 
 	font: bold "Reboto";
 	color: #F1F1F1;
@@ -30,9 +31,7 @@ QListWidget#LabelList {
 	border: 1px solid #3F3F46;
 }
 QListWidget#LabelList::item {
-	min-width: 280;
 	min-height: 210;
-	max-width: 280;
 	max-height: 210;
 }
 QListWidget#LabelList::item:hover {
