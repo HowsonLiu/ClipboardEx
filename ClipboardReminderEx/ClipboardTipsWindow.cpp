@@ -53,6 +53,10 @@ void MimeDataLabel::showMimeData()
 
 void MimeDataLabel::showText(const QString& text)
 {
+	QString showText = text;
+	QStringList strList = showText.split('\n');
+	if (strList.back().isEmpty()) strList.pop_back();
+
 	setWordWrap(!text.contains('\n'));
 	setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 	int fontSize = kMinFontSize;

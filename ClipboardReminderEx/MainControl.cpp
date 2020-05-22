@@ -132,6 +132,7 @@ void MainControl::setUpTrayIcon()
 		m_historySize = n; 
 		HistoryDataList::getInstance()->onSetListSize(m_historySize); 
 	});
+	connect(exitAction, &QAction::triggered, this, &MainControl::onSaveConfigure);
 	connect(exitAction, &QAction::triggered, this, &QApplication::quit);
 	connect(trayIcon, &QSystemTrayIcon::activated, this, &MainControl::onTrayActivated);
 }
