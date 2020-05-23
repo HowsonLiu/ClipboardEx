@@ -185,7 +185,6 @@ void DockableWindow::prepareDock()
 	else if (belongScreenRect.right() < rect.right())
 		target_x = belongScreenRect.right() - rect.width() + 1;
 	move(target_x, target_y);
-	qDebug() << belongScreenRect << rect << belongScreenRect.right() << belongScreenRect.left();
 }
 
 void DockableWindow::dockShow()

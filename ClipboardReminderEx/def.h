@@ -23,6 +23,10 @@ static const QString kMenuSubRBtn = "MenuSubRBtn";
 // define style
 #define WHEEL_SCROLL_PER_PIXEL
 
-static const int kMinFontSize = 15;
+// define history size type
+#define HISTORYSIZE_NOT_CONTAINS_CURRENT
+
+static const int kMinFontSize = 15;			// Tips window font min pixel size
+static const int kTrayMsgShowTime = 100;	// Tray Message show time ms
 
 #endif // DEF_H

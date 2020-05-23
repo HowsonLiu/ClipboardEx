@@ -1,4 +1,5 @@
 #include "HistoryDataList.h"
+#include "def.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QMimeData>
@@ -46,11 +47,9 @@ void ReadClipboardThread::run()
 	}
 	if (data->isValid()) {
 		emit sigSuccessed(data);
-		qDebug() << "success";
 	}
 	else {
 		emit sigFailed();
-		qDebug() << "failed";
 	}
 }
 
@@ -70,6 +69,9 @@ HistoryDataList::HistoryDataList(QObject* parent) : QObject(parent)
 
 void HistoryDataList::onSetListSize(int s)
 {
+#ifdef HISTORYSIZE_NOT_CONTAINS_CURRENT
+	s++;
+#endif
 	if (s < m_historyClipboardDataList.size()) {
 		while (m_historyClipboardDataList.size() > s)
 			m_historyClipboardDataList.pop_back();

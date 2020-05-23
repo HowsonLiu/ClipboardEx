@@ -83,7 +83,6 @@ void NumMenuActionWidget::onMinusButtonClick()
 	if (m_curVal < m_maxVal) m_plusButton->setEnabled(true);
 	m_numLabel->setText(QString::number(m_curVal));
 	sigNumChange(m_curVal);
-	qDebug() << styleSheet();
 }
 
 SliderMenuActionWidget::SliderMenuActionWidget(const QString& describeText, int minVal, 

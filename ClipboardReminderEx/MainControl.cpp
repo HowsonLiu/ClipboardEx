@@ -19,6 +19,8 @@ namespace {
 	static const int g_tipsNumMin = 1;
 	static const int g_tipsNumDefault = 1;
 	static const int g_tipsNumMax = 20;
+
+	// deprecated
 	static const QString g_tipsRectDescribeText = "Label";
 	static const QString g_tipsRectHeightText = "Height";
 	static const QString g_tipsRectWidthText = "Width ";
@@ -123,6 +125,7 @@ void MainControl::setUpTrayIcon()
 	trayIcon->setContextMenu(trayIconMenu);
 	trayIcon->setIcon(QIcon(":/res/image/startup.png"));	// neccessary
 	trayIcon->show();
+	trayIcon->showMessage("ClipboardEx", tr("is enabled"), trayIcon->icon(), kTrayMsgShowTime);
 
 	connect(startUpAction, &QAction::triggered, this, [](bool b) {
 		RegeditManager::getInstance()->enableRunStartUp(b);
