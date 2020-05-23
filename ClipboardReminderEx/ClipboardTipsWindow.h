@@ -27,6 +27,7 @@ public:
 public slots:
 	void onDoubleClicked();
 private:
+	QRect textRect();
 	void showMimeData();
 	void showText(const QString& text);
 private:
