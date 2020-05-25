@@ -1,6 +1,7 @@
 #include "DockableWindow.h"
 #include <QtWidgets/QApplication>
 #include <QTranslator>
+#include <QResource>
 #include "MenuActionWidget.h"
 #include "ClipboardTipsWindow.h"
 #include "ConfigManager.h"
@@ -20,6 +21,12 @@ int main(int argc, char *argv[])
 	QTranslator translator;
 	translator.load(langFile);
 	a.installTranslator(&translator);
+
+	// skin
+	QString themeFile = "theme.rcc";
+	if (QFile(themeFile).exists()) {
+		QResource::registerResource(themeFile);
+	}
 
 	MainControl::getInstance()->readConfig();
 	MainControl::getInstance()->setUpUI();

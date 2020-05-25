@@ -29,4 +29,11 @@ static const QString kMenuSubRBtn = "MenuSubRBtn";
 static const int kMinFontSize = 15;			// Tips window font min pixel size
 static const int kTrayMsgShowTime = 100;	// Tray Message show time ms
 
+static const int kHistorySizeMin = 1;
+static const int kHistorySizeDefault = 5;
+static const int kHistroySizeMax = 20;
+static const int kTipsNumMin = 1;
+static const int kTipsNumDefault = 1;
+static const int kTipsNumMax = 20;
+
 #endif // DEF_H

@@ -10,18 +10,9 @@
 #include <QDesktopWidget>
 #include <QTimer>
 
-namespace {
-	static const int g_historySizeMin = 1;
-	static const int g_historySizeDefault = 5;
-	static const int g_histroySizeMax = 20;
-	static const int g_tipsNumMin = 1;
-	static const int g_tipsNumDefault = 1;
-	static const int g_tipsNumMax = 20;
-}
-
 MainControl::MainControl(QObject* parent /*= nullptr*/) : QObject(parent)
 	, m_tipsWindowState()
-	, m_historySize(g_historySizeDefault)
+	, m_historySize(kHistorySizeDefault)
 {
 }
 
@@ -83,13 +74,13 @@ void MainControl::setUpTrayIcon()
 
 	// history size
 	NumMenuActionWidget* historySizeWidget = new NumMenuActionWidget(tr("History Size"),
-		g_historySizeMin, m_historySize, g_histroySizeMax, trayIconMenu);
+		kHistorySizeMin, m_historySize, kHistroySizeMax, trayIconMenu);
 	QWidgetAction* historySizeAction = new QWidgetAction(trayIconMenu);
 	historySizeAction->setDefaultWidget(historySizeWidget);
 
 	// number of tips windows
 	NumMenuActionWidget* tipsNumWidget = new NumMenuActionWidget(tr("Num of tips"),
-		g_tipsNumMin, m_tipsWindowState.size(), g_tipsNumMax, trayIconMenu);
+		kTipsNumMin, m_tipsWindowState.size(), kTipsNumMax, trayIconMenu);
 	QWidgetAction* tipsNumAction = new QWidgetAction(trayIconMenu);
 	tipsNumAction->setDefaultWidget(tipsNumWidget);
 
