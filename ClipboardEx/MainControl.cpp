@@ -10,38 +10,9 @@
 #include <QDesktopWidget>
 #include <QTimer>
 
-namespace {
-	static const QString g_historySizeDescribeText = QObject::tr("History Size");
-	static const int g_historySizeMin = 1;
-	static const int g_historySizeDefault = 5;
-	static const int g_histroySizeMax = 20;
-	static const QString g_tipsNumDescribeText = QObject::tr("Num of tips");
-	static const int g_tipsNumMin = 1;
-	static const int g_tipsNumDefault = 1;
-	static const int g_tipsNumMax = 20;
-
-	// deprecated
-	static const QString g_tipsRectDescribeText = "Label";
-	static const QString g_tipsRectHeightText = "Height";
-	static const QString g_tipsRectWidthText = "Width ";
-	static const int g_tipsRectHeightMin = 108;
-	static const int g_tipsRectHeightDefault = 216;
-	static const int g_tipsRectHeightMax = 432;
-	static const int g_tipsRectWidthMin = 192;
-	static const int g_tipsRectWidthDefault = 384;
-	static const int g_tipsRectWidthMax = 768;
-	static const QString g_tipsListHeightText = "Height of list";
-	static const int g_tipsListHeightMin = 300;
-	static const int g_tipsListHeightDefault = 500;
-	static const int g_tipsListHeightMax = 800;
-	static const int g_autoSaveInterval = 5 * 1000;
-
-	const QString kThemeQss = "theme.qss";
-}
-
 MainControl::MainControl(QObject* parent /*= nullptr*/) : QObject(parent)
 	, m_tipsWindowState()
-	, m_historySize(g_historySizeDefault)
+	, m_historySize(kHistorySizeDefault)
 {
 }
 
@@ -102,14 +73,14 @@ void MainControl::setUpTrayIcon()
 	startUpAction->setObjectName(kStartUpAction);
 
 	// history size
-	NumMenuActionWidget* historySizeWidget = new NumMenuActionWidget(g_historySizeDescribeText,
-		g_historySizeMin, m_historySize, g_histroySizeMax, trayIconMenu);
+	NumMenuActionWidget* historySizeWidget = new NumMenuActionWidget(tr("History Size"),
+		kHistorySizeMin, m_historySize, kHistroySizeMax, trayIconMenu);
 	QWidgetAction* historySizeAction = new QWidgetAction(trayIconMenu);
 	historySizeAction->setDefaultWidget(historySizeWidget);
 
 	// number of tips windows
-	NumMenuActionWidget* tipsNumWidget = new NumMenuActionWidget(g_tipsNumDescribeText,
-		g_tipsNumMin, m_tipsWindowState.size(), g_tipsNumMax, trayIconMenu);
+	NumMenuActionWidget* tipsNumWidget = new NumMenuActionWidget(tr("Num of tips"),
+		kTipsNumMin, m_tipsWindowState.size(), kTipsNumMax, trayIconMenu);
 	QWidgetAction* tipsNumAction = new QWidgetAction(trayIconMenu);
 	tipsNumAction->setDefaultWidget(tipsNumWidget);
 
@@ -154,14 +125,6 @@ void MainControl::setUpQss()
 		m_windowQss = qssFile.readAll();
 		qssFile.close();
 	} while (false);
-}
-
-void MainControl::setAutoSave()
-{
-	QTimer* timer = new QTimer(this);
-	timer->setSingleShot(false);
-	timer->start(g_autoSaveInterval);
-	connect(timer, &QTimer::timeout, this, &MainControl::onSaveConfigure);
 }
 
 void MainControl::onTipsWindowNumChange(int i)

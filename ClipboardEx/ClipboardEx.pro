@@ -42,3 +42,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     res.qrc
+
+TRANSLATIONS += res\i18n\zh_cn.ts \
+	res\i18n\en_us.ts
