@@ -22,4 +22,8 @@
         <file>res/image/up-hover.png</file>
         <file>res/image/up-normal.png</file>
     </qresource>
+    <qresource prefix="/i18n">
+        <file>res/i18n/en_us.qm</file>
+        <file>res/i18n/zh_cn.qm</file>
+    </qresource>
 </RCC>

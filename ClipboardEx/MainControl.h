@@ -18,7 +18,6 @@ public:
 	static MainControl* getInstance();
 	void readConfig();
 	void setUpUI();
-	void setAutoSave();
 
 	inline QString getMenuQss() const { return m_menuQss; };
 	inline QString getWindowQss() const { return m_windowQss; };
