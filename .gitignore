@@ -50,15 +50,13 @@ Thumbs.db
 *.idb
 *.ilk
 *.pdb
-*.sln
 *.suo
-*.vcproj
 *vcproj.*.*.user
 *.ncb
 *.sdf
 *.opensdf
-*.vcxproj
-*vcxproj.*
+*.pfx
+*.user
 
 # MinGW generated files
 *.Debug
@@ -77,3 +75,4 @@ debug/
 release/
 Win32/
 build*/
+.vs/
