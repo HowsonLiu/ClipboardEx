@@ -12,27 +12,50 @@ ClipboardEx is a tool to enhance the function of the original clipboard.
 ## How to use
 After open ClipboardEx，Tips Window will show you current clipboard content.
 
-![show_text](docs/show_text.png)![show_text](docs/show_picture.png)
+<div align=center>
+    <img src="docs/normal.gif"/>
+    <br/>
+    <font color=#999>Show clipboard content</font>
+</div>
 
 ClipboardEx can only support picture and text format so far.
 
 ## Auto hide
 By default, Tips Window always displays on top of the desktop. When you check the "Auto hide" checkbox, it will hide until clipboard updated.
 
+<div align=center>
+    <img src="docs/auto_hide.gif"/>
+    <br/>
+    <font color=#999>Auto hide</font>
+</div>
 
 ## Previous contents
 ClipboardEx can save up to 20 previous clipboard's contents. You can copy as any times.
 
-![show_text](docs/history.png)![show_text](docs/tray_history.png)
+<div align=center>
+    <img src="docs/history.gif"/>
+    <br/>
+    <font color=#999>Previous contents</font>
+</div>
 
 
 ## Muti monitor
 You can create more than one Tips Windows. It will be very convenient that create Tips Windows according to the number of your monitor, and place one for each monitor.
 
+<div align=center>
+    <img src="docs/muti_monitor.png"/>
+    <br/>
+    <font color=#999>Support muti-monitor</font>
+</div>
+
 ## Quick review
 Drag Tips Windows to the monitor's edge, it will move ouside. You can quick review by hit that edge.
 
-![show_text](docs/dock_hide.png)![show_text](docs/dock_show.png)
+<div align=center>
+    <img src="docs/dock.gif"/>
+    <br/>
+    <font color=#999>Dock mode</font>
+</div>
 
 ## Startup
 You can enable startup on tray icon menu.
