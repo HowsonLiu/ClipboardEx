@@ -9,8 +9,6 @@
         <file>res/image/right-disable.png</file>
         <file>res/image/right-hover.png</file>
         <file>res/image/right-normal.png</file>
-        <file>res/qss/menu.qss</file>
-        <file>res/qss/window.qss</file>
         <file>res/image/tick_hover.png</file>
         <file>res/image/tick_normal.png</file>
         <file>res/image/down-clicked.png</file>
@@ -25,5 +23,11 @@
     <qresource prefix="/i18n">
         <file>res/i18n/en_us.qm</file>
         <file>res/i18n/zh_cn.qm</file>
+    </qresource>
+    <qresource prefix="/qss">
+        <file>res/qss/menu.qss</file>
+        <file>res/qss/menu_cn.qss</file>
+        <file>res/qss/window.qss</file>
+        <file>res/qss/window_cn.qss</file>
     </qresource>
 </RCC>

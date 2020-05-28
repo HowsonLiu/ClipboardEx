@@ -1,0 +1,79 @@
+#TrayMenu {
+	background-color: #1B1B1C;
+	border: 1px solid #007ACC;
+	width: 150px;
+	
+	font: 15px "SimHei";
+	color: #F1F1F1;
+	padding: 5 10 5 10;
+}
+#TrayMenu::item {
+	width: 100px;
+	height: 20px;
+	padding: 5 0 5 30;
+}
+#TrayMenu::item:selected {
+	background-color: #333334;
+}
+#TrayMenu::item:pressed {
+
+}
+#TrayMenu::indicator {
+	width: 20px;
+	height: 20px;
+}
+#TrayMenu::indicator:checked {
+	background-color: #2D2D30;
+	border-image: url(:/res/image/tick_normal.png);
+}
+#TrayMenu::indicator:checked:selected {
+	background-color: #3E3E40;
+	border-image: url(:/res/image/tick_hover.png);
+}
+
+QWidget#MenuSubWidget:hover {
+	background-color: #333334;
+}
+QLabel#MenuSubTitle {
+	font: 15px "SimHei";
+	color: #F1F1F1;
+}
+QLabel#MenuSubValue {
+	color: #F1F1F1;
+	font: bold 25px "SimHei";
+}
+QPushButton#MenuSubLBtn {
+	max-width: 16px;
+	max-height: 16px;
+	min-width: 16px;
+	min-height: 16px;
+	margin-left: 25px;
+	border-image: url(:/res/image/left-normal.png);
+}
+QPushButton#MenuSubLBtn:hover {
+	border-image: url(:/res/image/left-hover.png);
+}
+QPushButton#MenuSubLBtn:pressed {
+	border-image: url(:/res/image/left-clicked.png);
+}
+QPushButton#MenuSubLBtn:disabled {
+	border-image: url(:/res/image/left-disable.png);
+}
+QPushButton#MenuSubRBtn {
+	max-width: 16px;
+	max-height: 16px;
+	min-width: 16px;
+	min-height: 16px;
+	margin-right: 15px;
+	border-image: url(:/res/image/right-normal.png);
+}
+QPushButton#MenuSubRBtn:hover {
+	border-image: url(:/res/image/right-hover.png);
+}
+QPushButton#MenuSubRBtn:pressed {
+	border-image: url(:/res/image/right-clicked.png);
+}
+QPushButton#MenuSubRBtn:disabled {
+	border-image: url(:/res/image/right-disable.png);
+}
+

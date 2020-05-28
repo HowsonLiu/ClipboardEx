@@ -113,14 +113,18 @@ void MainControl::setUpTrayIcon()
 
 void MainControl::setUpQss()
 {
+	QLocale local;
+	bool isChinese = local.language() == QLocale::Chinese;
+	QString menuName = isChinese ? ":/qss/res/qss/menu_cn.qss" : ":/qss/res/qss/menu.qss";
+	QString winName = isChinese ? ":/qss/res/qss/window_cn.qss" : ":/qss/res/qss/window.qss";
 	do {
 		QFile qssFile;
-		qssFile.setFileName(":/res/qss/menu.qss");
+		qssFile.setFileName(menuName);
 		if (!qssFile.open(QIODevice::ReadOnly | QIODevice::Text)) break;
 		m_menuQss = qssFile.readAll();
 		qssFile.close();
 
-		qssFile.setFileName(":/res/qss/window.qss");
+		qssFile.setFileName(winName);
 		if (!qssFile.open(QIODevice::ReadOnly | QIODevice::Text)) break;
 		m_windowQss = qssFile.readAll();
 		qssFile.close();
