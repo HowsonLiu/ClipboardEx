@@ -3,7 +3,7 @@
 	border: 1px solid #007ACC;
 	width: 150px;
 	
-	font: 15px "SimHei";
+	font: 15px "Reboto";
 	color: #F1F1F1;
 	padding: 5 10 5 10;
 }
@@ -35,12 +35,12 @@ QWidget#MenuSubWidget:hover {
 	background-color: #333334;
 }
 QLabel#MenuSubTitle {
-	font: 15px "SimHei";
+	font: 15px "Reboto";
 	color: #F1F1F1;
 }
 QLabel#MenuSubValue {
 	color: #F1F1F1;
-	font: bold 25px "SimHei";
+	font: bold 25px "Reboto";
 }
 QPushButton#MenuSubLBtn {
 	max-width: 16px;
