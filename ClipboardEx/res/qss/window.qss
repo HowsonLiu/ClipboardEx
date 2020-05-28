@@ -9,7 +9,7 @@ QLabel#MainLabel {
 	max-width: 320;
 	max-height: 240;
 
-	font: bold "Reboto";
+	font: bold "SimHei";
 	color: #F1F1F1;
 }
 
@@ -20,7 +20,7 @@ QLabel#SubLabel {
 	max-height: 206;
 	margin: 2px;
 
-	font: bold "Reboto";
+	font: bold "SimHei";
 	color: #F1F1F1;
 }
 
@@ -103,7 +103,7 @@ QScrollBar::down-arrow:vertical:pressed {
 
 
 QCheckBox#AutoShowBtn {
-	font: 17px "Reboto";
+	font: 17px "SimHei";
 	color: #F1F1F1;
 }
 QCheckBox#AutoShowBtn::indicator {
