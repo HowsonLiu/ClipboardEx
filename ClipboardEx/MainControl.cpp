@@ -94,7 +94,7 @@ void MainControl::setUpTrayIcon()
 	trayIconMenu->addAction(exitAction);
 
 	trayIcon->setContextMenu(trayIconMenu);
-	trayIcon->setIcon(QIcon(":/res/image/startup.png"));	// neccessary
+	trayIcon->setIcon(QIcon(":/res/image/clipboardex32x32.png"));	// neccessary
 	trayIcon->show();
 	trayIcon->showMessage("ClipboardEx", tr("is enabled"), trayIcon->icon(), kTrayMsgShowTime);
 

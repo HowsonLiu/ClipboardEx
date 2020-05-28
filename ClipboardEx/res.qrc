@@ -19,6 +19,7 @@
         <file>res/image/up-disable.png</file>
         <file>res/image/up-hover.png</file>
         <file>res/image/up-normal.png</file>
+        <file>res/image/clipboardex32x32.png</file>
     </qresource>
     <qresource prefix="/i18n">
         <file>res/i18n/en_us.qm</file>
