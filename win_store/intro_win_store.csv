@@ -1,0 +1,200 @@
+Field,ID,Type (類型),default,en-us,zh
+Description,2,文字,,"ClipboardEx is a tool to enhance the function of the original clipboard. It can record previous clipboard's content, and remind you when the clipboard updated. In dock mode, you can check current clipboard's content quickly.",剪贴板Ex相比原生剪贴板提供更多的功能，可以帮助你大大提高工作效率。它能保存复制项的历史记录；提供剪贴版更新自动提醒；允许快速检阅当前剪贴板内容等等。程序在多显示器环境下也有不俗的表现，你可以根据自己的喜好选择提示的位置以及提示方式。后续我还会开发剪贴板内容导出功能以及截图模块。
+ReleaseNotes,3,文字,,Previde previous clipboard's content; Custom tips show type and ,提供剪贴板历史记录；实时提示剪贴板更新内容；兼容多显示器的多样化提示方法
+Title,4,文字,,ClipboardEx,剪贴板Ex
+ShortTitle,5,文字,,ClipboardEx,剪贴板Ex
+SortTitle,6,文字,,ClipboardEx,剪贴板Ex
+VoiceTitle,7,文字,,ClipboardEx,剪贴板Ex
+ShortDescription,8,文字,,ClipboardEx is a tool to enhance the function of the original clipboard.,ClipboardEx装的好，Ctrl CV没烦恼
+DevStudio,9,文字,,HowsonLiu,HowsonLiu
+CopyrightTrademarkInformation,12,文字,,HowsonLiu,HowsonLiu
+AdditionalLicenseTerms,13,文字,,HowsonLiu,HowsonLiu
+DesktopScreenshot1,100,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480222
+DesktopScreenshot2,101,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480237
+DesktopScreenshot3,102,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480188,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480188
+DesktopScreenshot4,103,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480167
+DesktopScreenshot5,104,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+DesktopScreenshot6,105,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+DesktopScreenshot7,106,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+DesktopScreenshot8,107,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+DesktopScreenshot9,108,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+DesktopScreenshot10,109,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+DesktopScreenshotCaption1,150,文字,,Tips window,提示窗口
+DesktopScreenshotCaption2,151,文字,,Privious contents,展开历史数据
+DesktopScreenshotCaption3,152,文字,,Tray icon menu,托盘菜单
+DesktopScreenshotCaption4,153,文字,,Multi-monitor supports,多显示器支持
+DesktopScreenshotCaption5,154,文字,,,
+DesktopScreenshotCaption6,155,文字,,,
+DesktopScreenshotCaption7,156,文字,,,
+DesktopScreenshotCaption8,157,文字,,,
+DesktopScreenshotCaption9,158,文字,,,
+DesktopScreenshotCaption10,159,文字,,,
+MobileScreenshot1,200,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480222
+MobileScreenshot2,201,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480237
+MobileScreenshot3,202,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480188,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480188
+MobileScreenshot4,203,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480167
+MobileScreenshot5,204,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+MobileScreenshot6,205,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+MobileScreenshot7,206,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+MobileScreenshot8,207,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+MobileScreenshot9,208,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+MobileScreenshot10,209,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+MobileScreenshotCaption1,250,文字,,Tips window,提示窗口
+MobileScreenshotCaption2,251,文字,,Privious contents,展开历史数据
+MobileScreenshotCaption3,252,文字,,Tray icon menu,托盘菜单
+MobileScreenshotCaption4,253,文字,,Multi-monitor supports,多显示器支持
+MobileScreenshotCaption5,254,文字,,,
+MobileScreenshotCaption6,255,文字,,,
+MobileScreenshotCaption7,256,文字,,,
+MobileScreenshotCaption8,257,文字,,,
+MobileScreenshotCaption9,258,文字,,,
+MobileScreenshotCaption10,259,文字,,,
+XboxScreenshot1,300,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480222
+XboxScreenshot2,301,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480237
+XboxScreenshot3,302,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480188,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480188
+XboxScreenshot4,303,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480167
+XboxScreenshot5,304,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+XboxScreenshot6,305,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+XboxScreenshot7,306,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+XboxScreenshot8,307,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+XboxScreenshot9,308,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+XboxScreenshot10,309,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+XboxScreenshotCaption1,350,文字,,Tips window,提示窗口
+XboxScreenshotCaption2,351,文字,,Privious contents,展开历史数据
+XboxScreenshotCaption3,352,文字,,Tray icon menu,托盘菜单
+XboxScreenshotCaption4,353,文字,,Multi-monitor supports,多显示器支持
+XboxScreenshotCaption5,354,文字,,,
+XboxScreenshotCaption6,355,文字,,,
+XboxScreenshotCaption7,356,文字,,,
+XboxScreenshotCaption8,357,文字,,,
+XboxScreenshotCaption9,358,文字,,,
+XboxScreenshotCaption10,359,文字,,,
+HolographicScreenshot1,400,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480222
+HolographicScreenshot2,401,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480237
+HolographicScreenshot3,402,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480188,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480188
+HolographicScreenshot4,403,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480167
+HolographicScreenshot5,404,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+HolographicScreenshot6,405,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+HolographicScreenshot7,406,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+HolographicScreenshot8,407,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+HolographicScreenshot9,408,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+HolographicScreenshot10,409,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+HolographicScreenshotCaption1,450,文字,,Tips window,提示窗口
+HolographicScreenshotCaption2,451,文字,,Privious contents,展开历史数据
+HolographicScreenshotCaption3,452,文字,,Tray icon menu,托盘菜单
+HolographicScreenshotCaption4,453,文字,,Multi-monitor supports,多显示器支持
+HolographicScreenshotCaption5,454,文字,,,
+HolographicScreenshotCaption6,455,文字,,,
+HolographicScreenshotCaption7,456,文字,,,
+HolographicScreenshotCaption8,457,文字,,,
+HolographicScreenshotCaption9,458,文字,,,
+HolographicScreenshotCaption10,459,文字,,,
+StoreLogo720x1080,600,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480238,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480238
+StoreLogo1080x1080,601,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480223,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480223
+StoreLogo300x300,602,相對路徑 (或合作夥伴中心中檔案的 URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480107,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480107
+OverrideLogosForWin10,603,True/False,,FALSE,FALSE
+StoreLogoOverride150x150,604,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+StoreLogoOverride71x71,605,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+PromoImage1920x1080,606,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+PromoImage2400x1200,607,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+XboxBrandedKeyArt584x800,608,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+XboxTitledHero1920x1080,609,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+XboxFeaturedPromo1080x1080,610,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+OptionalPromo358x358,611,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+OptionalPromo1000x800,612,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+OptionalPromo414x180,613,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Feature1,700,文字,,Real-time display clipboard content,实时更新粘贴板内容
+Feature2,701,文字,,Auto hide,不需要时可以自动隐藏
+Feature3,702,文字,,Previous contents,保存剪贴板历史记录
+Feature4,703,文字,,Multi-monitor supports,多显示器支持
+Feature5,704,文字,,Quick review,停靠模式
+Feature6,705,文字,,,
+Feature7,706,文字,,,
+Feature8,707,文字,,,
+Feature9,708,文字,,,
+Feature10,709,文字,,,
+Feature11,710,文字,,,
+Feature12,711,文字,,,
+Feature13,712,文字,,,
+Feature14,713,文字,,,
+Feature15,714,文字,,,
+Feature16,715,文字,,,
+Feature17,716,文字,,,
+Feature18,717,文字,,,
+Feature19,718,文字,,,
+Feature20,719,文字,,,
+MinimumHardwareReq1,800,文字,,,
+MinimumHardwareReq2,801,文字,,,
+MinimumHardwareReq3,802,文字,,,
+MinimumHardwareReq4,803,文字,,,
+MinimumHardwareReq5,804,文字,,,
+MinimumHardwareReq6,805,文字,,,
+MinimumHardwareReq7,806,文字,,,
+MinimumHardwareReq8,807,文字,,,
+MinimumHardwareReq9,808,文字,,,
+MinimumHardwareReq10,809,文字,,,
+MinimumHardwareReq11,810,文字,,,
+RecommendedHardwareReq1,850,文字,,,
+RecommendedHardwareReq2,851,文字,,,
+RecommendedHardwareReq3,852,文字,,,
+RecommendedHardwareReq4,853,文字,,,
+RecommendedHardwareReq5,854,文字,,,
+RecommendedHardwareReq6,855,文字,,,
+RecommendedHardwareReq7,856,文字,,,
+RecommendedHardwareReq8,857,文字,,,
+RecommendedHardwareReq9,858,文字,,,
+RecommendedHardwareReq10,859,文字,,,
+RecommendedHardwareReq11,860,文字,,,
+SearchTerm1,900,文字,,Cut,剪贴
+SearchTerm2,901,文字,,Paste,粘贴
+SearchTerm3,902,文字,,Copy,剪切
+SearchTerm4,903,文字,,Clipboard,复制
+SearchTerm5,904,文字,,剪贴板,Clipboard
+SearchTerm6,905,文字,,粘贴板,拷贝
+SearchTerm7,906,文字,,剪切板,ClipboardEx
+TrailerToPlayAtTopOfListing,999,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer1,1000,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer2,1001,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer3,1002,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer4,1003,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer5,1004,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer6,1005,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer7,1006,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer8,1007,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer9,1008,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer10,1009,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer11,1010,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer12,1011,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer13,1012,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer14,1013,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+Trailer15,1014,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerTitle1,1020,文字,,,
+TrailerTitle2,1021,文字,,,
+TrailerTitle3,1022,文字,,,
+TrailerTitle4,1023,文字,,,
+TrailerTitle5,1024,文字,,,
+TrailerTitle6,1025,文字,,,
+TrailerTitle7,1026,文字,,,
+TrailerTitle8,1027,文字,,,
+TrailerTitle9,1028,文字,,,
+TrailerTitle10,1029,文字,,,
+TrailerTitle11,1030,文字,,,
+TrailerTitle12,1031,文字,,,
+TrailerTitle13,1032,文字,,,
+TrailerTitle14,1033,文字,,,
+TrailerTitle15,1034,文字,,,
+TrailerThumbnail1,1040,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail2,1041,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail3,1042,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail4,1043,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail5,1044,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail6,1045,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail7,1046,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail8,1047,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail9,1048,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail10,1049,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail11,1050,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail12,1051,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail13,1052,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail14,1053,相對路徑 (或合作夥伴中心中檔案的 URL),,,
+TrailerThumbnail15,1054,相對路徑 (或合作夥伴中心中檔案的 URL),,,

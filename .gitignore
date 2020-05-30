@@ -56,6 +56,8 @@ Thumbs.db
 *.opensdf
 *.pfx
 *.user
+*.psd1
+*.ps1
 
 # MinGW generated files
 *.Debug
