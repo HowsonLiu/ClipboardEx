@@ -2,8 +2,10 @@
 #define DEF_H
 #include <QString>
 
-// define control name
+// platform
+#define UWP
 
+// define control name
 static const QString kTipsWindow = "TipsWindow";
 static const QString kMainLabel = "MainLabel";
 static const QString kSubLabel = "SubLabel";

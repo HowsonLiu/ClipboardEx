@@ -1,6 +1,13 @@
 #include "ConfigManager.h"
+#include "def.h"
 #include <QSettings>
 #include <QApplication>
+#include <QDebug>
+#ifdef UWP
+#include <ppltasks.h>
+using namespace Windows::ApplicationModel;
+using namespace concurrency;
+#endif
 
 namespace {
 	static const QString g_iniFileName = "\\CREx";
@@ -12,8 +19,27 @@ RegeditManager* RegeditManager::getInstance()
 	return &instance;
 }
 
-void RegeditManager::enableRunStartUp(bool b)
+bool RegeditManager::enableRunStartUp(bool b)
 {
+#ifdef UWP
+	// https://blog.csdn.net/eiilpux17/article/details/78964795
+	auto asynOp = StartupTask::GetAsync(ref new Platform::String(TEXT("ClipboardExStartUpId")));
+	if (asynOp == nullptr) {
+		qDebug() << "UWP Start up API error";
+		return false;
+	}
+	auto startUpTask = concurrency::create_task(asynOp).get();
+	if (b) {
+		auto state = concurrency::create_task(startUpTask->RequestEnableAsync()).get();
+		qDebug() << "UWP enable start up state: " << static_cast<int>(state);
+		return state == StartupTaskState::Enabled || state == StartupTaskState::EnabledByPolicy;
+	}
+	else {
+		startUpTask->Disable();
+		return false;
+	}
+#else
+
 	QSettings* reg = new QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
 	QString appName = QApplication::applicationName();
 	QString appPath = QApplication::applicationFilePath();
@@ -25,6 +51,7 @@ void RegeditManager::enableRunStartUp(bool b)
 		reg->remove(appName);
 	}
 	reg->deleteLater();
+#endif
 }
 
 RegeditManager::RegeditManager(QObject* parent /*= nullptr*/) : QObject(parent)

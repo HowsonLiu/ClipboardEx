@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap mp rescap">
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" 
+xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" 
+xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" 
+xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
+xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" 
+IgnorableNamespaces="uap uap2 uap3 mp rescap desktop">
   <Identity Name="52090HowsonLiu.ClipboardEx" Publisher="CN=556B1E19-A7FF-462E-B6DF-234E2447340E" Version="1.0.0.0" />
   <Properties>
     <DisplayName>ClipboardEx</DisplayName>
@@ -21,9 +28,9 @@
         <uap:SplashScreen Image="Images\SplashScreen.png" />
       </uap:VisualElements>
 	  <Extensions>
-        <uap5:Extension Category="windows.startupTask" EntryPoint="Windows.FullTrustApplication" Executable="ClipboardEx.exe">
-          <uap5:StartupTask DisplayName="ClipboardEx" Enabled="true" TaskId="ClipboardExStartUpId"/>
-        </uap5:Extension>
+        <desktop:Extension Category="windows.startupTask" EntryPoint="Windows.FullTrustApplication" Executable="ClipboardEx\ClipboardEx.exe">
+          <desktop:StartupTask DisplayName="ClipboardEx" Enabled="true" TaskId="ClipboardExStartUpId"/>
+        </desktop:Extension>
       </Extensions>
     </Application>
   </Applications>
