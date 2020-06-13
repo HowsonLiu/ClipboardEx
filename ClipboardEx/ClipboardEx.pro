@@ -23,6 +23,7 @@ SOURCES += \
     MainControl.cpp \
     MenuActionWidget.cpp \
     main.cpp \
+    mimedatalabel.cpp \
     util.cpp
 
 HEADERS += \
@@ -33,6 +34,7 @@ HEADERS += \
     MainControl.h \
     MenuActionWidget.h \
     def.h \
+    mimedatalabel.h \
     util.h
 
 # Default rules for deployment.
