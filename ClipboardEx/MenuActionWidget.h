@@ -18,7 +18,8 @@ class NumMenuActionWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	NumMenuActionWidget(const QString& describeText, int minVal, int defaultVal, int maxVal, QWidget* parent = nullptr);
+	NumMenuActionWidget(const QString& describeText, float minVal, float defaultVal, float maxVal, float step, QWidget* parent = nullptr);
+	NumMenuActionWidget(const QString& describeText, int minVal, int defaultVal, int maxVal, int step, QWidget* parent = nullptr);
 
 protected:
 	virtual void paintEvent(QPaintEvent *event) override;
@@ -28,16 +29,17 @@ private:
 	void initWindow();
 
 signals:
-	void sigNumChange(int);
+	void sigNumChange(float);
 
 private slots:
 	void onPlusButtonClick();
 	void onMinusButtonClick();
 
 private:
-	int m_minVal;
-	int m_maxVal;
-	int m_curVal;
+	float m_minVal;
+	float m_maxVal;
+	float m_curVal;
+	float m_step;
 	QString m_describeText;
 
 	QLabel* m_describeTextLabel;

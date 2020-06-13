@@ -21,6 +21,7 @@ public:
 
 	inline QString getMenuQss() const { return m_menuQss; };
 	inline QString getWindowQss() const { return m_windowQss; };
+	inline float getShowTime() const { return m_showTime; }
 
 private:
 	MainControl(QObject* parent = nullptr);
@@ -29,6 +30,8 @@ private:
 	void setUpQss();
 
 private slots:
+	void onShowTimeChanged(float);
+	void onHistorySizeChanged(int);
 	void onTipsWindowNumChange(int);
 	void onSaveConfigure();
 	void onTrayActivated(QSystemTrayIcon::ActivationReason reson);
@@ -39,6 +42,7 @@ private:
 	// config
 	QList<ClipboardTipsWindowState> m_tipsWindowState;
 	int m_historySize;
+	float m_showTime;
 
 	// qss
 	QString m_menuQss;

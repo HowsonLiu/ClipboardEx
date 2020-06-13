@@ -72,15 +72,21 @@ void MainControl::setUpTrayIcon()
 	startUpAction->setCheckable(true);
 	startUpAction->setObjectName(kStartUpAction);
 
+	// show time
+	NumMenuActionWidget* showTimeWidget = new NumMenuActionWidget(tr("Show Time"),
+		kShowTimeMin, kShowTimeDefault, kShowTimeMax, kShowTimeStep, trayIconMenu);
+	QWidgetAction* showTimeAction = new QWidgetAction(trayIconMenu);
+	showTimeAction->setDefaultWidget(showTimeWidget);
+
 	// history size
 	NumMenuActionWidget* historySizeWidget = new NumMenuActionWidget(tr("History Size"),
-		kHistorySizeMin, m_historySize, kHistroySizeMax, trayIconMenu);
+		kHistorySizeMin, m_historySize, kHistroySizeMax, kHistorySizeStep, trayIconMenu);
 	QWidgetAction* historySizeAction = new QWidgetAction(trayIconMenu);
 	historySizeAction->setDefaultWidget(historySizeWidget);
 
 	// number of tips windows
 	NumMenuActionWidget* tipsNumWidget = new NumMenuActionWidget(tr("Num of tips"),
-		kTipsNumMin, m_tipsWindowState.size(), kTipsNumMax, trayIconMenu);
+		kTipsNumMin, m_tipsWindowState.size(), kTipsNumMax, kTipsNumStep, trayIconMenu);
 	QWidgetAction* tipsNumAction = new QWidgetAction(trayIconMenu);
 	tipsNumAction->setDefaultWidget(tipsNumWidget);
 
@@ -89,6 +95,7 @@ void MainControl::setUpTrayIcon()
 	exitAction->setText(tr("Exit"));
 
 	trayIconMenu->addAction(startUpAction);
+	trayIconMenu->addAction(showTimeAction);
 	trayIconMenu->addAction(historySizeAction);
 	trayIconMenu->addAction(tipsNumAction);
 	trayIconMenu->addAction(exitAction);
@@ -102,10 +109,9 @@ void MainControl::setUpTrayIcon()
 		RegeditManager::getInstance()->enableRunStartUp(b);
 	});
 	connect(tipsNumWidget, &NumMenuActionWidget::sigNumChange, this, &MainControl::onTipsWindowNumChange);
-	connect(historySizeWidget, &NumMenuActionWidget::sigNumChange, this, [this](int n) {
-		m_historySize = n; 
-		HistoryDataList::getInstance()->onSetListSize(m_historySize); 
-	});
+	connect(showTimeWidget, &NumMenuActionWidget::sigNumChange, this, &MainControl::onShowTimeChanged);
+	connect(historySizeWidget, &NumMenuActionWidget::sigNumChange, this, &MainControl::onHistorySizeChanged);
+	connect(historySizeWidget, &NumMenuActionWidget::sigNumChange, HistoryDataList::getInstance(), &HistoryDataList::onSetListSize);
 	connect(exitAction, &QAction::triggered, this, &MainControl::onSaveConfigure);
 	connect(exitAction, &QAction::triggered, this, &QApplication::quit);
 	connect(trayIcon, &QSystemTrayIcon::activated, this, &MainControl::onTrayActivated);
@@ -129,6 +135,16 @@ void MainControl::setUpQss()
 		m_windowQss = qssFile.readAll();
 		qssFile.close();
 	} while (false);
+}
+
+void MainControl::onShowTimeChanged(float f)
+{
+	m_showTime = f;
+}
+
+void MainControl::onHistorySizeChanged(int n)
+{
+	m_historySize = n;
 }
 
 void MainControl::onTipsWindowNumChange(int i)
