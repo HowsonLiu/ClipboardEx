@@ -114,6 +114,8 @@ void MimeDataLabel::onContentMenu(const QPoint& p)
 
 	contextMenu.setObjectName("ContextMenu");
 	contextMenu.setStyleSheet(MainControl::getInstance()->getMenuQss());
+	if (MainControl::getInstance()->hasLanguageFont())
+		contextMenu.setFont(MainControl::getInstance()->getLanguageFont());
 	
 	connect(&saveAsAction, &QAction::triggered, this, &MimeDataLabel::onSaveAs);
 	contextMenu.addAction(&saveAsAction);

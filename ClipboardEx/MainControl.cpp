@@ -41,6 +41,19 @@ void MainControl::setUpUI()
 	setUpWindow();
 }
 
+bool MainControl::hasLanguageFont() const
+{
+	return QLocale().language() == QLocale::Chinese;
+}
+
+QFont MainControl::getLanguageFont() const
+{
+	switch (QLocale().language()) {
+	case QLocale::Chinese: return QFont("SimHei");
+	}
+	return QFont();
+}
+
 void MainControl::setUpWindow()
 {
 	HistoryDataList::getInstance()->onSetListSize(m_historySize);
@@ -68,6 +81,8 @@ void MainControl::setUpTrayIcon()
 	QMenu* trayIconMenu = new QMenu;
 	trayIconMenu->setObjectName(kTrayMenu);
 	trayIconMenu->setStyleSheet(m_menuQss);
+	if (MainControl::getInstance()->hasLanguageFont())
+		trayIconMenu->setFont(MainControl::getInstance()->getLanguageFont());
 
 	// start up
 	QAction* startUpAction = new QAction(trayIconMenu);
@@ -122,10 +137,8 @@ void MainControl::setUpTrayIcon()
 
 void MainControl::setUpQss()
 {
-	QLocale local;
-	bool isChinese = local.language() == QLocale::Chinese;
-	QString menuName = isChinese ? ":/qss/res/qss/menu_cn.qss" : ":/qss/res/qss/menu.qss";
-	QString winName = isChinese ? ":/qss/res/qss/window_cn.qss" : ":/qss/res/qss/window.qss";
+	QString menuName = ":/qss/res/qss/menu.qss";
+	QString winName = ":/qss/res/qss/window.qss";
 	do {
 		QFile qssFile;
 		qssFile.setFileName(menuName);
@@ -160,6 +173,8 @@ void MainControl::onTipsWindowNumChange(int i)
 	while (m_tipsWindows.size() < i) {
 		ClipboardTipsWindow* window = new ClipboardTipsWindow;
 		window->setStyleSheet(m_windowQss);
+		if (MainControl::getInstance()->hasLanguageFont())
+			window->setFont(MainControl::getInstance()->getLanguageFont());
 		window->move(QApplication::desktop()->screen()->rect().center() - window->rect().center());
 		window->show();
 		window->updateHistoryList();

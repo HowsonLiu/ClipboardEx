@@ -133,6 +133,10 @@ void ClipboardTipsWindow::initWindow()
 
 	setStyleSheet(MainControl::getInstance()->getWindowQss());
 	m_historyMimeDataListWidget->verticalScrollBar()->setStyleSheet(MainControl::getInstance()->getWindowQss());
+	if (MainControl::getInstance()->hasLanguageFont()) {
+		setFont(MainControl::getInstance()->getLanguageFont());
+		m_historyMimeDataListWidget->verticalScrollBar()->setFont(MainControl::getInstance()->getLanguageFont());
+	}
 	setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint | Qt::ToolTip);
 	setAttribute(Qt::WA_DeleteOnClose, true);
 }
