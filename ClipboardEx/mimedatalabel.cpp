@@ -109,6 +109,7 @@ void MimeDataLabel::onDoubleClicked()
 
 void MimeDataLabel::onContentMenu(const QPoint& p)
 {
+	if (!isValid()) return;
 	QMenu contextMenu(this);
 	QAction saveAsAction(tr("Save as...") ,this);
 
