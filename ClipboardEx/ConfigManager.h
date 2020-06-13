@@ -32,6 +32,8 @@ class IniManager : public QObject
 	Q_OBJECT
 public:
 	static IniManager* getInstance();
+	float getShowTime() const;
+	void setShowTime(float);
 	int getHistorySize() const;
 	void setHistorySize(const int);
 	int getTipsListHeight() const;

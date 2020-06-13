@@ -27,8 +27,6 @@
     </qresource>
     <qresource prefix="/qss">
         <file>res/qss/menu.qss</file>
-        <file>res/qss/menu_cn.qss</file>
         <file>res/qss/window.qss</file>
-        <file>res/qss/window_cn.qss</file>
     </qresource>
 </RCC>

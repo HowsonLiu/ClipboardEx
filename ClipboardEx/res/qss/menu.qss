@@ -1,34 +1,39 @@
-#TrayMenu {
+QMenu {
 	background-color: #1B1B1C;
-	border: 1px solid #007ACC;
-	width: 150px;
-	
 	font: 15px "Reboto";
 	color: #F1F1F1;
-	padding: 5 10 5 10;
 }
-#TrayMenu::item {
+QMenu::item {
 	width: 100px;
 	height: 20px;
 	padding: 5 0 5 30;
 }
-#TrayMenu::item:selected {
+QMenu::item:selected {
 	background-color: #333334;
 }
-#TrayMenu::item:pressed {
+QMenu::item:pressed {
 
 }
-#TrayMenu::indicator {
+QMenu::indicator {
 	width: 20px;
 	height: 20px;
 }
-#TrayMenu::indicator:checked {
+QMenu::indicator:checked {
 	background-color: #2D2D30;
 	border-image: url(:/res/image/tick_normal.png);
 }
-#TrayMenu::indicator:checked:selected {
+QMenu::indicator:checked:selected {
 	background-color: #3E3E40;
 	border-image: url(:/res/image/tick_hover.png);
+}
+
+#TrayMenu {
+	border: 1px solid #007ACC;
+	padding: 5 10 5 10;
+}
+#ContextMenu {
+	border: 1px solid #333337;
+	padding: 2px;
 }
 
 QWidget#MenuSubWidget:hover {

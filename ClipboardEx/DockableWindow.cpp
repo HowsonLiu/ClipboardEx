@@ -155,6 +155,7 @@ QRect DockableWindow::curScreenRect() const
 
 DockDirection DockableWindow::canDock() const
 {
+	// screen outside
 	QScreen* topLeftScreen = QGuiApplication::screenAt(this->geometry().topLeft());
 	QScreen* topRightScreen = QGuiApplication::screenAt(this->geometry().topRight());
 	QScreen* bottomLeftScreen = QGuiApplication::screenAt(this->geometry().bottomLeft());
@@ -162,6 +163,12 @@ DockDirection DockableWindow::canDock() const
 	if (!topLeftScreen && topLeftScreen == topRightScreen) return DockDirection::UP;
 	else if (!topLeftScreen && topLeftScreen == bottomLeftScreen) return DockDirection::LEFT;
 	else if (!topRightScreen && topRightScreen == bottomRightScreen) return DockDirection::RIGHT;
+
+	// screen edge
+	if (topLeftScreen->geometry().topLeft().y() == this->geometry().topLeft().y()) return DockDirection::UP;
+	else if (topLeftScreen->geometry().topLeft().x() == this->geometry().topLeft().x()) return DockDirection::LEFT;
+	else if (topRightScreen->geometry().topRight().x() == this->geometry().topRight().x()) return DockDirection::RIGHT;
+
 	return DockDirection::None;
 }
 

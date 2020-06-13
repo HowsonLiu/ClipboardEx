@@ -1,38 +1,11 @@
 #pragma once
 #include "DockableWindow.h"
-#include "HistoryDataList.h"
-#include <QLabel>
-#include <QImage>
 
-class QMimeData;
 class QCheckBox;
 class QListWidget;
-class QPropertyAnimation;
 class QListWidgetItem;
 class QTimer;
-
-/*!
- * \class MimeDataLabel
- * \brief A label show mime data
- * \author liuhaosheng
- * \date October 2019
- */
-class MimeDataLabel : public QLabel 
-{
-	Q_OBJECT
-public:
-	MimeDataLabel(QWidget* parent = nullptr);
-	inline void setMimeData(const ClipboardDataPtr& data) { m_bindMimeData = data; showMimeData(); }
-	inline bool isValid() const { return m_bindMimeData ? m_bindMimeData->isValid() : false; }
-public slots:
-	void onDoubleClicked();
-private:
-	QRect textRect();
-	void showMimeData();
-	void showText(const QString& text);
-private:
-	ClipboardDataPtr m_bindMimeData;
-};
+class MimeDataLabel;
 
 /*!
  * \class ClipboardTipsWindowState
@@ -68,8 +41,11 @@ public:
 
 private:
 	void initWindow();
+	void startHide();
+	void stopHide();
 
 private slots:
+	void onContentMenuShow(bool);
 	void onHistoryListUpdate();
 	void onExpandStateChanged(int state);
 	void onItemDoubleClicked(QListWidgetItem*);
@@ -88,5 +64,7 @@ private:
 
 	QTimer* m_timer;
 	QTimer* m_dockTimer;
+	
+	bool m_showingContextMenu;
 };
 

@@ -22,6 +22,8 @@ public:
 	inline QString getMenuQss() const { return m_menuQss; };
 	inline QString getWindowQss() const { return m_windowQss; };
 	inline float getShowTime() const { return m_showTime; }
+	inline bool hasLanguageFont() const;
+	inline QFont getLanguageFont() const;
 
 private:
 	MainControl(QObject* parent = nullptr);
