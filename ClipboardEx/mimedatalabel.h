@@ -17,6 +17,8 @@ public:
 	inline bool isValid() const { return m_bindMimeData ? m_bindMimeData->isValid() : false; }
 public slots:
 	void onDoubleClicked();
+	void onContentMenu(const QPoint&);
+	void onSaveAs();
 private:
 	QRect textRect();
 	void showMimeData();

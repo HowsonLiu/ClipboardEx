@@ -1,10 +1,17 @@
 #include "mimedatalabel.h"
 #include "def.h"
+#include "MainControl.h"
 #include <QStyle>
+#include <QDebug>
+#include <QMenu>
+#include <QFileDialog>
+#include <QMessageBox>
 
 MimeDataLabel::MimeDataLabel(QWidget* parent /*= nullptr*/) : QLabel(parent)
 , m_bindMimeData(nullptr)
 {
+	setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(this, &QLabel::customContextMenuRequested, this, &MimeDataLabel::onContentMenu);
 }
 
 QRect MimeDataLabel::textRect()
@@ -98,4 +105,51 @@ void MimeDataLabel::onDoubleClicked()
 {
 	if (!m_bindMimeData || !m_bindMimeData->isValid()) return;
 	m_bindMimeData->copyToClipboard();
+}
+
+void MimeDataLabel::onContentMenu(const QPoint& p)
+{
+	QMenu contextMenu(this);
+	QAction saveAsAction(tr("Save as...") ,this);
+
+	contextMenu.setObjectName("ContextMenu");
+	contextMenu.setStyleSheet(MainControl::getInstance()->getMenuQss());
+	
+	connect(&saveAsAction, &QAction::triggered, this, &MimeDataLabel::onSaveAs);
+
+	contextMenu.addAction(&saveAsAction);
+	contextMenu.exec(mapToGlobal(p));
+}
+
+void MimeDataLabel::onSaveAs()
+{
+	static QString path;
+	QString typeStr;
+	if (m_bindMimeData->hasImage())
+		typeStr = "PNG File (*.png);; JPG File (*.jpg);; BMP File(*.bmp)";
+	else if (m_bindMimeData->hasText() || m_bindMimeData->hasUrls())
+		typeStr = "Text File (*.txt);; XML File (*.xml)";
+	if (typeStr.isEmpty()) return;
+	QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), path, typeStr);
+	if (fileName.isEmpty()) return;
+	path = QFileInfo(fileName).absolutePath();
+	if (m_bindMimeData->hasImage()) {
+		m_bindMimeData->image.save(fileName);
+	}
+	else {
+		QFile file(fileName);
+		if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+			QMessageBox::warning(this, tr("Save error"), tr("Can't open file"));
+			return;
+		}
+		QTextStream textStream(&file);
+		if (m_bindMimeData->hasText()) {
+			textStream << m_bindMimeData->text;
+		}
+		else {
+			for (auto url : m_bindMimeData->urls)
+				textStream << url.toString() << "\n";
+		}
+		file.close();
+	}
 }
