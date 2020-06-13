@@ -9,17 +9,25 @@
 #include <QStyleOption>
 #include <QPainter>
 
-NumMenuActionWidget::NumMenuActionWidget(const QString& describeText, int minVal, 
-	int defaultVal, int maxVal, QWidget* parent /*= nullptr*/)
+NumMenuActionWidget::NumMenuActionWidget(const QString& describeText, float minVal,
+	float defaultVal, float maxVal, float step, QWidget* parent /*= nullptr*/)
 	: QWidget(parent)
 	, m_minVal(minVal)
 	, m_maxVal(maxVal)
 	, m_curVal(defaultVal)
+	, m_step(step)
 	, m_describeText(describeText)
 {
 	initWindow();
 	connect(m_plusButton, &QPushButton::clicked, this, &NumMenuActionWidget::onPlusButtonClick);
 	connect(m_minusButton, &QPushButton::clicked, this, &NumMenuActionWidget::onMinusButtonClick);
+}
+
+NumMenuActionWidget::NumMenuActionWidget(const QString& describeText, int minVal, 
+	int defaultVal, int maxVal, int step, QWidget* parent /*= nullptr*/)
+	: NumMenuActionWidget(describeText, static_cast<float>(minVal), static_cast<float>(defaultVal), 
+		static_cast<float>(maxVal), static_cast<float>(step), parent)
+{
 }
 
 void NumMenuActionWidget::paintEvent(QPaintEvent *event)
@@ -69,19 +77,25 @@ void NumMenuActionWidget::initWindow()
 
 void NumMenuActionWidget::onPlusButtonClick()
 {
-	if (m_curVal >= m_maxVal) return;
-	if (++m_curVal == m_maxVal) m_plusButton->setEnabled(false);
+	if (m_curVal - m_maxVal > EPSINON) return;
+	m_curVal += m_step;
+	m_curVal = m_curVal > m_maxVal ? m_maxVal : m_curVal;
+	if (m_maxVal - m_curVal <= EPSINON) m_plusButton->setEnabled(false);
 	if (m_curVal > m_minVal) m_minusButton->setEnabled(true);
-	m_numLabel->setText(QString::number(m_curVal));
+	m_numLabel->setText(QString::number(m_curVal, 'g', 2));
 	sigNumChange(m_curVal);
 }
 
 void NumMenuActionWidget::onMinusButtonClick()
 {
-	if (m_curVal <= m_minVal) return;
-	if (--m_curVal == m_minVal) m_minusButton->setEnabled(false);
+	if (m_minVal - m_curVal > EPSINON) return;
+	m_curVal -= m_step;
+	m_curVal = m_curVal < m_minVal ? m_minVal : m_curVal;
+	if (m_curVal - m_minVal <= EPSINON) m_minusButton->setEnabled(false);
 	if (m_curVal < m_maxVal) m_plusButton->setEnabled(true);
-	m_numLabel->setText(QString::number(m_curVal));
+	QString numStr = QString::number(m_curVal, 'g', 2);
+	if (m_curVal < EPSINON) numStr = "0";
+	m_numLabel->setText(numStr);
 	sigNumChange(m_curVal);
 }
 

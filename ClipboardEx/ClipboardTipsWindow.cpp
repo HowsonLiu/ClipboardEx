@@ -19,7 +19,6 @@
 
 namespace {
 	const float kExpandSpeed = 1;
-	const float kShowTime = 3.0f;
 }
 
 MimeDataLabel::MimeDataLabel(QWidget* parent /*= nullptr*/) : QLabel(parent)
@@ -239,7 +238,7 @@ void ClipboardTipsWindow::onHistoryListUpdate()
 	// dock type show
 	if (m_curDockDirection != DockDirection::None) {
 		dockShow();
-		m_dockTimer->start(kShowTime * 1000);
+		m_dockTimer->start(MainControl::getInstance()->getShowTime() * 1000);
 		return;
 	}
 
@@ -247,7 +246,7 @@ void ClipboardTipsWindow::onHistoryListUpdate()
 	this->show();
 	if (m_autoShowCheckBox->isChecked() &&
 		!this->rect().contains(this->mapFromGlobal(QCursor::pos()))) {
-		m_timer->start(kShowTime * 1000);
+		m_timer->start(MainControl::getInstance()->getShowTime() * 1000);
 	}
 }
 
@@ -275,7 +274,7 @@ void ClipboardTipsWindow::leaveEvent(QEvent* event)
 {
 	if (m_autoShowCheckBox->isChecked()
 		&& m_curDockDirection == DockDirection::None)
-		m_timer->start(kShowTime * 1000);
+		m_timer->start(MainControl::getInstance()->getShowTime() * 1000);
 	__super::leaveEvent(event);
 }
 
