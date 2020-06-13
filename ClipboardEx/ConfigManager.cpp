@@ -37,6 +37,18 @@ IniManager* IniManager::getInstance()
 	return &instance;
 }
 
+float IniManager::getShowTime() const
+{
+	auto value = ini->value("show_time");
+	if (value.isNull()) return -1.0f;
+	return value.toFloat();
+}
+
+void IniManager::setShowTime(float showTime)
+{
+	ini->setValue("show_time", showTime);
+}
+
 int IniManager::getHistorySize() const
 {
 	return ini->value("history_size").toInt();

@@ -13,6 +13,7 @@
 MainControl::MainControl(QObject* parent /*= nullptr*/) : QObject(parent)
 	, m_tipsWindowState()
 	, m_historySize(kHistorySizeDefault)
+	, m_showTime(kShowTimeDefault)
 {
 }
 
@@ -24,9 +25,11 @@ MainControl* MainControl::getInstance()
 
 void MainControl::readConfig()
 {
+	float showTime = IniManager::getInstance()->getShowTime();
 	auto tipsWindowState = IniManager::getInstance()->getWindowPositions();
 	int historySize = IniManager::getInstance()->getHistorySize();
 
+	if (showTime > -1.0f) m_showTime = showTime;
 	if (historySize) m_historySize = historySize;
 	if (!tipsWindowState.isEmpty()) m_tipsWindowState = tipsWindowState;
 }
@@ -74,7 +77,7 @@ void MainControl::setUpTrayIcon()
 
 	// show time
 	NumMenuActionWidget* showTimeWidget = new NumMenuActionWidget(tr("Show Time"),
-		kShowTimeMin, kShowTimeDefault, kShowTimeMax, kShowTimeStep, trayIconMenu);
+		kShowTimeMin, m_showTime, kShowTimeMax, kShowTimeStep, trayIconMenu);
 	QWidgetAction* showTimeAction = new QWidgetAction(trayIconMenu);
 	showTimeAction->setDefaultWidget(showTimeWidget);
 
@@ -171,6 +174,7 @@ void MainControl::onSaveConfigure()
 		states.push_back(tip->getTipsWindowState());
 	IniManager::getInstance()->setWindowPositions(states);
 	IniManager::getInstance()->setHistorySize(m_historySize);
+	IniManager::getInstance()->setShowTime(m_showTime);
 }
 
 void MainControl::onTrayActivated(QSystemTrayIcon::ActivationReason reson)
