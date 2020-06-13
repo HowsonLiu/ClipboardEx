@@ -45,8 +45,10 @@ ClipboardTipsWindowState::operator QString()
 
 ClipboardTipsWindow::ClipboardTipsWindow(QWidget* parent /*= nullptr*/)
 	: DockableWindow(parent)
+	, m_showingContextMenu(false)
 {
 	initWindow();
+	connect(m_curMimeDataLabel, &MimeDataLabel::sigContentMenuShow, this, &ClipboardTipsWindow::onContentMenuShow);
 	connect(m_historyMimeDataListWidget, &QListWidget::itemDoubleClicked, this, &ClipboardTipsWindow::onItemDoubleClicked);
 	connect(HistoryDataList::getInstance(), &HistoryDataList::sigDataListUpdate, this, &ClipboardTipsWindow::onHistoryListUpdate);
 	connect(m_expandCheckBox, &QCheckBox::stateChanged, this, &ClipboardTipsWindow::onExpandStateChanged);
@@ -81,6 +83,7 @@ void ClipboardTipsWindow::updateHistoryList()
 		label->setObjectName(kSubLabel);
 		m_historyMimeDataListWidget->addItem(item);
 		m_historyMimeDataListWidget->setItemWidget(item, label);
+		connect(label, &MimeDataLabel::sigContentMenuShow, this, &ClipboardTipsWindow::onContentMenuShow);
 	}
 	while (m_historyMimeDataListWidget->count() > dataList->size() - 1) {
 		auto item = m_historyMimeDataListWidget->takeItem(0);
@@ -134,23 +137,43 @@ void ClipboardTipsWindow::initWindow()
 	setAttribute(Qt::WA_DeleteOnClose, true);
 }
 
-void ClipboardTipsWindow::onHistoryListUpdate()
+void ClipboardTipsWindow::startHide()
 {
-	updateHistoryList();
-
-	// dock type show
+	// dock type hide
 	if (m_curDockDirection != DockDirection::None) {
-		dockShow();
 		m_dockTimer->start(MainControl::getInstance()->getShowTime() * 1000);
 		return;
 	}
 
-	// floating type show
-	this->show();
+	// floating type hide
 	if (m_autoShowCheckBox->isChecked() &&
 		!this->rect().contains(this->mapFromGlobal(QCursor::pos()))) {
 		m_timer->start(MainControl::getInstance()->getShowTime() * 1000);
 	}
+}
+
+void ClipboardTipsWindow::stopHide()
+{
+	if (m_timer->isActive()) m_timer->stop();
+	if (m_dockTimer->isActive()) m_dockTimer->stop();
+}
+
+void ClipboardTipsWindow::onContentMenuShow(bool b)
+{
+	m_showingContextMenu = b;
+	if (m_showingContextMenu) return;
+	startHide();
+}
+
+void ClipboardTipsWindow::onHistoryListUpdate()
+{
+	updateHistoryList();
+
+	// show and start hide
+	this->show();
+	if (m_curDockDirection != DockDirection::None)
+		dockShow();
+	startHide();
 }
 
 void ClipboardTipsWindow::onExpandStateChanged(int state)
@@ -168,13 +191,16 @@ void ClipboardTipsWindow::onItemDoubleClicked(QListWidgetItem* item)
 
 void ClipboardTipsWindow::enterEvent(QEvent* event)
 {
-	if (m_timer->isActive()) m_timer->stop();
-	if (m_dockTimer->isActive()) m_dockTimer->stop();
+	stopHide();
 	__super::enterEvent(event);
 }
 
 void ClipboardTipsWindow::leaveEvent(QEvent* event)
 {
+	if (m_showingContextMenu) {
+		QWidget::leaveEvent(event);
+		return;
+	}
 	if (m_autoShowCheckBox->isChecked()
 		&& m_curDockDirection == DockDirection::None)
 		m_timer->start(MainControl::getInstance()->getShowTime() * 1000);

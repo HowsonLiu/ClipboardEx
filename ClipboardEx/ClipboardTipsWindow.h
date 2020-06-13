@@ -41,8 +41,11 @@ public:
 
 private:
 	void initWindow();
+	void startHide();
+	void stopHide();
 
 private slots:
+	void onContentMenuShow(bool);
 	void onHistoryListUpdate();
 	void onExpandStateChanged(int state);
 	void onItemDoubleClicked(QListWidgetItem*);
@@ -61,5 +64,7 @@ private:
 
 	QTimer* m_timer;
 	QTimer* m_dockTimer;
+	
+	bool m_showingContextMenu;
 };
 

@@ -15,6 +15,8 @@ public:
 	MimeDataLabel(QWidget* parent = nullptr);
 	inline void setMimeData(const ClipboardDataPtr& data) { m_bindMimeData = data; showMimeData(); }
 	inline bool isValid() const { return m_bindMimeData ? m_bindMimeData->isValid() : false; }
+signals:
+	void sigContentMenuShow(bool);
 public slots:
 	void onDoubleClicked();
 	void onContentMenu(const QPoint&);

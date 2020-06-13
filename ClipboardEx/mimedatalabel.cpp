@@ -116,9 +116,11 @@ void MimeDataLabel::onContentMenu(const QPoint& p)
 	contextMenu.setStyleSheet(MainControl::getInstance()->getMenuQss());
 	
 	connect(&saveAsAction, &QAction::triggered, this, &MimeDataLabel::onSaveAs);
-
 	contextMenu.addAction(&saveAsAction);
+
+	emit sigContentMenuShow(true);
 	contextMenu.exec(mapToGlobal(p));
+	emit sigContentMenuShow(false);
 }
 
 void MimeDataLabel::onSaveAs()
