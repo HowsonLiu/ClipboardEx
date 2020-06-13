@@ -61,7 +61,7 @@ void MainControl::setUpWindow()
 
 void MainControl::setUpTrayIcon()
 {
-	QSystemTrayIcon* trayIcon = new QSystemTrayIcon(this);
+	QSystemTrayIcon* trayIcon = new QSystemTrayIcon;
 	QMenu* trayIconMenu = new QMenu;
 	trayIconMenu->setObjectName(kTrayMenu);
 	trayIconMenu->setStyleSheet(m_menuQss);
