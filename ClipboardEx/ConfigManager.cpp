@@ -1,5 +1,4 @@
 #include "ConfigManager.h"
-#include "def.h"
 #include <QSettings>
 #include <QApplication>
 #include <QDebug>
@@ -19,43 +18,66 @@ RegeditManager* RegeditManager::getInstance()
 	return &instance;
 }
 
-bool RegeditManager::enableRunStartUp(bool b)
+int RegeditManager::enableRunStartUp(bool b)
 {
 #ifdef UWP
 	// https://blog.csdn.net/eiilpux17/article/details/78964795
 	auto asynOp = StartupTask::GetAsync(ref new Platform::String(TEXT("ClipboardExStartUpId")));
 	if (asynOp == nullptr) {
 		qDebug() << "UWP Start up API error";
-		return false;
+		return -1;
 	}
 	auto startUpTask = concurrency::create_task(asynOp).get();
 	if (b) {
 		auto state = concurrency::create_task(startUpTask->RequestEnableAsync()).get();
 		qDebug() << "UWP enable start up state: " << static_cast<int>(state);
-		return state == StartupTaskState::Enabled || state == StartupTaskState::EnabledByPolicy;
+		return state == StartupTaskState::Enabled || state == StartupTaskState::EnabledByPolicy ? 1 : 0;
 	}
 	else {
 		startUpTask->Disable();
-		return false;
+		return 0;
 	}
 #else
-
-	QSettings* reg = new QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
 	QString appName = QApplication::applicationName();
 	QString appPath = QApplication::applicationFilePath();
 	if (b) {
-		QString oldPath = reg->value(appName).toString();
-		if (oldPath != appPath) reg->setValue(appName, appPath);
+		QString oldPath = m_reg->value(appName).toString();
+		if (oldPath != appPath) m_reg->setValue(appName, appPath);
+		return true;
 	}
 	else {
-		reg->remove(appName);
+		m_reg->remove(appName);
+		return false;
 	}
-	reg->deleteLater();
+	return true;
+#endif
+}
+
+int RegeditManager::currentStartUpState() const
+{
+#ifdef UWP
+	auto asynOp = StartupTask::GetAsync(ref new Platform::String(TEXT("ClipboardExStartUpId")));
+	if (!asynOp) {
+		qDebug() << "UWP Start up API error";
+		return -1;
+	}
+	auto startUpTask = concurrency::create_task(asynOp).get();
+	qDebug() << "UWP enable start up state: " << static_cast<int>(startUpTask->State);
+	return startUpTask->State == StartupTaskState::Enabled || startUpTask->State == StartupTaskState::EnabledByPolicy ? 1 : 0;
+#else
+	QString appName = QApplication::applicationName();
+	QString appPath = QApplication::applicationFilePath();
+	QString regPath = m_reg->value(appName).toString();
+	qDebug() << "Regedit startup path: " << regPath;
+	return regPath == appPath;
 #endif
 }
 
 RegeditManager::RegeditManager(QObject* parent /*= nullptr*/) : QObject(parent)
 {
+#ifndef UWP
+	m_reg = new QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+#endif
 }
 
 IniManager* IniManager::getInstance()

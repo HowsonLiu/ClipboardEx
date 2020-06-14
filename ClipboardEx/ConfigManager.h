@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include "ClipboardTipsWindow.h"
+#include "def.h"
 
 class QSettings;
 
@@ -15,10 +16,14 @@ class RegeditManager : public QObject
 	Q_OBJECT
 public:
 	static RegeditManager* getInstance();
-	bool enableRunStartUp(bool);
+	int enableRunStartUp(bool);
+	int currentStartUpState() const;
 
 private:
 	RegeditManager(QObject* parent = nullptr);
+#ifndef UWP
+	QSettings* m_reg;
+#endif
 };
 
 /*!

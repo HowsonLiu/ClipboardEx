@@ -45,6 +45,7 @@ private:
 	QList<ClipboardTipsWindowState> m_tipsWindowState;
 	int m_historySize;
 	float m_showTime;
+	int m_bStartUp;
 
 	// qss
 	QString m_menuQss;
