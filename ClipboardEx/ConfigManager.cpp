@@ -1,6 +1,7 @@
 #include "ConfigManager.h"
 #include <QSettings>
 #include <QApplication>
+#include <QDebug>
 
 namespace {
 	static const QString g_iniFileName = "\\CREx";
@@ -12,23 +13,35 @@ RegeditManager* RegeditManager::getInstance()
 	return &instance;
 }
 
-void RegeditManager::enableRunStartUp(bool b)
+bool RegeditManager::enableRunStartUp(bool b)
 {
-	QSettings* reg = new QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+	// TODO need UAC
 	QString appName = QApplication::applicationName();
 	QString appPath = QApplication::applicationFilePath();
 	if (b) {
-		QString oldPath = reg->value(appName).toString();
-		if (oldPath != appPath) reg->setValue(appName, appPath);
+		QString oldPath = m_reg->value(appName).toString();
+		if (oldPath != appPath) m_reg->setValue(appName, appPath);
+		return true;
 	}
 	else {
-		reg->remove(appName);
+		m_reg->remove(appName);
+		return false;
 	}
-	reg->deleteLater();
+	return true;
+}
+
+bool RegeditManager::currentStartUpState() const
+{
+	QString appName = QApplication::applicationName();
+	QString appPath = QApplication::applicationFilePath();
+	QString regPath = m_reg->value(appName).toString();
+	qDebug() << "Regedit startup path: " << regPath;
+	return regPath == appPath;
 }
 
 RegeditManager::RegeditManager(QObject* parent /*= nullptr*/) : QObject(parent)
 {
+	m_reg = new QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
 }
 
 IniManager* IniManager::getInstance()

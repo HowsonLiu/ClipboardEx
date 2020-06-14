@@ -25,6 +25,7 @@ MainControl* MainControl::getInstance()
 
 void MainControl::readConfig()
 {
+	m_bStartUp = RegeditManager::getInstance()->currentStartUpState();
 	float showTime = IniManager::getInstance()->getShowTime();
 	auto tipsWindowState = IniManager::getInstance()->getWindowPositions();
 	int historySize = IniManager::getInstance()->getHistorySize();
@@ -89,6 +90,7 @@ void MainControl::setUpTrayIcon()
 	startUpAction->setText(tr("Start up"));
 	startUpAction->setCheckable(true);
 	startUpAction->setObjectName(kStartUpAction);
+	startUpAction->setChecked(m_bStartUp);
 
 	// show time
 	NumMenuActionWidget* showTimeWidget = new NumMenuActionWidget(tr("Show Time"),
@@ -123,8 +125,9 @@ void MainControl::setUpTrayIcon()
 	trayIcon->show();
 	trayIcon->showMessage("ClipboardEx", tr("is enabled"), trayIcon->icon(), kTrayMsgShowTime);
 
-	connect(startUpAction, &QAction::triggered, this, [](bool b) {
-		RegeditManager::getInstance()->enableRunStartUp(b);
+	connect(startUpAction, &QAction::triggered, this, [this, startUpAction](bool b) {
+		m_bStartUp = RegeditManager::getInstance()->enableRunStartUp(b);
+		startUpAction->setChecked(m_bStartUp);
 	});
 	connect(tipsNumWidget, &NumMenuActionWidget::sigNumChange, this, &MainControl::onTipsWindowNumChange);
 	connect(showTimeWidget, &NumMenuActionWidget::sigNumChange, this, &MainControl::onShowTimeChanged);

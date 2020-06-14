@@ -15,10 +15,12 @@ class RegeditManager : public QObject
 	Q_OBJECT
 public:
 	static RegeditManager* getInstance();
-	void enableRunStartUp(bool);
+	bool enableRunStartUp(bool);
+	bool currentStartUpState() const;
 
 private:
 	RegeditManager(QObject* parent = nullptr);
+	QSettings* m_reg;
 };
 
 /*!
