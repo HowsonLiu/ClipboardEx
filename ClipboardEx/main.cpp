@@ -6,9 +6,20 @@
 #include "ClipboardTipsWindow.h"
 #include "ConfigManager.h"
 #include "MainControl.h"
+#include "def.h"
+#ifdef UWP
+#include "ROApi.h"
+using namespace std;
+using namespace Platform;
+using namespace Windows::Foundation;
+using namespace Windows::System;
+#endif
 
 int main(int argc, char *argv[])
 {
+#ifdef UWP
+	Windows::Foundation::Initialize();
+#endif
 	QApplication a(argc, argv);
 
 	// i18n
