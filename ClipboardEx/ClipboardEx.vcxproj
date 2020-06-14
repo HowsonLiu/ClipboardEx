@@ -293,6 +293,7 @@
     <ClCompile Include="MainControl.cpp" />
     <ClCompile Include="MenuActionWidget.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mimedatalabel.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +310,7 @@
     <QtMoc Include="MenuActionWidget.h">
     </QtMoc>
     <ClInclude Include="def.h" />
+    <QtMoc Include="mimedatalabel.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
