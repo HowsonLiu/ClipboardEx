@@ -1,200 +1,209 @@
-Field,ID,Type (é¡å‹),default,en-us,zh
-Description,2,æ–‡å­—,,"ClipboardEx is a tool to enhance the function of the original clipboard. It can record previous clipboard's content, and remind you when the clipboard updated. In dock mode, you can check current clipboard's content quickly.",å‰ªè´´æ¿Exç›¸æ¯”åŸç”Ÿå‰ªè´´æ¿æä¾›æ›´å¤šçš„åŠŸèƒ½ï¼Œå¯ä»¥å¸®åŠ©ä½ å¤§å¤§æé«˜å·¥ä½œæ•ˆç‡ã€‚å®ƒèƒ½ä¿å­˜å¤åˆ¶é¡¹çš„å†å²è®°å½•ï¼›æä¾›å‰ªè´´ç‰ˆæ›´æ–°è‡ªåŠ¨æé†’ï¼›å…è®¸å¿«é€Ÿæ£€é˜…å½“å‰å‰ªè´´æ¿å†…å®¹ç­‰ç­‰ã€‚ç¨‹åºåœ¨å¤šæ˜¾ç¤ºå™¨ç¯å¢ƒä¸‹ä¹Ÿæœ‰ä¸ä¿—çš„è¡¨ç°ï¼Œä½ å¯ä»¥æ ¹æ®è‡ªå·±çš„å–œå¥½é€‰æ‹©æç¤ºçš„ä½ç½®ä»¥åŠæç¤ºæ–¹å¼ã€‚åç»­æˆ‘è¿˜ä¼šå¼€å‘å‰ªè´´æ¿å†…å®¹å¯¼å‡ºåŠŸèƒ½ä»¥åŠæˆªå›¾æ¨¡å—ã€‚
-ReleaseNotes,3,æ–‡å­—,,Previde previous clipboard's content; Custom tips show type and ,æä¾›å‰ªè´´æ¿å†å²è®°å½•ï¼›å®æ—¶æç¤ºå‰ªè´´æ¿æ›´æ–°å†…å®¹ï¼›å…¼å®¹å¤šæ˜¾ç¤ºå™¨çš„å¤šæ ·åŒ–æç¤ºæ–¹æ³•
-Title,4,æ–‡å­—,,ClipboardEx,å‰ªè´´æ¿Ex
-ShortTitle,5,æ–‡å­—,,ClipboardEx,å‰ªè´´æ¿Ex
-SortTitle,6,æ–‡å­—,,ClipboardEx,å‰ªè´´æ¿Ex
-VoiceTitle,7,æ–‡å­—,,ClipboardEx,å‰ªè´´æ¿Ex
-ShortDescription,8,æ–‡å­—,,ClipboardEx is a tool to enhance the function of the original clipboard.,ClipboardExè£…çš„å¥½ï¼ŒCtrl CVæ²¡çƒ¦æ¼
-DevStudio,9,æ–‡å­—,,HowsonLiu,HowsonLiu
-CopyrightTrademarkInformation,12,æ–‡å­—,,HowsonLiu,HowsonLiu
-AdditionalLicenseTerms,13,æ–‡å­—,,HowsonLiu,HowsonLiu
-DesktopScreenshot1,100,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480222
-DesktopScreenshot2,101,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480237
-DesktopScreenshot3,102,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480188,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480188
-DesktopScreenshot4,103,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480167
-DesktopScreenshot5,104,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-DesktopScreenshot6,105,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-DesktopScreenshot7,106,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-DesktopScreenshot8,107,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-DesktopScreenshot9,108,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-DesktopScreenshot10,109,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-DesktopScreenshotCaption1,150,æ–‡å­—,,Tips window,æç¤ºçª—å£
-DesktopScreenshotCaption2,151,æ–‡å­—,,Privious contents,å±•å¼€å†å²æ•°æ®
-DesktopScreenshotCaption3,152,æ–‡å­—,,Tray icon menu,æ‰˜ç›˜èœå•
-DesktopScreenshotCaption4,153,æ–‡å­—,,Multi-monitor supports,å¤šæ˜¾ç¤ºå™¨æ”¯æŒ
-DesktopScreenshotCaption5,154,æ–‡å­—,,,
-DesktopScreenshotCaption6,155,æ–‡å­—,,,
-DesktopScreenshotCaption7,156,æ–‡å­—,,,
-DesktopScreenshotCaption8,157,æ–‡å­—,,,
-DesktopScreenshotCaption9,158,æ–‡å­—,,,
-DesktopScreenshotCaption10,159,æ–‡å­—,,,
-MobileScreenshot1,200,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480222
-MobileScreenshot2,201,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480237
-MobileScreenshot3,202,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480188,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480188
-MobileScreenshot4,203,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480167
-MobileScreenshot5,204,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-MobileScreenshot6,205,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-MobileScreenshot7,206,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-MobileScreenshot8,207,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-MobileScreenshot9,208,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-MobileScreenshot10,209,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-MobileScreenshotCaption1,250,æ–‡å­—,,Tips window,æç¤ºçª—å£
-MobileScreenshotCaption2,251,æ–‡å­—,,Privious contents,å±•å¼€å†å²æ•°æ®
-MobileScreenshotCaption3,252,æ–‡å­—,,Tray icon menu,æ‰˜ç›˜èœå•
-MobileScreenshotCaption4,253,æ–‡å­—,,Multi-monitor supports,å¤šæ˜¾ç¤ºå™¨æ”¯æŒ
-MobileScreenshotCaption5,254,æ–‡å­—,,,
-MobileScreenshotCaption6,255,æ–‡å­—,,,
-MobileScreenshotCaption7,256,æ–‡å­—,,,
-MobileScreenshotCaption8,257,æ–‡å­—,,,
-MobileScreenshotCaption9,258,æ–‡å­—,,,
-MobileScreenshotCaption10,259,æ–‡å­—,,,
-XboxScreenshot1,300,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480222
-XboxScreenshot2,301,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480237
-XboxScreenshot3,302,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480188,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480188
-XboxScreenshot4,303,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480167
-XboxScreenshot5,304,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-XboxScreenshot6,305,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-XboxScreenshot7,306,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-XboxScreenshot8,307,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-XboxScreenshot9,308,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-XboxScreenshot10,309,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-XboxScreenshotCaption1,350,æ–‡å­—,,Tips window,æç¤ºçª—å£
-XboxScreenshotCaption2,351,æ–‡å­—,,Privious contents,å±•å¼€å†å²æ•°æ®
-XboxScreenshotCaption3,352,æ–‡å­—,,Tray icon menu,æ‰˜ç›˜èœå•
-XboxScreenshotCaption4,353,æ–‡å­—,,Multi-monitor supports,å¤šæ˜¾ç¤ºå™¨æ”¯æŒ
-XboxScreenshotCaption5,354,æ–‡å­—,,,
-XboxScreenshotCaption6,355,æ–‡å­—,,,
-XboxScreenshotCaption7,356,æ–‡å­—,,,
-XboxScreenshotCaption8,357,æ–‡å­—,,,
-XboxScreenshotCaption9,358,æ–‡å­—,,,
-XboxScreenshotCaption10,359,æ–‡å­—,,,
-HolographicScreenshot1,400,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480222
-HolographicScreenshot2,401,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480237
-HolographicScreenshot3,402,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480188,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480188
-HolographicScreenshot4,403,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480167
-HolographicScreenshot5,404,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-HolographicScreenshot6,405,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-HolographicScreenshot7,406,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-HolographicScreenshot8,407,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-HolographicScreenshot9,408,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-HolographicScreenshot10,409,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-HolographicScreenshotCaption1,450,æ–‡å­—,,Tips window,æç¤ºçª—å£
-HolographicScreenshotCaption2,451,æ–‡å­—,,Privious contents,å±•å¼€å†å²æ•°æ®
-HolographicScreenshotCaption3,452,æ–‡å­—,,Tray icon menu,æ‰˜ç›˜èœå•
-HolographicScreenshotCaption4,453,æ–‡å­—,,Multi-monitor supports,å¤šæ˜¾ç¤ºå™¨æ”¯æŒ
-HolographicScreenshotCaption5,454,æ–‡å­—,,,
-HolographicScreenshotCaption6,455,æ–‡å­—,,,
-HolographicScreenshotCaption7,456,æ–‡å­—,,,
-HolographicScreenshotCaption8,457,æ–‡å­—,,,
-HolographicScreenshotCaption9,458,æ–‡å­—,,,
-HolographicScreenshotCaption10,459,æ–‡å­—,,,
-StoreLogo720x1080,600,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480238,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480238
-StoreLogo1080x1080,601,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480223,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480223
-StoreLogo300x300,602,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004521971/listingassets/2000000000065480107,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690022099/listings/1152922700004533481/listingassets/2000000000065480107
-OverrideLogosForWin10,603,True/False,,FALSE,FALSE
-StoreLogoOverride150x150,604,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-StoreLogoOverride71x71,605,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-PromoImage1920x1080,606,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-PromoImage2400x1200,607,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-XboxBrandedKeyArt584x800,608,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-XboxTitledHero1920x1080,609,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-XboxFeaturedPromo1080x1080,610,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-OptionalPromo358x358,611,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-OptionalPromo1000x800,612,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-OptionalPromo414x180,613,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Feature1,700,æ–‡å­—,,Real-time display clipboard content,å®æ—¶æ›´æ–°ç²˜è´´æ¿å†…å®¹
-Feature2,701,æ–‡å­—,,Auto hide,ä¸éœ€è¦æ—¶å¯ä»¥è‡ªåŠ¨éšè—
-Feature3,702,æ–‡å­—,,Previous contents,ä¿å­˜å‰ªè´´æ¿å†å²è®°å½•
-Feature4,703,æ–‡å­—,,Multi-monitor supports,å¤šæ˜¾ç¤ºå™¨æ”¯æŒ
-Feature5,704,æ–‡å­—,,Quick review,åœé æ¨¡å¼
-Feature6,705,æ–‡å­—,,,
-Feature7,706,æ–‡å­—,,,
-Feature8,707,æ–‡å­—,,,
-Feature9,708,æ–‡å­—,,,
-Feature10,709,æ–‡å­—,,,
-Feature11,710,æ–‡å­—,,,
-Feature12,711,æ–‡å­—,,,
-Feature13,712,æ–‡å­—,,,
-Feature14,713,æ–‡å­—,,,
-Feature15,714,æ–‡å­—,,,
-Feature16,715,æ–‡å­—,,,
-Feature17,716,æ–‡å­—,,,
-Feature18,717,æ–‡å­—,,,
-Feature19,718,æ–‡å­—,,,
-Feature20,719,æ–‡å­—,,,
-MinimumHardwareReq1,800,æ–‡å­—,,,
-MinimumHardwareReq2,801,æ–‡å­—,,,
-MinimumHardwareReq3,802,æ–‡å­—,,,
-MinimumHardwareReq4,803,æ–‡å­—,,,
-MinimumHardwareReq5,804,æ–‡å­—,,,
-MinimumHardwareReq6,805,æ–‡å­—,,,
-MinimumHardwareReq7,806,æ–‡å­—,,,
-MinimumHardwareReq8,807,æ–‡å­—,,,
-MinimumHardwareReq9,808,æ–‡å­—,,,
-MinimumHardwareReq10,809,æ–‡å­—,,,
-MinimumHardwareReq11,810,æ–‡å­—,,,
-RecommendedHardwareReq1,850,æ–‡å­—,,,
-RecommendedHardwareReq2,851,æ–‡å­—,,,
-RecommendedHardwareReq3,852,æ–‡å­—,,,
-RecommendedHardwareReq4,853,æ–‡å­—,,,
-RecommendedHardwareReq5,854,æ–‡å­—,,,
-RecommendedHardwareReq6,855,æ–‡å­—,,,
-RecommendedHardwareReq7,856,æ–‡å­—,,,
-RecommendedHardwareReq8,857,æ–‡å­—,,,
-RecommendedHardwareReq9,858,æ–‡å­—,,,
-RecommendedHardwareReq10,859,æ–‡å­—,,,
-RecommendedHardwareReq11,860,æ–‡å­—,,,
-SearchTerm1,900,æ–‡å­—,,Cut,å‰ªè´´
-SearchTerm2,901,æ–‡å­—,,Paste,ç²˜è´´
-SearchTerm3,902,æ–‡å­—,,Copy,å‰ªåˆ‡
-SearchTerm4,903,æ–‡å­—,,Clipboard,å¤åˆ¶
-SearchTerm5,904,æ–‡å­—,,å‰ªè´´æ¿,Clipboard
-SearchTerm6,905,æ–‡å­—,,ç²˜è´´æ¿,æ‹·è´
-SearchTerm7,906,æ–‡å­—,,å‰ªåˆ‡æ¿,ClipboardEx
-TrailerToPlayAtTopOfListing,999,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer1,1000,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer2,1001,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer3,1002,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer4,1003,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer5,1004,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer6,1005,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer7,1006,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer8,1007,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer9,1008,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer10,1009,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer11,1010,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer12,1011,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer13,1012,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer14,1013,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-Trailer15,1014,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerTitle1,1020,æ–‡å­—,,,
-TrailerTitle2,1021,æ–‡å­—,,,
-TrailerTitle3,1022,æ–‡å­—,,,
-TrailerTitle4,1023,æ–‡å­—,,,
-TrailerTitle5,1024,æ–‡å­—,,,
-TrailerTitle6,1025,æ–‡å­—,,,
-TrailerTitle7,1026,æ–‡å­—,,,
-TrailerTitle8,1027,æ–‡å­—,,,
-TrailerTitle9,1028,æ–‡å­—,,,
-TrailerTitle10,1029,æ–‡å­—,,,
-TrailerTitle11,1030,æ–‡å­—,,,
-TrailerTitle12,1031,æ–‡å­—,,,
-TrailerTitle13,1032,æ–‡å­—,,,
-TrailerTitle14,1033,æ–‡å­—,,,
-TrailerTitle15,1034,æ–‡å­—,,,
-TrailerThumbnail1,1040,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail2,1041,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail3,1042,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail4,1043,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail5,1044,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail6,1045,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail7,1046,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail8,1047,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail9,1048,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail10,1049,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail11,1050,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail12,1051,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail13,1052,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail14,1053,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
-TrailerThumbnail15,1054,ç›¸å°è·¯å¾‘ (æˆ–åˆä½œå¤¥ä¼´ä¸­å¿ƒä¸­æª”æ¡ˆçš„ URL),,,
+Field,ID,Type (ÀàĞÍ),default,en-us,zh
+Description,2,ÎÄ±¾,"ClipboardEx is a tool to enhance the function of the original clipboard. It can record previous clipboard's content, and remind you when the clipboard updated. In dock mode, you can check current clipboard's content quickly.","ClipboardEx is a tool to enhance the function of the original clipboard. It can record previous clipboard's content, and remind you when the clipboard updated. In dock mode, you can check current clipboard's content quickly.",¼ôÌù°åExÏà±ÈÔ­Éú¼ôÌù°åÌá¹©¸ü¶àµÄ¹¦ÄÜ£¬¿ÉÒÔ°ïÖúÄã´ó´óÌá¸ß¹¤×÷Ğ§ÂÊ¡£
+ReleaseNotes,3,ÎÄ±¾,"Add ""Save as...""
+Add ""Show time"" adjustment
+Fix some bugs","Add ""Save as...""
+Add ""Show time"" adjustment
+Fix some bugs","""Ôö¼Ó¡°Áí´æÎª¡±¹¦ÄÜ£»
+Ôö¼Ó¡°ÏÔÊ¾Ê±¼ä¡±µ÷½Ú¹¦ÄÜ£»
+ĞŞ¸´ÍË³öÊ±±ÀÀ£µÄÎÊÌâ£»
+ĞŞ¸´Í£¿¿ÅĞ¶¨´íÎóµÄÎÊÌâ
+ĞŞ¸´¿ª»úÆô¶¯²»Í¬²½µÄÎÊÌâ""
+"
+Title,4,ÎÄ±¾,ClipboardEx,ClipboardEx,ClipboardEx
+ShortTitle,5,ÎÄ±¾,clipboardex,clipboardex,clipboardex
+SortTitle,6,ÎÄ±¾,clipboardex,clipboardex,clipboardex
+VoiceTitle,7,ÎÄ±¾,clipboard,clipboard,clipboard
+ShortDescription,8,ÎÄ±¾,ClipboardEx is a tool to enhance the function of the original clipboard.,ClipboardEx is a tool to enhance the function of the original clipboard.,ClipboardEx×°µÄºÃ£¬Ctrl CVÃ»·³ÄÕ
+DevStudio,9,ÎÄ±¾,HowsonLiu,HowsonLiu,HowsonLiu
+CopyrightTrademarkInformation,12,ÎÄ±¾,HowsonLiu,HowsonLiu,HowsonLiu
+AdditionalLicenseTerms,13,ÎÄ±¾,,,
+DesktopScreenshot1,100,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480222
+DesktopScreenshot2,101,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480237
+DesktopScreenshot3,102,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000066714562,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000066714562,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000066714399
+DesktopScreenshot4,103,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480167
+DesktopScreenshot5,104,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+DesktopScreenshot6,105,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+DesktopScreenshot7,106,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+DesktopScreenshot8,107,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+DesktopScreenshot9,108,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+DesktopScreenshot10,109,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+DesktopScreenshotCaption1,150,ÎÄ±¾,Tips window,Tips window,ÌáÊ¾´°¿Ú
+DesktopScreenshotCaption2,151,ÎÄ±¾,Privious contents,Privious contents,Õ¹¿ªÀúÊ·Êı¾İ
+DesktopScreenshotCaption3,152,ÎÄ±¾,Tray icon menu,Tray icon menu,ÍĞÅÌ²Ëµ¥
+DesktopScreenshotCaption4,153,ÎÄ±¾,Multi-monitor supports,Multi-monitor supports,¶àÏÔÊ¾Æ÷Ö§³Ö
+DesktopScreenshotCaption5,154,ÎÄ±¾,,,
+DesktopScreenshotCaption6,155,ÎÄ±¾,,,
+DesktopScreenshotCaption7,156,ÎÄ±¾,,,
+DesktopScreenshotCaption8,157,ÎÄ±¾,,,
+DesktopScreenshotCaption9,158,ÎÄ±¾,,,
+DesktopScreenshotCaption10,159,ÎÄ±¾,,,
+MobileScreenshot1,200,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480222
+MobileScreenshot2,201,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480237
+MobileScreenshot3,202,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480188
+MobileScreenshot4,203,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480167
+MobileScreenshot5,204,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+MobileScreenshot6,205,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+MobileScreenshot7,206,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+MobileScreenshot8,207,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+MobileScreenshot9,208,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+MobileScreenshot10,209,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+MobileScreenshotCaption1,250,ÎÄ±¾,Tips window,Tips window,ÌáÊ¾´°¿Ú
+MobileScreenshotCaption2,251,ÎÄ±¾,Privious contents,Privious contents,Õ¹¿ªÀúÊ·Êı¾İ
+MobileScreenshotCaption3,252,ÎÄ±¾,Tray icon menu,Tray icon menu,ÍĞÅÌ²Ëµ¥
+MobileScreenshotCaption4,253,ÎÄ±¾,Multi-monitor supports,Multi-monitor supports,¶àÏÔÊ¾Æ÷Ö§³Ö
+MobileScreenshotCaption5,254,ÎÄ±¾,,,
+MobileScreenshotCaption6,255,ÎÄ±¾,,,
+MobileScreenshotCaption7,256,ÎÄ±¾,,,
+MobileScreenshotCaption8,257,ÎÄ±¾,,,
+MobileScreenshotCaption9,258,ÎÄ±¾,,,
+MobileScreenshotCaption10,259,ÎÄ±¾,,,
+XboxScreenshot1,300,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480222
+XboxScreenshot2,301,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480237
+XboxScreenshot3,302,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480188
+XboxScreenshot4,303,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480167
+XboxScreenshot5,304,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+XboxScreenshot6,305,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+XboxScreenshot7,306,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+XboxScreenshot8,307,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+XboxScreenshot9,308,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+XboxScreenshot10,309,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+XboxScreenshotCaption1,350,ÎÄ±¾,Tips window,Tips window,ÌáÊ¾´°¿Ú
+XboxScreenshotCaption2,351,ÎÄ±¾,Privious contents,Privious contents,Õ¹¿ªÀúÊ·Êı¾İ
+XboxScreenshotCaption3,352,ÎÄ±¾,Tray icon menu,Tray icon menu,ÍĞÅÌ²Ëµ¥
+XboxScreenshotCaption4,353,ÎÄ±¾,Multi-monitor supports,Multi-monitor supports,¶àÏÔÊ¾Æ÷Ö§³Ö
+XboxScreenshotCaption5,354,ÎÄ±¾,,,
+XboxScreenshotCaption6,355,ÎÄ±¾,,,
+XboxScreenshotCaption7,356,ÎÄ±¾,,,
+XboxScreenshotCaption8,357,ÎÄ±¾,,,
+XboxScreenshotCaption9,358,ÎÄ±¾,,,
+XboxScreenshotCaption10,359,ÎÄ±¾,,,
+HolographicScreenshot1,400,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480222,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480222
+HolographicScreenshot2,401,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480237,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480237
+HolographicScreenshot3,402,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480188
+HolographicScreenshot4,403,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480167,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480167
+HolographicScreenshot5,404,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+HolographicScreenshot6,405,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+HolographicScreenshot7,406,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+HolographicScreenshot8,407,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+HolographicScreenshot9,408,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+HolographicScreenshot10,409,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+HolographicScreenshotCaption1,450,ÎÄ±¾,Tips window,Tips window,ÌáÊ¾´°¿Ú
+HolographicScreenshotCaption2,451,ÎÄ±¾,Privious contents,Privious contents,Õ¹¿ªÀúÊ·Êı¾İ
+HolographicScreenshotCaption3,452,ÎÄ±¾,Tray icon menu,Tray icon menu,ÍĞÅÌ²Ëµ¥
+HolographicScreenshotCaption4,453,ÎÄ±¾,Multi-monitor supports,Multi-monitor supports,¶àÏÔÊ¾Æ÷Ö§³Ö
+HolographicScreenshotCaption5,454,ÎÄ±¾,,,
+HolographicScreenshotCaption6,455,ÎÄ±¾,,,
+HolographicScreenshotCaption7,456,ÎÄ±¾,,,
+HolographicScreenshotCaption8,457,ÎÄ±¾,,,
+HolographicScreenshotCaption9,458,ÎÄ±¾,,,
+HolographicScreenshotCaption10,459,ÎÄ±¾,,,
+StoreLogo720x1080,600,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480238,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480238,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480238
+StoreLogo1080x1080,601,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480223,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480223,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480223
+StoreLogo300x300,602,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480107,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004521971/listingassets/2000000000065480107,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000065480107
+OverrideLogosForWin10,603,True/False,FALSE,FALSE,TRUE
+StoreLogoOverride150x150,604,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000066714993,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000066714993,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000066714993
+StoreLogoOverride71x71,605,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000066714995,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000066714995,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000066714995
+PromoImage1920x1080,606,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000066714997,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000066714997,https://developer.microsoft.com/en-us/dashboard/apps/9P0ZRBSSMD9L/submissions/1152921505690505971/listings/1152922700004533481/listingassets/2000000000066714997
+PromoImage2400x1200,607,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+XboxBrandedKeyArt584x800,608,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+XboxTitledHero1920x1080,609,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+XboxFeaturedPromo1080x1080,610,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+OptionalPromo358x358,611,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+OptionalPromo1000x800,612,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+OptionalPromo414x180,613,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Feature1,700,ÎÄ±¾,Real-time display clipboard content,Real-time display clipboard content,ÊµÊ±¸üĞÂÕ³Ìù°åÄÚÈİ
+Feature2,701,ÎÄ±¾,Auto hide,Auto hide,²»ĞèÒªÊ±¿ÉÒÔ×Ô¶¯Òş²Ø
+Feature3,702,ÎÄ±¾,Previous contents,Previous contents,±£´æ¼ôÌù°åÀúÊ·¼ÇÂ¼
+Feature4,703,ÎÄ±¾,Multi-monitor supports,Multi-monitor supports,¶àÏÔÊ¾Æ÷Ö§³Ö
+Feature5,704,ÎÄ±¾,Quick review,Quick review,Í£¿¿Ä£Ê½
+Feature6,705,ÎÄ±¾,Save file from clipboard,Save file from clipboard,´Ó¼ôÌù°å±£´æµ½ÎÄ¼ş
+Feature7,706,ÎÄ±¾,,,
+Feature8,707,ÎÄ±¾,,,
+Feature9,708,ÎÄ±¾,,,
+Feature10,709,ÎÄ±¾,,,
+Feature11,710,ÎÄ±¾,,,
+Feature12,711,ÎÄ±¾,,,
+Feature13,712,ÎÄ±¾,,,
+Feature14,713,ÎÄ±¾,,,
+Feature15,714,ÎÄ±¾,,,
+Feature16,715,ÎÄ±¾,,,
+Feature17,716,ÎÄ±¾,,,
+Feature18,717,ÎÄ±¾,,,
+Feature19,718,ÎÄ±¾,,,
+Feature20,719,ÎÄ±¾,,,
+MinimumHardwareReq1,800,ÎÄ±¾,,,
+MinimumHardwareReq2,801,ÎÄ±¾,,,
+MinimumHardwareReq3,802,ÎÄ±¾,,,
+MinimumHardwareReq4,803,ÎÄ±¾,,,
+MinimumHardwareReq5,804,ÎÄ±¾,,,
+MinimumHardwareReq6,805,ÎÄ±¾,,,
+MinimumHardwareReq7,806,ÎÄ±¾,,,
+MinimumHardwareReq8,807,ÎÄ±¾,,,
+MinimumHardwareReq9,808,ÎÄ±¾,,,
+MinimumHardwareReq10,809,ÎÄ±¾,,,
+MinimumHardwareReq11,810,ÎÄ±¾,,,
+RecommendedHardwareReq1,850,ÎÄ±¾,,,
+RecommendedHardwareReq2,851,ÎÄ±¾,,,
+RecommendedHardwareReq3,852,ÎÄ±¾,,,
+RecommendedHardwareReq4,853,ÎÄ±¾,,,
+RecommendedHardwareReq5,854,ÎÄ±¾,,,
+RecommendedHardwareReq6,855,ÎÄ±¾,,,
+RecommendedHardwareReq7,856,ÎÄ±¾,,,
+RecommendedHardwareReq8,857,ÎÄ±¾,,,
+RecommendedHardwareReq9,858,ÎÄ±¾,,,
+RecommendedHardwareReq10,859,ÎÄ±¾,,,
+RecommendedHardwareReq11,860,ÎÄ±¾,,,
+SearchTerm1,900,ÎÄ±¾,clipboard,clipboard,¼ôÌù
+SearchTerm2,901,ÎÄ±¾,cli,cli,Õ³Ìù
+SearchTerm3,902,ÎÄ±¾,clip,clip,¼ôÇĞ
+SearchTerm4,903,ÎÄ±¾,Clipboard,Clipboard,¸´ÖÆ
+SearchTerm5,904,ÎÄ±¾,cut,cut,clip
+SearchTerm6,905,ÎÄ±¾,paste,paste,¿½±´
+SearchTerm7,906,ÎÄ±¾,copy,copy,clipboard
+TrailerToPlayAtTopOfListing,999,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer1,1000,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer2,1001,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer3,1002,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer4,1003,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer5,1004,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer6,1005,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer7,1006,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer8,1007,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer9,1008,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer10,1009,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer11,1010,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer12,1011,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer13,1012,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer14,1013,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+Trailer15,1014,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerTitle1,1020,ÎÄ±¾,,,
+TrailerTitle2,1021,ÎÄ±¾,,,
+TrailerTitle3,1022,ÎÄ±¾,,,
+TrailerTitle4,1023,ÎÄ±¾,,,
+TrailerTitle5,1024,ÎÄ±¾,,,
+TrailerTitle6,1025,ÎÄ±¾,,,
+TrailerTitle7,1026,ÎÄ±¾,,,
+TrailerTitle8,1027,ÎÄ±¾,,,
+TrailerTitle9,1028,ÎÄ±¾,,,
+TrailerTitle10,1029,ÎÄ±¾,,,
+TrailerTitle11,1030,ÎÄ±¾,,,
+TrailerTitle12,1031,ÎÄ±¾,,,
+TrailerTitle13,1032,ÎÄ±¾,,,
+TrailerTitle14,1033,ÎÄ±¾,,,
+TrailerTitle15,1034,ÎÄ±¾,,,
+TrailerThumbnail1,1040,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail2,1041,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail3,1042,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail4,1043,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail5,1044,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail6,1045,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail7,1046,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail8,1047,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail9,1048,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail10,1049,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail11,1050,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail12,1051,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail13,1052,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail14,1053,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
+TrailerThumbnail15,1054,Ïà¶ÔÂ·¾¶(»òÖ¸ÏòºÏ×÷»ï°éÖĞĞÄÎÄ¼şµÄ URL),,,
