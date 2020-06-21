@@ -9,6 +9,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QTimer>
+#include "3rd_party/QHotkey/QHotkey/qhotkey.h"
 
 MainControl::MainControl(QObject* parent /*= nullptr*/) : QObject(parent)
 	, m_tipsWindowState()
@@ -85,6 +86,12 @@ void MainControl::setUpTrayIcon()
 	if (MainControl::getInstance()->hasLanguageFont())
 		trayIconMenu->setFont(MainControl::getInstance()->getLanguageFont());
 
+	// snip
+	QAction* snipAction = new QAction(trayIconMenu);
+	snipAction->setText(tr("Snip"));
+	snipAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_C));
+	QHotkey* snipHotkey = new QHotkey(QKeySequence(Qt::ALT + Qt::Key_C), true, this);
+
 	// start up
 	QAction* startUpAction = new QAction(trayIconMenu);
 	startUpAction->setText(tr("Start up"));
@@ -114,6 +121,7 @@ void MainControl::setUpTrayIcon()
 	QAction* exitAction = new QAction(trayIconMenu);
 	exitAction->setText(tr("Exit"));
 
+	trayIconMenu->addAction(snipAction);
 	trayIconMenu->addAction(startUpAction);
 	trayIconMenu->addAction(showTimeAction);
 	trayIconMenu->addAction(historySizeAction);
@@ -125,6 +133,8 @@ void MainControl::setUpTrayIcon()
 	trayIcon->show();
 	trayIcon->showMessage("ClipboardEx", tr("is enabled"), trayIcon->icon(), kTrayMsgShowTime);
 
+	connect(snipAction, &QAction::triggered, this, &MainControl::onSnip);
+	connect(snipHotkey, &QHotkey::activated, this, &MainControl::onSnip);
 	connect(startUpAction, &QAction::triggered, this, [this, startUpAction](bool b) {
 		m_bStartUp = RegeditManager::getInstance()->enableRunStartUp(b);
 		startUpAction->setChecked(m_bStartUp);
@@ -154,6 +164,11 @@ void MainControl::setUpQss()
 		m_windowQss = qssFile.readAll();
 		qssFile.close();
 	} while (false);
+}
+
+void MainControl::onSnip()
+{
+	qDebug() << "snip";
 }
 
 void MainControl::onShowTimeChanged(float f)

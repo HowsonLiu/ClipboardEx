@@ -47,3 +47,5 @@ RESOURCES += \
 
 TRANSLATIONS += res\i18n\zh_cn.ts \
 	res\i18n\en_us.ts
+
+include(./3rd_party/QHotkey/qhotkey.pri)

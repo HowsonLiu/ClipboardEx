@@ -32,6 +32,7 @@ private:
 	void setUpQss();
 
 private slots:
+	void onSnip();
 	void onShowTimeChanged(float);
 	void onHistorySizeChanged(int);
 	void onTipsWindowNumChange(int);
