@@ -1,9 +1,7 @@
 #include "snipwindow.h"
 #include "def.h"
 #include "util/floatlayout.h"
-#include <QRadioButton>
-#include <QPushButton>
-#include <QLayout>
+#include "sniptoolbar.h"
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDesktopWidget>
@@ -15,6 +13,8 @@ SnipWindow::SnipWindow(QWidget* parent /*= nullptr*/) : QWidget(parent)
 {
 	initWindow();
 	connect(qApp, &QGuiApplication::applicationStateChanged, this, &SnipWindow::onLoseFocus);
+	connect(m_toolbar, &SnipToolBar::sigRadioToggled, this, &SnipWindow::onRadioToggled);
+	connect(m_toolbar, &SnipToolBar::sigClose, this, &SnipWindow::close);
 }
 
 void SnipWindow::setUp(const QRect& rect, const QPixmap& pixmap)
@@ -77,25 +77,24 @@ void SnipWindow::paintEvent(QPaintEvent *event)
 
 void SnipWindow::initWindow()
 {
-	m_toolbar = new QWidget(this);
-	m_radioButton = new QRadioButton(m_toolbar);
-	m_closeButton = new QPushButton(m_toolbar);
-
-	QHBoxLayout* hLayout = new QHBoxLayout(m_toolbar);
-	hLayout->addWidget(m_radioButton);
-	hLayout->addWidget(m_closeButton);
-	m_toolbar->setLayout(hLayout);
+	m_toolbar = new SnipToolBar(this);
 
 	FloatLayout* fLayout = new FloatLayout(this);
 	fLayout->addWidget(m_toolbar, Qt::AlignHCenter | Qt::AlignTop);
 
-	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+	setWindowFlags(windowFlags() | Qt::FramelessWindowHint /*| Qt::WindowStaysOnTopHint*/);
 }
 
 void SnipWindow::onLoseFocus(Qt::ApplicationState state)
 {
 	//if (state != Qt::ApplicationState::ApplicationActive)
 	//	close();
+}
+
+void SnipWindow::onRadioToggled(int id, bool status)
+{
+	if (!status) return;
+	m_snipType = static_cast<SnipType>(id);
 }
 
 void Snip()

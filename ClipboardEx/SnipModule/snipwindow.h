@@ -1,12 +1,10 @@
 #pragma once
 #include <QWidget>
 
-class QRadioButton;
-class QPushButton;
+class SnipToolBar;
 
 /** @class SnipWindow
   * @brief grab and snip desktop
-  * @copyright (c) 2020, NetEase Inc. All rights reserved
   * @author HowsonLiu
   * @date 2020/6/21
   */
@@ -28,12 +26,11 @@ private:
 
 private slots:
 	void onLoseFocus(Qt::ApplicationState);
+	void onRadioToggled(int id, bool status);
 
 private:
 	// widget
-	QWidget* m_toolbar;
-	QRadioButton* m_radioButton;
-	QPushButton* m_closeButton;
+	SnipToolBar* m_toolbar;
 
 	// paint
 	QPixmap m_pixmap;
@@ -42,7 +39,7 @@ private:
 		kRect,
 		kFreeForm,
 		kApplication
-	} m_snipType;
+	} m_snipType = kRect;
 	// rect snip
 	QRect m_rect;
 	bool m_bRectStarted;

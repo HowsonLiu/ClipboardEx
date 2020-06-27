@@ -1,19 +1,11 @@
 #include "DockableWindow.h"
+#include "def.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QMouseEvent>
 #include <QPropertyAnimation>
 #include <QDesktopWidget>
 #include <QScreen>
-#include <QDebug>
-
-namespace {
-	// Window docks until window's edge exceed monitor's edge kDockEnableDistance
-	const int kDockEnableDistance = 5;
-	// it will show kUnDockTriggerDistance pixel edge when docks
-	const int kUnDockTriggerDistance = 3;
-	const int kDockAnimationDuration = 200;	// ms
-}
 
 DockableWindowState::DockableWindowState(const QString& str)
 {

@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     ClipboardTipsWindow.cpp \
     ConfigManager.cpp \
+    SnipModule/sniptoolbar.cpp \
     util/DockableWindow.cpp \
     HistoryDataList.cpp \
     MainControl.cpp \
@@ -31,6 +32,7 @@ SOURCES += \
 HEADERS += \
     ClipboardTipsWindow.h \
     ConfigManager.h \
+    SnipModule/sniptoolbar.h \
     util/DockableWindow.h \
     HistoryDataList.h \
     MainControl.h \

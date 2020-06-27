@@ -2,6 +2,12 @@
 #include <QLayout>
 #include <QList>
 
+/** @class FloatLayout
+  * @brief Layout for floating widget
+  * @copyright (c) 2020, HowsonLiu. All rights reserved
+  * @author HowsonLiu
+  * @date 2020/6/27
+  */
 class FloatLayout : public QLayout
 {
 public:

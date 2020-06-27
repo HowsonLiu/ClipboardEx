@@ -49,4 +49,9 @@ static const int kTipsNumStep = 1;
 static const QColor kMaskColor = QColor(0, 0, 0, 100);
 static const QColor kRectColor = QColor(0, 255, 0);
 
+// dock setting
+static const int kUnDockTriggerDistance = 3;
+static const int kDockAnimationDuration = 200;
+static const int kDockObjectFirstShowTime = 1000;
+
 #endif // DEF_H
