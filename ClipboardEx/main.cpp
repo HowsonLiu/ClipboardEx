@@ -1,4 +1,3 @@
-#include "DockableWindow.h"
 #include <QtWidgets/QApplication>
 #include <QTranslator>
 #include <QResource>

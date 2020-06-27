@@ -76,3 +76,7 @@ debug/
 release/
 Win32/
 build*/
+.vs/
+AppPackages/
+BundleArtifacts
+x64Release

@@ -1,5 +1,9 @@
 #include "snipwindow.h"
 #include "def.h"
+#include "util/floatlayout.h"
+#include <QRadioButton>
+#include <QPushButton>
+#include <QLayout>
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDesktopWidget>
@@ -73,6 +77,18 @@ void SnipWindow::paintEvent(QPaintEvent *event)
 
 void SnipWindow::initWindow()
 {
+	m_toolbar = new QWidget(this);
+	m_radioButton = new QRadioButton(m_toolbar);
+	m_closeButton = new QPushButton(m_toolbar);
+
+	QHBoxLayout* hLayout = new QHBoxLayout(m_toolbar);
+	hLayout->addWidget(m_radioButton);
+	hLayout->addWidget(m_closeButton);
+	m_toolbar->setLayout(hLayout);
+
+	FloatLayout* fLayout = new FloatLayout(this);
+	fLayout->addWidget(m_toolbar, Qt::AlignHCenter | Qt::AlignTop);
+
 	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 }
 

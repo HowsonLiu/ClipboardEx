@@ -18,26 +18,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     ClipboardTipsWindow.cpp \
     ConfigManager.cpp \
-    DockableWindow.cpp \
+    util/DockableWindow.cpp \
     HistoryDataList.cpp \
     MainControl.cpp \
     MenuActionWidget.cpp \
     SnipModule/snipwindow.cpp \
     main.cpp \
     mimedatalabel.cpp \
-    util.cpp
+    util.cpp \
+    util/floatlayout.cpp
 
 HEADERS += \
     ClipboardTipsWindow.h \
     ConfigManager.h \
-    DockableWindow.h \
+    util/DockableWindow.h \
     HistoryDataList.h \
     MainControl.h \
     MenuActionWidget.h \
     SnipModule/snipwindow.h \
     def.h \
     mimedatalabel.h \
-    util.h
+    util.h \
+    util/floatlayout.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

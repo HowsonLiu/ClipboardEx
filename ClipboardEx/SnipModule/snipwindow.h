@@ -1,6 +1,9 @@
 #pragma once
 #include <QWidget>
 
+class QRadioButton;
+class QPushButton;
+
 /** @class SnipWindow
   * @brief grab and snip desktop
   * @copyright (c) 2020, NetEase Inc. All rights reserved
@@ -27,6 +30,12 @@ private slots:
 	void onLoseFocus(Qt::ApplicationState);
 
 private:
+	// widget
+	QWidget* m_toolbar;
+	QRadioButton* m_radioButton;
+	QPushButton* m_closeButton;
+
+	// paint
 	QPixmap m_pixmap;
 
 	enum SnipType {

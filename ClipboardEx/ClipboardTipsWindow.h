@@ -1,5 +1,5 @@
 #pragma once
-#include "DockableWindow.h"
+#include "util/DockableWindow.h"
 
 class QCheckBox;
 class QListWidget;
