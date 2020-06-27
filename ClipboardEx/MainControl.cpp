@@ -3,6 +3,7 @@
 #include "ClipboardTipsWindow.h"
 #include "ConfigManager.h"
 #include "HistoryDataList.h"
+#include "SnipModule/snipwindow.h"
 #include "def.h"
 #include <QMenu>
 #include <QWidgetAction>
@@ -41,6 +42,7 @@ void MainControl::setUpUI()
 	setUpQss();
 	setUpTrayIcon();
 	setUpWindow();
+	QApplication::setQuitOnLastWindowClosed(false);
 }
 
 bool MainControl::hasLanguageFont() const
@@ -90,7 +92,7 @@ void MainControl::setUpTrayIcon()
 	QAction* snipAction = new QAction(trayIconMenu);
 	snipAction->setText(tr("Snip"));
 	snipAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_C));
-	QHotkey* snipHotkey = new QHotkey(QKeySequence(Qt::ALT + Qt::Key_C), true, this);
+	QHotkey* snipHotkey = new QHotkey(QKeySequence(Qt::ALT + Qt::Key_C), true, qApp);
 
 	// start up
 	QAction* startUpAction = new QAction(trayIconMenu);
@@ -169,6 +171,7 @@ void MainControl::setUpQss()
 void MainControl::onSnip()
 {
 	qDebug() << "snip";
+	Snip();
 }
 
 void MainControl::onShowTimeChanged(float f)

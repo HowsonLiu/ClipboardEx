@@ -22,6 +22,7 @@ SOURCES += \
     HistoryDataList.cpp \
     MainControl.cpp \
     MenuActionWidget.cpp \
+    SnipModule/snipwindow.cpp \
     main.cpp \
     mimedatalabel.cpp \
     util.cpp
@@ -33,6 +34,7 @@ HEADERS += \
     HistoryDataList.h \
     MainControl.h \
     MenuActionWidget.h \
+    SnipModule/snipwindow.h \
     def.h \
     mimedatalabel.h \
     util.h

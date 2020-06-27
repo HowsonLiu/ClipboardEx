@@ -1,6 +1,8 @@
 #ifndef DEF_H
 #define DEF_H
 #include <QString>
+#include <QColor>
+#include <QDebug>
 
 // define control name
 
@@ -42,5 +44,9 @@ static const int kTipsNumMin = 1;
 static const int kTipsNumDefault = 1;
 static const int kTipsNumMax = 20;
 static const int kTipsNumStep = 1;
+
+// snip module
+static const QColor kMaskColor = QColor(0, 0, 0, 100);
+static const QColor kRectColor = QColor(0, 255, 0);
 
 #endif // DEF_H
