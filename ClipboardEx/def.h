@@ -48,6 +48,15 @@ static const int kTipsNumStep = 1;
 // snip module
 static const QColor kMaskColor = QColor(0, 0, 0, 100);
 static const QColor kRectColor = QColor(0, 255, 0);
+// magnifier
+static const QSize kWidgetSize = QSize(120, 120);
+static const QSize kMinMagnifySize = QSize(10, 10);
+static const QSize kMaxMagnifySize = QSize(30, 30);
+static const int kMagnifyResizeStep = 2;
+static const int kDistanceToCursor = 20;
+static const QColor kMagnifierPenColor = QColor(0, 255, 0);
+static const int kMagnifierPenWidth = 3;
+static const QString kMagnifierTips ="Pos:(%1,%2)\nRGB:(%3,%4,%5)\nRGB Hex: #%6";
 
 // dock setting
 static const int kUnDockTriggerDistance = 3;

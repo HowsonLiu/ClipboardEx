@@ -2,6 +2,7 @@
 #include <QWidget>
 
 class SnipToolBar;
+class MagnifierWidget;
 
 /** @class SnipWindow
   * @brief grab and snip desktop
@@ -20,6 +21,7 @@ protected:
 	virtual void mouseMoveEvent(QMouseEvent* event) override;
 	virtual void mouseReleaseEvent(QMouseEvent* event) override;
 	virtual void paintEvent(QPaintEvent *event) override;
+	virtual void wheelEvent(QWheelEvent *event) override;
 
 private:
 	void initWindow();
@@ -31,6 +33,7 @@ private slots:
 private:
 	// widget
 	SnipToolBar* m_toolbar;
+	MagnifierWidget* m_magnifier;
 
 	// paint
 	QPixmap m_pixmap;
@@ -42,7 +45,7 @@ private:
 	} m_snipType = kRect;
 	// rect snip
 	QRect m_rect;
-	bool m_bRectStarted;
+	bool m_bRectStarted = false;
 };
 
 void Snip();
