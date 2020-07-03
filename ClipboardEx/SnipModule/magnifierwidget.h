@@ -1,8 +1,31 @@
 #ifndef MAGNIFIERWIDGET_H
 #define MAGNIFIERWIDGET_H
 #include <QWidget>
+#include <QLabel>
+#include <QImage>
 
-class QLabel;
+/** @class MagnifierLabel
+  * @brief Pixmap label. can zoom in and zoom out
+  * @copyright (c) 2020, HowsonLiu. All rights reserved
+  * @author HowsonLiu
+  * @date 2020/6/30
+  */
+class MagnifierLabel : public QLabel 
+{
+public:
+	MagnifierLabel(QWidget* parent = nullptr);
+	void setUp(const QPixmap& p);
+	void updatePosision(const QPoint& p);
+	void updateMagnifySize(int delta);
+
+protected:
+	virtual void paintEvent(QPaintEvent * event) override;
+
+private:
+	QPixmap m_originPixmap;
+	QSize m_cutSize;
+	QRect m_cutRect;
+};
 
 /** @class MagnifierWidget
   * @brief Magnifier
@@ -22,11 +45,9 @@ private:
 	void initWindow();
 
 private:
-	QPixmap m_pixmap;
-	QLabel* m_pixmapLabel;
+	QImage m_image;
+	MagnifierLabel* m_pixmapLabel;
 	QLabel* m_infoLabel;
-
-	QSize m_originSize;
 };
 
 #endif // MAGNIFIERWIDGET_H
