@@ -33,6 +33,11 @@ void SnipWindow::mousePressEvent(QMouseEvent* event)
 			m_rect.setTopLeft(event->pos());
 			m_bRectStarted = true;
 		}
+		else if (m_snipType == kFreeForm) {
+			m_path = QPainterPath();
+			m_path.moveTo(event->pos());
+			m_bPathStarted = true;
+		}
 	}
 	__super::mousePressEvent(event);
 }
@@ -41,6 +46,10 @@ void SnipWindow::mouseMoveEvent(QMouseEvent* event)
 {
 	if (m_snipType == kRect && m_bRectStarted) {
 		m_rect.setBottomRight(event->pos());
+		repaint();
+	}
+	else if (m_snipType == kFreeForm && m_bPathStarted) {
+		m_path.lineTo(event->pos());
 		repaint();
 	}
 	if (m_magnifier->isVisible())
@@ -54,6 +63,11 @@ void SnipWindow::mouseReleaseEvent(QMouseEvent* event)
 		if (m_snipType == kRect && m_bRectStarted) {
 			m_rect.setBottomRight(event->pos());
 			m_bRectStarted = false;
+			repaint();
+		}
+		else if (m_snipType == kFreeForm && m_bPathStarted) {
+			m_path.lineTo(event->pos());
+			m_bPathStarted = false;
 			repaint();
 		}
 	}
@@ -70,13 +84,22 @@ void SnipWindow::paintEvent(QPaintEvent *event)
 	QPainterPath path;
 	path.addRect(this->rect());
 	path.addRect(m_rect);
+	path.addPath(m_path);
 	painter.setBrush(QBrush(kMaskColor));
 	painter.drawPath(path);
 	painter.restore();
 
-	// paint rect & rect info
-	painter.setPen(kRectColor);
-	painter.drawRect(m_rect);
+	// paint rect
+	if (!m_rect.isEmpty()) {
+		painter.setPen(kRectColor);
+		painter.drawRect(m_rect);
+	}
+
+	// paint path
+	if (!m_path.isEmpty()) {
+		painter.setPen(kRectColor);
+		painter.drawPath(m_path);
+	}
 }
 
 void SnipWindow::wheelEvent(QWheelEvent *event)

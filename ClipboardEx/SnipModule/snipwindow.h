@@ -1,5 +1,6 @@
 #pragma once
 #include <QWidget>
+#include <QPainterPath>
 
 class SnipToolBar;
 class MagnifierWidget;
@@ -46,6 +47,10 @@ private:
 	// rect snip
 	QRect m_rect;
 	bool m_bRectStarted = false;
+
+	// freefrom snip
+	QPainterPath m_path;
+	bool m_bPathStarted = false;
 };
 
 void Snip();
