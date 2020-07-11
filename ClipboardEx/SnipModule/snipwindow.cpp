@@ -71,6 +71,16 @@ void SnipWindow::mouseReleaseEvent(QMouseEvent* event)
 			repaint();
 		}
 	}
+	else if (event->button() == Qt::RightButton) {
+		if (!m_rect.isEmpty() || !m_path.isEmpty()) {
+			m_rect = QRect();
+			m_path = QPainterPath();
+			repaint();
+		}
+		else {
+			close();
+		}
+	}
 	__super::mouseReleaseEvent(event);
 }
 
@@ -112,6 +122,11 @@ void SnipWindow::wheelEvent(QWheelEvent *event)
 	__super::wheelEvent(event);
 }
 
+void SnipWindow::closeEvent(QCloseEvent *event)
+{
+	m_magnifier->close();
+}
+
 void SnipWindow::initWindow()
 {
 	m_toolbar = new SnipToolBar(this);
@@ -120,7 +135,8 @@ void SnipWindow::initWindow()
 	FloatLayout* fLayout = new FloatLayout(this);
 	fLayout->addWidget(m_toolbar, Qt::AlignHCenter | Qt::AlignTop);
 
-	m_magnifier->setVisible(false);
+	m_magnifier->show();
+	m_magnifier->updatePosision(QCursor::pos());
 
 	setMouseTracking(true);
 	setWindowFlags(windowFlags() | Qt::FramelessWindowHint /*| Qt::WindowStaysOnTopHint*/);

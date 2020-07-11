@@ -23,6 +23,7 @@ protected:
 	virtual void mouseReleaseEvent(QMouseEvent* event) override;
 	virtual void paintEvent(QPaintEvent *event) override;
 	virtual void wheelEvent(QWheelEvent *event) override;
+	virtual void closeEvent(QCloseEvent *event) override;
 
 private:
 	void initWindow();

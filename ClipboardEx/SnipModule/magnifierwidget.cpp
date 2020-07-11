@@ -50,7 +50,6 @@ void MagnifierLabel::paintEvent(QPaintEvent * event)
 	painter.drawPixmap(this->rect(), m_originPixmap, m_cutRect);
 
 	// aim point
-	qDebug() << this->rect();
 	QLine hline(this->rect().left(), this->rect().center().y(), this->rect().right(), this->rect().center().y());
 	QLine vline(this->rect().center().x(), this->rect().top(), this->rect().center().x(), this->rect().bottom());
 	painter.setPen(QPen(kMagnifierPenColor, kMagnifierPenWidth / 2));
