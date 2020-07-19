@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     ClipboardTipsWindow.cpp \
     ConfigManager.cpp \
+	SnipModule/Canvas/snipcanvaswidget.cpp \
     SnipModule/magnifierwidget.cpp \
     SnipModule/sniptoolbar.cpp \
     util/DockableWindow.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
 HEADERS += \
     ClipboardTipsWindow.h \
     ConfigManager.h \
+	SnipModule/Canvas/snipcanvaswidget.h \
     SnipModule/magnifierwidget.h \
     SnipModule/sniptoolbar.h \
     util/DockableWindow.h \
