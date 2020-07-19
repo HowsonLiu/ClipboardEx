@@ -12,9 +12,20 @@ SnipToolBar::SnipToolBar(QWidget* parent /*= nullptr*/)
 {
 	initWindow();
 	connect(m_buttonGroup, static_cast<void(QButtonGroup::*)(int, bool)>(&QButtonGroup::buttonToggled), this, &SnipToolBar::sigRadioToggled);
-	connect(m_closeButton, &QPushButton::clicked, this, &SnipToolBar::sigClose);
+	connect(m_closeButton, &QPushButton::clicked, this, &SnipToolBar::sigQuit);
 	connect(m_dockShowAnimation, &QPropertyAnimation::finished, this, [this]() {m_bDockShow = true; });
 	connect(m_dockHideAnimation, &QPropertyAnimation::finished, this, [this]() {m_bDockShow = false; });
+}
+
+void SnipToolBar::showEvent(QShowEvent *event)
+{
+	dockShow();
+	QTimer::singleShot(kDockObjectFirstShowTime, this, &SnipToolBar::dockHide);
+}
+
+void SnipToolBar::hideEvent(QHideEvent *event)
+{
+	dockHide();
 }
 
 void SnipToolBar::enterEvent(QEvent* event)

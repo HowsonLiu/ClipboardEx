@@ -16,7 +16,12 @@ SnipWidget::SnipWidget(QWidget* parent /*= nullptr*/) : QWidget(parent)
 	initWindow();
 	connect(qApp, &QGuiApplication::applicationStateChanged, this, &SnipWidget::onLoseFocus);
 	connect(m_toolbar, &SnipToolBar::sigRadioToggled, this, &SnipWidget::onRadioToggled);
-	connect(m_toolbar, &SnipToolBar::sigClose, this, &SnipWidget::close);
+	connect(m_toolbar, &SnipToolBar::sigQuit, this, &SnipWidget::sigQuit);
+}
+
+SnipWidget::~SnipWidget()
+{
+	delete m_magnifier;
 }
 
 void SnipWidget::setUp(const QRect& rect, const QPixmap& pixmap)
@@ -26,11 +31,26 @@ void SnipWidget::setUp(const QRect& rect, const QPixmap& pixmap)
 	m_magnifier->setUp(pixmap);
 }
 
+void SnipWidget::showEvent(QShowEvent *event)
+{
+	m_rect = QRect();
+	m_path = QPainterPath();
+	m_toolbar->show();
+	m_magnifier->show();
+}
+
+void SnipWidget::hideEvent(QHideEvent *event)
+{
+	m_toolbar->hide();
+	m_magnifier->hide();
+}
+
 void SnipWidget::mousePressEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton) {
 		if (m_snipType == kRect) {
 			m_rect.setTopLeft(event->pos());
+			m_rect.setBottomRight(event->pos());
 			m_bRectStarted = true;
 		}
 		else if (m_snipType == kFreeForm) {
@@ -61,25 +81,22 @@ void SnipWidget::mouseReleaseEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton) {
 		if (m_snipType == kRect && m_bRectStarted) {
-			m_rect.setBottomRight(event->pos());
 			m_bRectStarted = false;
-			repaint();
+			if (m_rect.topLeft() != event->pos()) {
+				m_rect.setBottomRight(event->pos());
+				emit sigFinish(m_path);
+			}
 		}
 		else if (m_snipType == kFreeForm && m_bPathStarted) {
-			m_path.lineTo(event->pos());
 			m_bPathStarted = false;
-			repaint();
+			if (m_path.pointAtPercent(0) != event->pos()) {
+				m_path.lineTo(event->pos());
+				emit sigFinish(m_path);
+			}
 		}
 	}
 	else if (event->button() == Qt::RightButton) {
-		if (!m_rect.isEmpty() || !m_path.isEmpty()) {
-			m_rect = QRect();
-			m_path = QPainterPath();
-			repaint();
-		}
-		else {
-			close();
-		}
+			emit sigQuit();
 	}
 	__super::mouseReleaseEvent(event);
 }
@@ -122,9 +139,9 @@ void SnipWidget::wheelEvent(QWheelEvent *event)
 	__super::wheelEvent(event);
 }
 
-void SnipWidget::closeEvent(QCloseEvent *event)
+QSize SnipWidget::sizeHint() const
 {
-	m_magnifier->close();
+	return size();
 }
 
 void SnipWidget::initWindow()
@@ -153,13 +170,4 @@ void SnipWidget::onRadioToggled(int id, bool status)
 	if (!status) return;
 	m_snipType = static_cast<SnipType>(id);
 	m_magnifier->setVisible(m_snipType != kApplication);
-}
-
-void Snip()
-{
-	QRect screenGeometry = QGuiApplication::primaryScreen()->virtualGeometry();
-	QPixmap screenPixmap = QGuiApplication::primaryScreen()->grabWindow(0, screenGeometry.x(), screenGeometry.y(), screenGeometry.width(), screenGeometry.height());
-	SnipWidget* snipWindow = new SnipWidget;
-	snipWindow->setUp(screenGeometry, std::move(screenPixmap));
-	snipWindow->show();
 }

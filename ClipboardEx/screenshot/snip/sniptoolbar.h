@@ -19,12 +19,14 @@ public:
     SnipToolBar(QWidget* parent = nullptr);
 
 protected:
+	virtual void showEvent(QShowEvent *event) override;
+	virtual void hideEvent(QHideEvent *event) override;
 	virtual void enterEvent(QEvent* event) override;
 	virtual void leaveEvent(QEvent *event) override;
 
 signals:
 	void sigRadioToggled(int, bool);
-	void sigClose();
+	void sigQuit();
 
 private:
 	void initWindow();

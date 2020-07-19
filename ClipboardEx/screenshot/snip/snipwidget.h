@@ -15,18 +15,26 @@ class SnipWidget : public QWidget
 	Q_OBJECT
 public:
 	SnipWidget(QWidget* parent = nullptr);
+	~SnipWidget();
 	void setUp(const QRect& rect, const QPixmap& pixmap);
 
 protected:
+	virtual void showEvent(QShowEvent *event) override;
+	virtual void hideEvent(QHideEvent *event) override;
 	virtual void mousePressEvent(QMouseEvent* event) override;
 	virtual void mouseMoveEvent(QMouseEvent* event) override;
 	virtual void mouseReleaseEvent(QMouseEvent* event) override;
 	virtual void paintEvent(QPaintEvent *event) override;
 	virtual void wheelEvent(QWheelEvent *event) override;
-	virtual void closeEvent(QCloseEvent *event) override;
+	virtual QSize sizeHint() const override;
 
 private:
 	void initWindow();
+
+signals:
+	void sigQuit();
+	void sigFinish(const QRect&);
+	void sigFinish(const QPainterPath&);
 
 private slots:
 	void onLoseFocus(Qt::ApplicationState);
@@ -53,5 +61,3 @@ private:
 	QPainterPath m_path;
 	bool m_bPathStarted = false;
 };
-
-void Snip();

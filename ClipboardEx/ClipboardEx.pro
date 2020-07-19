@@ -18,7 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     ClipboardTipsWindow.cpp \
     ConfigManager.cpp \
-	screenshot/canvas/snipcanvaswidget.cpp \
+	screenshot/canvas/canvaswidget.cpp \
     screenshot/snip/magnifierwidget.cpp \
     screenshot/snip/sniptoolbar.cpp \
     util/DockableWindow.cpp \
@@ -26,6 +26,7 @@ SOURCES += \
     MainControl.cpp \
     MenuActionWidget.cpp \
     screenshot/snip/snipwidget.cpp \
+	screenshot/screenshotwindow.cpp \
     main.cpp \
     mimedatalabel.cpp \
     util.cpp \
@@ -34,7 +35,7 @@ SOURCES += \
 HEADERS += \
     ClipboardTipsWindow.h \
     ConfigManager.h \
-	screenshot/canvas/snipcanvaswidget.h \
+	screenshot/canvas/canvaswidget.h \
     screenshot/snip/magnifierwidget.h \
     screenshot/snip/sniptoolbar.h \
     util/DockableWindow.h \
@@ -42,6 +43,7 @@ HEADERS += \
     MainControl.h \
     MenuActionWidget.h \
     screenshot/snip/snipwidget.h \
+	screenshot/screenshotwindow.h \
     def.h \
     mimedatalabel.h \
     util.h \

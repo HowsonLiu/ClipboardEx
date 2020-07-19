@@ -3,7 +3,7 @@
 #include "ClipboardTipsWindow.h"
 #include "ConfigManager.h"
 #include "HistoryDataList.h"
-#include "screenshot/snip/snipwidget.h"
+#include "screenshot/screenshotwindow.h"
 #include "def.h"
 #include <QMenu>
 #include <QWidgetAction>
@@ -170,8 +170,7 @@ void MainControl::setUpQss()
 
 void MainControl::onSnip()
 {
-	qDebug() << "snip";
-	Snip();
+	screenshot();
 }
 
 void MainControl::onShowTimeChanged(float f)
