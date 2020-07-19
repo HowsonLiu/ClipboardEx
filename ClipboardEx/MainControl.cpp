@@ -3,7 +3,7 @@
 #include "ClipboardTipsWindow.h"
 #include "ConfigManager.h"
 #include "HistoryDataList.h"
-#include "SnipModule/snipwindow.h"
+#include "screenshot/snip/snipwidget.h"
 #include "def.h"
 #include <QMenu>
 #include <QWidgetAction>

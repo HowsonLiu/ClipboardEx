@@ -1,4 +1,4 @@
-#include "snipwindow.h"
+#include "snipwidget.h"
 #include "def.h"
 #include "util/floatlayout.h"
 #include "sniptoolbar.h"
@@ -11,22 +11,22 @@
 #include <QMouseEvent>
 #include <QWheelEvent>
 
-SnipWindow::SnipWindow(QWidget* parent /*= nullptr*/) : QWidget(parent)
+SnipWidget::SnipWidget(QWidget* parent /*= nullptr*/) : QWidget(parent)
 {
 	initWindow();
-	connect(qApp, &QGuiApplication::applicationStateChanged, this, &SnipWindow::onLoseFocus);
-	connect(m_toolbar, &SnipToolBar::sigRadioToggled, this, &SnipWindow::onRadioToggled);
-	connect(m_toolbar, &SnipToolBar::sigClose, this, &SnipWindow::close);
+	connect(qApp, &QGuiApplication::applicationStateChanged, this, &SnipWidget::onLoseFocus);
+	connect(m_toolbar, &SnipToolBar::sigRadioToggled, this, &SnipWidget::onRadioToggled);
+	connect(m_toolbar, &SnipToolBar::sigClose, this, &SnipWidget::close);
 }
 
-void SnipWindow::setUp(const QRect& rect, const QPixmap& pixmap)
+void SnipWidget::setUp(const QRect& rect, const QPixmap& pixmap)
 {
 	m_pixmap = pixmap;
 	this->setGeometry(rect);
 	m_magnifier->setUp(pixmap);
 }
 
-void SnipWindow::mousePressEvent(QMouseEvent* event)
+void SnipWidget::mousePressEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton) {
 		if (m_snipType == kRect) {
@@ -42,7 +42,7 @@ void SnipWindow::mousePressEvent(QMouseEvent* event)
 	__super::mousePressEvent(event);
 }
 
-void SnipWindow::mouseMoveEvent(QMouseEvent* event)
+void SnipWidget::mouseMoveEvent(QMouseEvent* event)
 {
 	if (m_snipType == kRect && m_bRectStarted) {
 		m_rect.setBottomRight(event->pos());
@@ -57,7 +57,7 @@ void SnipWindow::mouseMoveEvent(QMouseEvent* event)
 	__super::mouseMoveEvent(event);
 }
 
-void SnipWindow::mouseReleaseEvent(QMouseEvent* event)
+void SnipWidget::mouseReleaseEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton) {
 		if (m_snipType == kRect && m_bRectStarted) {
@@ -84,7 +84,7 @@ void SnipWindow::mouseReleaseEvent(QMouseEvent* event)
 	__super::mouseReleaseEvent(event);
 }
 
-void SnipWindow::paintEvent(QPaintEvent *event)
+void SnipWidget::paintEvent(QPaintEvent *event)
 {
 	QPainter painter(this);
 	painter.drawPixmap(QPoint(0, 0), m_pixmap);
@@ -112,7 +112,7 @@ void SnipWindow::paintEvent(QPaintEvent *event)
 	}
 }
 
-void SnipWindow::wheelEvent(QWheelEvent *event)
+void SnipWidget::wheelEvent(QWheelEvent *event)
 {
 	if (m_magnifier->isVisible()) {
 		m_magnifier->updateMagnifySize(event->delta());
@@ -122,12 +122,12 @@ void SnipWindow::wheelEvent(QWheelEvent *event)
 	__super::wheelEvent(event);
 }
 
-void SnipWindow::closeEvent(QCloseEvent *event)
+void SnipWidget::closeEvent(QCloseEvent *event)
 {
 	m_magnifier->close();
 }
 
-void SnipWindow::initWindow()
+void SnipWidget::initWindow()
 {
 	m_toolbar = new SnipToolBar(this);
 	m_magnifier = new MagnifierWidget;
@@ -142,13 +142,13 @@ void SnipWindow::initWindow()
 	setWindowFlags(windowFlags() | Qt::FramelessWindowHint /*| Qt::WindowStaysOnTopHint*/);
 }
 
-void SnipWindow::onLoseFocus(Qt::ApplicationState state)
+void SnipWidget::onLoseFocus(Qt::ApplicationState state)
 {
 	//if (state != Qt::ApplicationState::ApplicationActive)
 	//	close();
 }
 
-void SnipWindow::onRadioToggled(int id, bool status)
+void SnipWidget::onRadioToggled(int id, bool status)
 {
 	if (!status) return;
 	m_snipType = static_cast<SnipType>(id);
@@ -159,7 +159,7 @@ void Snip()
 {
 	QRect screenGeometry = QGuiApplication::primaryScreen()->virtualGeometry();
 	QPixmap screenPixmap = QGuiApplication::primaryScreen()->grabWindow(0, screenGeometry.x(), screenGeometry.y(), screenGeometry.width(), screenGeometry.height());
-	SnipWindow* snipWindow = new SnipWindow;
+	SnipWidget* snipWindow = new SnipWidget;
 	snipWindow->setUp(screenGeometry, std::move(screenPixmap));
 	snipWindow->show();
 }

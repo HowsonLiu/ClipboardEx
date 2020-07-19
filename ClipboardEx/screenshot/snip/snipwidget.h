@@ -10,11 +10,11 @@ class MagnifierWidget;
   * @author HowsonLiu
   * @date 2020/6/21
   */
-class SnipWindow : public QWidget
+class SnipWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	SnipWindow(QWidget* parent = nullptr);
+	SnipWidget(QWidget* parent = nullptr);
 	void setUp(const QRect& rect, const QPixmap& pixmap);
 
 protected:

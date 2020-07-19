@@ -18,14 +18,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     ClipboardTipsWindow.cpp \
     ConfigManager.cpp \
-	SnipModule/Canvas/snipcanvaswidget.cpp \
-    SnipModule/magnifierwidget.cpp \
-    SnipModule/sniptoolbar.cpp \
+	screenshot/canvas/snipcanvaswidget.cpp \
+    screenshot/snip/magnifierwidget.cpp \
+    screenshot/snip/sniptoolbar.cpp \
     util/DockableWindow.cpp \
     HistoryDataList.cpp \
     MainControl.cpp \
     MenuActionWidget.cpp \
-    SnipModule/snipwindow.cpp \
+    screenshot/snip/snipwidget.cpp \
     main.cpp \
     mimedatalabel.cpp \
     util.cpp \
@@ -34,14 +34,14 @@ SOURCES += \
 HEADERS += \
     ClipboardTipsWindow.h \
     ConfigManager.h \
-	SnipModule/Canvas/snipcanvaswidget.h \
-    SnipModule/magnifierwidget.h \
-    SnipModule/sniptoolbar.h \
+	screenshot/canvas/snipcanvaswidget.h \
+    screenshot/snip/magnifierwidget.h \
+    screenshot/snip/sniptoolbar.h \
     util/DockableWindow.h \
     HistoryDataList.h \
     MainControl.h \
     MenuActionWidget.h \
-    SnipModule/snipwindow.h \
+    screenshot/snip/snipwidget.h \
     def.h \
     mimedatalabel.h \
     util.h \
